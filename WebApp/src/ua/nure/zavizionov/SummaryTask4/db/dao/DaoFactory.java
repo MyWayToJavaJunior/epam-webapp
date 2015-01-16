@@ -5,8 +5,8 @@ import java.sql.SQLException;
 
 public interface DaoFactory {
 	
-	public Connection getConnection() throws SQLException;
+	public Connection getContext() throws PersistException;
 	
-	
+	public GenericDao getDao();	
 
 }

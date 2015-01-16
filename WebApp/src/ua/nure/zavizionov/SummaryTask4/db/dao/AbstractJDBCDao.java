@@ -11,21 +11,13 @@ public abstract class AbstractJDBCDao<T extends Entity> implements GenericDao<T>
 	
 	private Connection connection;
 
-	public String getSelectQuery(Tables table){
-		return "SELECT * FROM " + table.getTableName() + ";";
-	};
+	public abstract String getSelectQuery();
 	
-	public String getUpdateQuery(Tables table, String params){
-		return "UPDATE " + table.getTableName() + " SET " + params + ";";
-	};
+	public abstract String getUpdateQuery();
 	
-	public String getDeleteQuery(Tables table, String params){
-		return "DELETE FROM " + table.getTableName() + " WHERE " + params + ";";
-	}
+	public abstract String getDeleteQuery();
 	
-	public String getCreateQuery(Tables table, String params){
-		return "INSERT INTO " + table.getTableName() + " VALUES " + params + ";";
-	};
+	public abstract String getCreateQuery();
 		
 	protected abstract List<T> parseResultSet(ResultSet rs);
 	
@@ -84,9 +76,19 @@ public abstract class AbstractJDBCDao<T extends Entity> implements GenericDao<T>
 		}catch (Exception e){
 			throw new PersistException(e);
 		}
-		//sql = getSelectQuery();
-		//to be done
 		
+		sql = getSelectQuery() + "WHERE id = last_insert_id();";
+		try (PreparedStatement statement = connection.prepareStatement(sql)){
+			ResultSet rs = statement.executeQuery();
+			List<T> list = parseResultSet(rs);
+			if (list == null || list.size() == 0){
+				throw new PersistException("Cant find inserted data");
+			}
+			persistInstance = list.iterator().next();
+		}catch(Exception e){
+			throw new PersistException(e);
+		}
+		return persistInstance;
 	}
 	
 	@Override
