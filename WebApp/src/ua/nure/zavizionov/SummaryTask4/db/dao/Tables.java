@@ -1,19 +1,29 @@
 package ua.nure.zavizionov.SummaryTask4.db.dao;
 
+import ua.nure.zavizionov.SummaryTask4.db.entity.*;
+
+import com.sun.javafx.scene.accessibility.Role;
+
 public enum Tables {
 	
-	ROLE("roles"), ROUTE("routes"), ROUTE_COMPOSITION("route_compositions"),
-	STATION("stations"), TRAIN("trains"), USER("users"), WAGON("wagons"), WAGON_TYPE("wagon_types");
+	ROLE("roles", Role.class), ROUTE("routes", Route.class), 
+	ROUTE_COMPOSITION("route_compositions", RouteComposition.class),
+	STATION("stations", Station.class), TRAIN("trains", Train.class), 
+	USER("users", User.class), WAGON("wagons", Wagon.class), WAGON_TYPE("wagon_types", WagonType.class);
 	
 	private String tableName;
+	private Class daoClass;
 	
-	Tables(String table){
-		this.tableName = table;		
+	Tables(String table, Class daoClass){
+		this.tableName = table;
+		this.daoClass = daoClass;
 	}
 	
 	public String getTableName(){
 		return tableName;
 	}
+	
+	
 
 
 }
