@@ -56,7 +56,7 @@ public class LoginCommand extends Command {
 			}
 			
 			if(userRole == Role.USER){
-				//
+				//TODO
 			}
 			
 			LOG.trace("Associating session with user " + user);
