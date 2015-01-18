@@ -1,0 +1,86 @@
+package ua.nure.zavizionov.SummaryTask4.db.dao;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.log4j.Logger;
+
+public class UserDao<User> extends AbstractDao<ua.nure.zavizionov.SummaryTask4.db.entity.User> {
+	
+	private static final Logger LOG = Logger.getLogger(ua.nure.zavizionov.SummaryTask4.db.entity.User.class);
+	
+	public UserDao(Connection connection) {
+		super(connection);
+		// TODO Auto-generated constructor stub
+	}
+
+	@Override
+	public ua.nure.zavizionov.SummaryTask4.db.entity.User create()
+			throws SQLException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getSelectQuery() {
+		return "SELECT * FROM users";
+	}
+
+	@Override
+	public String getUpdateQuery() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getDeleteQuery() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getCreateQuery() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	protected List<ua.nure.zavizionov.SummaryTask4.db.entity.User> parseResultSet(
+			ResultSet rs) {
+		LOG.debug("Parsing starts");
+		List<ua.nure.zavizionov.SummaryTask4.db.entity.User> result = 
+				new ArrayList<ua.nure.zavizionov.SummaryTask4.db.entity.User>();
+		try {
+			while (rs.next()){
+				ua.nure.zavizionov.SummaryTask4.db.entity.User user = 
+						new ua.nure.zavizionov.SummaryTask4.db.entity.User();
+				user.setId(rs.getInt(Fields.ID));
+				user.setLogin(rs.getString(Fields.USER_LOGIN));
+				user.setPassword(rs.getString(Fields.USER_PASSWORD));
+				user.setEmail(rs.getString(Fields.USER_EMAIL));
+				user.setRoleId(rs.getInt(Fields.USER_ROLE_ID));
+				result.add(user);
+			}
+		} catch (SQLException e) {
+			LOG.error("Error occured while parsing", e);
+		}
+		LOG.debug("Parsed.");
+		return result;
+	}
+
+	@Override
+	protected void prepareStatementForInsert(PreparedStatement statement,
+			ua.nure.zavizionov.SummaryTask4.db.entity.User object) {
+		
+	}
+
+	@Override
+	protected void prepareStatementForUpdate(PreparedStatement statement,
+			ua.nure.zavizionov.SummaryTask4.db.entity.User object) {
+	}
+
+}
