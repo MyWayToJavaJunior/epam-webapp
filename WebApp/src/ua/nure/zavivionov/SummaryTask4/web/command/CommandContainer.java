@@ -17,7 +17,7 @@ public class CommandContainer {
 		commands.put("logout", new LogoutCommand());
 		//commands.put("viewSettings", new ViewSettingsCommand());
 		commands.put("noCommand", new NoCommand());
-//		commands.put("listTrains", new ListTrainsCommand());
+		commands.put("listTrains", new ListTrainsCommand());
 //		commands.put("listRoutes", new ListRoutesCommand());
 //		commands.put("createUser", new CreateUserCommand());
 //		

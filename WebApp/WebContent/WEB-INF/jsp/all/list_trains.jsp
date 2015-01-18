@@ -25,7 +25,7 @@
 			<td class="content">			
 			<%-- CONTENT --%>
 			
-			<c:forEach var="bean" items="${trainListBean}">
+			<c:forEach var="bean" items="${trainBeanList}">
 					<tr>
 						<td>${bean.departureStation} </td>
 						<td>${bean.departureDate}</td>

@@ -4,17 +4,13 @@ import java.util.Date;
 
 public class Train extends Entity{
 	
-	private Integer trainId;
+	private static final long serialVersionUID = -3924337161584843834L;
+	
 	private Integer routeId;
 	private Date departureDate;
 	private Date arrivalDate;
 	
-	public Integer getTrainId() {
-		return trainId;
-	}
-	public void setTrainId(Integer trainId) {
-		this.trainId = trainId;
-	}
+
 	public Integer getRouteId() {
 		return routeId;
 	}

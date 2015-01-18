@@ -82,6 +82,8 @@ public class UserDao extends AbstractDao<User> {
 	}
 
 	public User getByLogin(String login) throws SQLException {
+		LOG.debug("Begin to search user");
+		LOG.trace("Searching user with login " + login);
 		List<User> list = null;
 		String sql = getSelectQuery();
 		sql += " WHERE login = ?";
@@ -89,8 +91,6 @@ public class UserDao extends AbstractDao<User> {
 			statement.setString(1, login);
 			ResultSet rs = statement.executeQuery();
 			list = parseResultSet(rs);
-		}catch (SQLException e){
-			throw new SQLException(e);
 		}
 		if (list == null || list.size() == 0){
 			return null;
@@ -98,6 +98,7 @@ public class UserDao extends AbstractDao<User> {
 		if (list.size() > 1){
 			throw new SQLException("Recieved more then 1 value");
 		}
+		LOG.debug("User was founded.");
 		return list.iterator().next();
 	}
 

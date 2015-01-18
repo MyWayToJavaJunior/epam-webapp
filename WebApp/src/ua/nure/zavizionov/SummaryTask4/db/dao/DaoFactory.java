@@ -41,6 +41,10 @@ public class DaoFactory {
 		return new UserDao(connection);
 	}
 	
+	public TrainBeanDao getTrainBeanDao(Connection connection){
+		return new TrainBeanDao(connection);
+	}
+	
 	
 	
 

@@ -23,4 +23,9 @@ public final class Fields {
 	
 	//stations
 	public static final String STATION_NAME = "name";
+	
+	//TrainBean
+	public static final String TRAIN_BEAN_DEPARTURE_STATION_NAME = "dep_station_name";
+	public static final String TRAIN_BEAN_ARRIVAL_STATION_NAME = "arr_station_name";
+	
 }

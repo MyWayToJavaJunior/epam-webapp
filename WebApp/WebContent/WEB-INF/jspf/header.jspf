@@ -74,6 +74,10 @@ Type link to logout
 	</div>
 </c:if>
 
+<div id="rightHeader">
+		<a href="controller?command=listTrains">List trains</a>
+	</div>
+
 	</td>
 </tr>
 
