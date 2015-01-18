@@ -8,6 +8,8 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+import ua.nure.zavizionov.SummaryTask4.db.entity.User;
+
 public class DaoFactory {
 	
 	
@@ -34,6 +36,12 @@ public class DaoFactory {
 		}
 		return con;
 	}
+	
+	public UserDao getUserDao(Connection connection){
+		return new UserDao(connection);
+	}
+	
+	
 	
 
 	private DaoFactory() {

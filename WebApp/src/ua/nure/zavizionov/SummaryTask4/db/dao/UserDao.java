@@ -9,10 +9,11 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
-public class UserDao<User> extends AbstractDao<ua.nure.zavizionov.SummaryTask4.db.entity.User> {
+import ua.nure.zavizionov.SummaryTask4.db.entity.User;
+
+public class UserDao extends AbstractDao<User> {
 	
-	private static final Logger LOG = Logger.getLogger(ua.nure.zavizionov.SummaryTask4.db.entity.User.class);
-	
+	private static final Logger LOG = Logger.getLogger(User.class);
 	public UserDao(Connection connection) {
 		super(connection);
 		// TODO Auto-generated constructor stub
@@ -49,15 +50,13 @@ public class UserDao<User> extends AbstractDao<ua.nure.zavizionov.SummaryTask4.d
 	}
 
 	@Override
-	protected List<ua.nure.zavizionov.SummaryTask4.db.entity.User> parseResultSet(
+	protected List<User> parseResultSet(
 			ResultSet rs) {
 		LOG.debug("Parsing starts");
-		List<ua.nure.zavizionov.SummaryTask4.db.entity.User> result = 
-				new ArrayList<ua.nure.zavizionov.SummaryTask4.db.entity.User>();
+		List<User> result = new ArrayList<User>();
 		try {
 			while (rs.next()){
-				ua.nure.zavizionov.SummaryTask4.db.entity.User user = 
-						new ua.nure.zavizionov.SummaryTask4.db.entity.User();
+				User user = new User();
 				user.setId(rs.getInt(Fields.ID));
 				user.setLogin(rs.getString(Fields.USER_LOGIN));
 				user.setPassword(rs.getString(Fields.USER_PASSWORD));
@@ -73,14 +72,33 @@ public class UserDao<User> extends AbstractDao<ua.nure.zavizionov.SummaryTask4.d
 	}
 
 	@Override
-	protected void prepareStatementForInsert(PreparedStatement statement,
-			ua.nure.zavizionov.SummaryTask4.db.entity.User object) {
+	protected void prepareStatementForInsert(PreparedStatement statement, 
+			User object) {
 		
 	}
 
 	@Override
-	protected void prepareStatementForUpdate(PreparedStatement statement,
-			ua.nure.zavizionov.SummaryTask4.db.entity.User object) {
+	protected void prepareStatementForUpdate(PreparedStatement statement, User object) {
+	}
+
+	public User getByLogin(String login) throws SQLException {
+		List<User> list = null;
+		String sql = getSelectQuery();
+		sql += " WHERE login = ?";
+		try (PreparedStatement statement = connection.prepareStatement(sql)){
+			statement.setString(1, login);
+			ResultSet rs = statement.executeQuery();
+			list = parseResultSet(rs);
+		}catch (SQLException e){
+			throw new SQLException(e);
+		}
+		if (list == null || list.size() == 0){
+			return null;
+		}
+		if (list.size() > 1){
+			throw new SQLException("Recieved more then 1 value");
+		}
+		return list.iterator().next();
 	}
 
 }

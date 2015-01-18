@@ -38,6 +38,12 @@ public class User extends Entity {
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
+	@Override
+	public String toString() {
+		String result = login;
+		//TODO
+		return result;
+	}
 	
 	
 	

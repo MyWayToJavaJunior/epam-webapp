@@ -11,7 +11,7 @@ import ua.nure.zavizionov.SummaryTask4.db.entity.Entity;
 public abstract class AbstractDao<T extends Entity> implements GenericDao<T> {
 	
 	
-	private Connection connection;
+	protected Connection connection;
 
 	public abstract String getSelectQuery();
 	
