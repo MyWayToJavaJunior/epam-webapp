@@ -21,8 +21,8 @@ public class Controller extends HttpServlet {
        
 	private static final Logger LOG = Logger.getLogger(Controller.class);
 	
-
-
+	
+	
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -46,7 +46,7 @@ public class Controller extends HttpServlet {
 		LOG.trace("Request parameter command is " + commandName);
 		
 		Command command = CommandContainer.get(commandName);
-		LOG.trace("Command " + command + "obtained");
+		LOG.trace("Command " + command + " obtained");
 		
 		String forward = command.execute(request, response);
 		LOG.trace("Forward address obtained: " + forward);
@@ -59,6 +59,12 @@ public class Controller extends HttpServlet {
 		}
 
 		
+	}
+
+	@Override
+	public void init() throws ServletException {
+		LOG.debug("Controller initialized");
+		super.init();
 	}
 
 }
