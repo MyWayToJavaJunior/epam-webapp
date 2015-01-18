@@ -27,10 +27,10 @@
 			
 			<c:forEach var="bean" items="${trainBeanList}">
 					<tr>
-						<td>${bean.departureStation} </td>
+						<td>${bean.departureStationName} </td>
 						<td>${bean.departureDate}</td>
 						<td>${bean.departureTime}</td>
-						<td>${bean.arrivalStation}</td>
+						<td>${bean.arrivalStationName}</td>
 						<td>${bean.arrivalDate}</td>
 						<td>${bean.arrivalTime}</td>
 						<td><a href="controller?command=ListRouteInfo&routeId=${bean.routeId}">Info</a><</td>
