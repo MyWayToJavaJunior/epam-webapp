@@ -14,6 +14,24 @@ public class CommandContainer {
 	
 	static{
 		commands.put("login", new LoginCommand());
+		commands.put("logout", new LogoutCommand());
+		//commands.put("viewSettings", new ViewSettingsCommand());
+		commands.put("noCommand", new NoCommand());
+//		commands.put("listTrains", new ListTrainsCommand());
+//		commands.put("listRoutes", new ListRoutesCommand());
+//		commands.put("createUser", new CreateUserCommand());
+//		
+//		commands.put("addRoute", new AddRouteCommand());
+//		commands.put("addTrain", new AddTrainCommand());
+//		commands.put("editRoute", new EditRouteCommand());
+//		commands.put("editTrain", new EditTrainCommand());
+//		commands.put("removeRoute", new AddRouteCommand());
+//		commands.put("removeTrain", new AddTrainCommand());
+//		
+//		commands.put("buyTicket", new BuyTicketCommand());
+		
+		
+		
 		//TODO
 		
 	}
