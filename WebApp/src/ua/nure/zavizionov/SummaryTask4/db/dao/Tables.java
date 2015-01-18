@@ -2,7 +2,6 @@ package ua.nure.zavizionov.SummaryTask4.db.dao;
 
 import ua.nure.zavizionov.SummaryTask4.db.entity.*;
 
-import com.sun.javafx.scene.accessibility.Role;
 
 public enum Tables {
 	
@@ -12,9 +11,9 @@ public enum Tables {
 	USER("users", User.class), WAGON("wagons", Wagon.class), WAGON_TYPE("wagon_types", WagonType.class);
 	
 	private String tableName;
-	private Class daoClass;
+	private Class<? extends Entity> daoClass;
 	
-	Tables(String table, Class daoClass){
+	Tables(String table, Class<? extends Entity> daoClass){
 		this.tableName = table;
 		this.daoClass = daoClass;
 	}
