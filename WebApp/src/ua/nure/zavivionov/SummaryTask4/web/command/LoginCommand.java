@@ -49,23 +49,22 @@ public class LoginCommand extends Command {
 		LOG.error("Error occured: " + errorMessage);
 		return forward;
 		}else{
-			Role userRole = Role.getRole(user);
+			String userRole = user.getRole().getName();
 			LOG.trace("User role is " + userRole);
-			if(userRole == Role.ADMIN){
+			if(userRole.equals(Role.ADMIN.getName())){
 				//TODO
 			}
 			
-			if(userRole == Role.USER){
+			if(userRole.equals(Role.USER.getName())){
 				//TODO
 			}
 			
 			LOG.trace("Associating session with user " + user);
 			session.setAttribute("user", user);
-			
 			LOG.trace("Associating session with userRole " + userRole);
 			session.setAttribute("userRole", userRole);
 			
-			LOG.info("User " + user + "logged as " + userRole.getName());
+			LOG.info("User " + user + "logged as " + userRole);
 			
 			
 		}

@@ -54,6 +54,9 @@ public class UserDao extends AbstractDao<User> {
 			ResultSet rs) {
 		LOG.debug("Parsing starts");
 		List<User> result = new ArrayList<User>();
+		DaoFactory factory = DaoFactory.getInstance();
+		LOG.debug("Getting role DAO");
+		RoleDao roleDao = factory.getRoleDao(connection);
 		try {
 			while (rs.next()){
 				User user = new User();
@@ -61,7 +64,7 @@ public class UserDao extends AbstractDao<User> {
 				user.setLogin(rs.getString(Fields.USER_LOGIN));
 				user.setPassword(rs.getString(Fields.USER_PASSWORD));
 				user.setEmail(rs.getString(Fields.USER_EMAIL));
-				user.setRoleId(rs.getInt(Fields.USER_ROLE_ID));
+				user.setRole(roleDao.getByPK(rs.getInt(Fields.USER_ROLE_ID)));
 				result.add(user);
 			}
 		} catch (SQLException e) {

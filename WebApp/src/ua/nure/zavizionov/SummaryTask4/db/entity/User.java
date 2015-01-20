@@ -32,7 +32,7 @@ public class User extends Entity {
 	public Role getRole() {
 		return role;
 	}
-	public void setRoleId(Role role) {
+	public void setRole(Role role) {
 		this.role = role;
 	}
 	public static long getSerialversionuid() {

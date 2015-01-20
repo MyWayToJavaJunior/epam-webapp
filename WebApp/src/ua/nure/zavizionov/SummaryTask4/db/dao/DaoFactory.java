@@ -40,6 +40,10 @@ public class DaoFactory {
 		return con;
 	}
 	
+	public RoleDao getRoleDao(Connection connection){
+		return new RoleDao(connection);
+	}
+	
 	public UserDao getUserDao(Connection connection){
 		return new UserDao(connection);
 	}
@@ -47,6 +51,8 @@ public class DaoFactory {
 	public TrainBeanDao getTrainBeanDao(Connection connection){
 		return new TrainBeanDao(connection);
 	}
+	
+	
 	
 	
 	

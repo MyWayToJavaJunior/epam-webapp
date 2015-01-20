@@ -10,15 +10,17 @@ import ua.nure.zavizionov.SummaryTask4.db.entity.User;
  */
 
 public enum Role {
-	ADMIN, USER;
+	ADMIN("admin"), USER("user");
 	
-	public static Role getRole(User user) {
-		int roleId = user.getRoleId();
-		return Role.values()[roleId];
+	private String name;
+	
+	Role(String name){
+		this.name = name;
 	}
 	
+	
 	public String getName() {
-		return name().toLowerCase();
+		return name;
 	}
 	
 }

@@ -68,7 +68,8 @@ public class TrainBeanDao extends AbstractDao<TrainBean> {
 			while (rs.next()){
 				TrainBean bean = new TrainBean();
 				bean.setId(rs.getInt(Fields.ID));
-				bean.setRouteId(rs.getInt(Fields.TRAIN_ROUTE_ID));
+				//TODO
+				//bean.setRouteId(rs.getInt(Fields.TRAIN_ROUTE_ID));
 				bean.setDepartureDate(rs.getDate(Fields.TRAIN_DEPARTURE_DATE));
 				bean.setDepartureTime(rs.getTime(Fields.ROUTE_DEPARTURE_TIME));
 				bean.setArrivalDate(rs.getDate(Fields.TRAIN_ARRIVAL_DATE));
