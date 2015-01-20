@@ -9,26 +9,27 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
-import ua.nure.zavizionov.SummaryTask4.db.entity.User;
+import ua.nure.zavizionov.SummaryTask4.db.entity.Train;
 
-public class UserDao extends AbstractDao<User> {
+public class TrainDao extends AbstractDao<Train>{
 	
-	private static final Logger LOG = Logger.getLogger(UserDao.class);
-	public UserDao(Connection connection) {
+	private static final Logger LOG = Logger.getLogger(TrainDao.class);
+	
+	public TrainDao(Connection connection) {
 		super(connection);
 		// TODO Auto-generated constructor stub
 	}
 
 	@Override
-	public ua.nure.zavizionov.SummaryTask4.db.entity.User create()
-			throws SQLException {
+	public Train create() throws SQLException {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public String getSelectQuery() {
-		return "SELECT * FROM users";
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
@@ -50,13 +51,14 @@ public class UserDao extends AbstractDao<User> {
 	}
 
 	@Override
-	protected List<User> parseResultSet(
-			ResultSet rs) {
+	protected List<Train> parseResultSet(ResultSet rs) {
 		LOG.debug("Parsing starts");
-		List<User> result = new ArrayList<User>();
+		List<Train> result = new ArrayList<Train>();
 		DaoFactory factory = DaoFactory.getInstance();
-		LOG.debug("Getting role DAO");
+		
+		LOG.debug("Getting route DAO");
 		RoleDao roleDao = factory.getRoleDao(connection);
+		
 		try {
 			while (rs.next()){
 				User user = new User();
@@ -75,34 +77,17 @@ public class UserDao extends AbstractDao<User> {
 	}
 
 	@Override
-	protected void prepareStatementForInsert(PreparedStatement statement, 
-			User object) {
+	protected void prepareStatementForInsert(PreparedStatement statement,
+			Train object) {
+		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	protected void prepareStatementForUpdate(PreparedStatement statement, User object) {
-	}
-
-	public User getByLogin(String login) throws SQLException {
-		LOG.debug("Begin to search user");
-		LOG.trace("Searching user with login " + login);
-		List<User> list = null;
-		String sql = getSelectQuery();
-		sql += " WHERE login = ?";
-		try (PreparedStatement statement = connection.prepareStatement(sql)){
-			statement.setString(1, login);
-			ResultSet rs = statement.executeQuery();
-			list = parseResultSet(rs);
-		}
-		if (list == null || list.size() == 0){
-			return null;
-		}
-		if (list.size() > 1){
-			throw new SQLException("Recieved more then 1 value");
-		}
-		LOG.debug("User was founded.");
-		return list.iterator().next();
+	protected void prepareStatementForUpdate(PreparedStatement statement,
+			Train object) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
