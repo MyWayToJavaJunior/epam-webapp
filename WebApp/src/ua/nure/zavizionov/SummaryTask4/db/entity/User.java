@@ -9,7 +9,7 @@ public class User extends Entity {
 	private String login;
 	private String password;
 	private String email;
-	private Integer roleId;
+	private Role role;
 	
 	public String getLogin() {
 		return login;
@@ -29,11 +29,11 @@ public class User extends Entity {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public Integer getRoleId() {
-		return roleId;
+	public Role getRole() {
+		return role;
 	}
-	public void setRoleId(Integer roleId) {
-		this.roleId = roleId;
+	public void setRoleId(Role role) {
+		this.role = role;
 	}
 	public static long getSerialversionuid() {
 		return serialVersionUID;

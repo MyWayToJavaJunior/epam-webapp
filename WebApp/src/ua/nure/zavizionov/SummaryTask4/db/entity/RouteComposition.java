@@ -4,8 +4,8 @@ import java.util.Date;
 
 public class RouteComposition extends Entity {
 	
-	private Integer routeId;
-	private Integer stationId;
+	private Route route;
+	private Station station;
 	private Date departureTime;
 	private Integer stay;
 	private Date arrivalTime;

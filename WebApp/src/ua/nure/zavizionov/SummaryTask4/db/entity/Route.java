@@ -4,8 +4,8 @@ import java.util.Date;
 
 public class Route extends Entity {
 	
-	private Integer departureStationId;
-	private Integer arrivalStationId;
+	private Station departureStation;
+	private Station arrivalStation;
 	private Date departureTime;
 	private Date arrivalTime;
 

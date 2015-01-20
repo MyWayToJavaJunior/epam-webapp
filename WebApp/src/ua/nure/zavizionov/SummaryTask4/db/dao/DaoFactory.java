@@ -34,6 +34,9 @@ public class DaoFactory {
 		} catch (NamingException ex) {
 					
 		}
+		if(con == null){
+			throw new SQLException();
+		}
 		return con;
 	}
 	

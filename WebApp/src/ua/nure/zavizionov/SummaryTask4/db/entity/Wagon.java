@@ -2,9 +2,9 @@ package ua.nure.zavizionov.SummaryTask4.db.entity;
 
 public class Wagon extends Entity {
 	
-	private Integer trainId;
+	private Train train;
 	private Integer seats;
-	private Integer typeId;
+	private WagonType type;
 		
 
 }

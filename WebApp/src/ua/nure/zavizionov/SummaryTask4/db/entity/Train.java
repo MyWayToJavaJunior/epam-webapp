@@ -6,16 +6,16 @@ public class Train extends Entity{
 	
 	private static final long serialVersionUID = -3924337161584843834L;
 	
-	private Integer routeId;
+	private Route route;
 	private Date departureDate;
 	private Date arrivalDate;
 	
 
-	public Integer getRouteId() {
-		return routeId;
+	public Route getRoute() {
+		return route;
 	}
-	public void setRouteId(Integer routeId) {
-		this.routeId = routeId;
+	public void setRoute(Route route) {
+		this.route = route;
 	}
 	public Date getDepartureDate() {
 		return departureDate;
