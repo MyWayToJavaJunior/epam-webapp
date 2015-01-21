@@ -48,18 +48,29 @@ public class DaoFactory {
 		return new UserDao(connection);
 	}
 	
+	public TrainDao getTrainDao(Connection connection){
+		return new TrainDao(connection);
+	}
+	
 	public TrainBeanDao getTrainBeanDao(Connection connection){
 		return new TrainBeanDao(connection);
 	}
 	
+	public RouteDao getRouteDao(Connection connection) {
+		return new RouteDao(connection);
+	}
 	
-	
-	
-	
+	public StationDao getStationDao(Connection connection) {
+		return new StationDao(connection);
+	}
 
 	private DaoFactory() {
 		
 	}
+
+	
+
+	
 	
 	
 

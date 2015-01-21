@@ -31,7 +31,7 @@ public abstract class AbstractDao<T extends Entity> implements GenericDao<T> {
 	public T getByPK(int key) throws SQLException{
 		List<T> list;
 		String sql = getSelectQuery();
-		sql += " WHERE id = ?";
+		sql += " WHERE " + Fields.ID + " = ?";
 		try (PreparedStatement statement = connection.prepareStatement(sql)){
 			statement.setInt(1, key);
 			ResultSet rs = statement.executeQuery();

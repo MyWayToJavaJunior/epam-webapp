@@ -5,10 +5,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.log4j.Logger;
 
+import ua.nure.zavizionov.SummaryTask4.db.bean.TrainBean;
 import ua.nure.zavizionov.SummaryTask4.db.entity.Train;
 
 public class TrainDao extends AbstractDao<Train>{
@@ -28,8 +30,7 @@ public class TrainDao extends AbstractDao<Train>{
 
 	@Override
 	public String getSelectQuery() {
-		// TODO Auto-generated method stub
-		return null;
+		return "SELECT * FROM trains ";
 	}
 
 	@Override
@@ -57,17 +58,16 @@ public class TrainDao extends AbstractDao<Train>{
 		DaoFactory factory = DaoFactory.getInstance();
 		
 		LOG.debug("Getting route DAO");
-		RoleDao roleDao = factory.getRoleDao(connection);
+		RouteDao routeDao = factory.getRouteDao(connection);
 		
 		try {
 			while (rs.next()){
-				User user = new User();
-				user.setId(rs.getInt(Fields.ID));
-				user.setLogin(rs.getString(Fields.USER_LOGIN));
-				user.setPassword(rs.getString(Fields.USER_PASSWORD));
-				user.setEmail(rs.getString(Fields.USER_EMAIL));
-				user.setRole(roleDao.getByPK(rs.getInt(Fields.USER_ROLE_ID)));
-				result.add(user);
+				Train train = new Train();
+				train.setId(rs.getInt(Fields.ID));
+				train.setDepartureDate(rs.getDate(Fields.TRAIN_DEPARTURE_DATE));
+				train.setArrivalDate(rs.getDate(Fields.TRAIN_ARRIVAL_DATE));
+				train.setRoute(routeDao.getByPK(rs.getInt(Fields.TRAIN_ROUTE_ID)));
+				result.add(train);
 			}
 		} catch (SQLException e) {
 			LOG.error("Error occured while parsing", e);
@@ -90,4 +90,18 @@ public class TrainDao extends AbstractDao<Train>{
 		
 	}
 
+	public List<Train> findTrainsByDate(Date startDate, Date endDate) throws SQLException{
+		List<Train> list = new ArrayList<Train>();
+		String sql = getSelectQuery();
+		sql += " WHERE "+ Fields.TRAIN_DEPARTURE_DATE +" between ? and ?";
+		try (PreparedStatement statement = connection.prepareStatement(sql)){
+			statement.setDate(1, new java.sql.Date(startDate.getTime()));
+			statement.setDate(2, new java.sql.Date(endDate.getTime()));
+			ResultSet rs = statement.executeQuery();
+			list = parseResultSet(rs);
+		}catch (SQLException e){
+			throw new SQLException(e);
+		}
+		return list;
+	}
 }

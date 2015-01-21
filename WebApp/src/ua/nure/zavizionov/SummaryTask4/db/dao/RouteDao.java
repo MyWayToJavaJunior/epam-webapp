@@ -28,8 +28,7 @@ public class RouteDao extends AbstractDao<Route>{
 
 	@Override
 	public String getSelectQuery() {
-		// TODO Auto-generated method stub
-		return null;
+		return "SELECT * FROM routes ";
 	}
 
 	@Override
@@ -55,19 +54,19 @@ public class RouteDao extends AbstractDao<Route>{
 		LOG.debug("Parsing starts");
 		List<Route> result = new ArrayList<Route>();
 		DaoFactory factory = DaoFactory.getInstance();
-		
 		LOG.debug("Getting station DAO");
-		RoleDao roleDao = factory.getRoleDao(connection);
-		
+		StationDao stationDao = factory.getStationDao(connection);
 		try {
 			while (rs.next()){
 				Route route = new Route();
-				user.setId(rs.getInt(Fields.ID));
-				user.setLogin(rs.getString(Fields.USER_LOGIN));
-				user.setPassword(rs.getString(Fields.USER_PASSWORD));
-				user.setEmail(rs.getString(Fields.USER_EMAIL));
-				user.setRole(roleDao.getByPK(rs.getInt(Fields.USER_ROLE_ID)));
-				result.add(user);
+				route.setId(rs.getInt(Fields.ID));
+				route.setDepartureStation(stationDao.getByPK(
+						rs.getInt(Fields.ROUTE_DEPARTURE_STATION_ID)));
+				route.setArrivalStation(stationDao.getByPK(
+						rs.getInt(Fields.ROUTE_ARRIVAL_STATION_ID)));
+				route.setDepartureTime(rs.getTime(Fields.ROUTE_DEPARTURE_TIME));
+				route.setArrivalTime(rs.getTime(Fields.ROUTE_ARRIVAL_TIME));
+				result.add(route);
 			}
 		} catch (SQLException e) {
 			LOG.error("Error occured while parsing", e);

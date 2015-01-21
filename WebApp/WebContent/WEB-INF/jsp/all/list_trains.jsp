@@ -25,15 +25,15 @@
 			<td class="content">			
 			<%-- CONTENT --%>
 			
-			<c:forEach var="bean" items="${trainBeanList}">
+			<c:forEach var="bean" items="${trainList}">
 					<tr>
-						<td>${bean.departureStationName} </td>
+						<td>${bean.route.departureStation.name} </td>
 						<td>${bean.departureDate}</td>
-						<td>${bean.departureTime}</td>
-						<td>${bean.arrivalStationName}</td>
+						<td><fmt:formatDate value="${bean.route.departureTime}" pattern="HH:mm:ss" /></td>
+						<td>${bean.route.arrivalStation.name}</td>
 						<td>${bean.arrivalDate}</td>
-						<td>${bean.arrivalTime}</td>
-						<td><a href="controller?command=ListRouteInfo&routeId=${bean.routeId}">Info</a><</td>
+						<td><fmt:formatDate value="${bean.route.arrivalTime}" pattern="HH:mm:ss" /></td>
+						<td><a href="controller?command=ListRouteInfo&routeId=${bean.route.id}">Info</a><</td>
 					</tr>
 
 				</c:forEach>			

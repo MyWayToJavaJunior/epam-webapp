@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import ua.nure.zavivionov.SummaryTask4.Path;
 import ua.nure.zavizionov.SummaryTask4.db.bean.TrainBean;
+import ua.nure.zavizionov.SummaryTask4.db.entity.Train;
 import ua.nure.zavizionov.SummaryTask4.db.util.DBService;
 
 import org.apache.log4j.Logger;
@@ -28,7 +29,7 @@ public class ListTrainsCommand extends Command {
 			HttpServletResponse response) throws IOException, ServletException {
 		String forward = null;
 		String errorMessage = null;
-		List<TrainBean> trainBeanList;
+		List<Train> trainList;
 		LOG.debug("Command starts");
 		String startDateString = request.getParameter("startDate");
 		String endDateString = request.getParameter("endDate");
@@ -56,9 +57,9 @@ public class ListTrainsCommand extends Command {
 		}
 		
 		LOG.debug("Geting beans.");
-		trainBeanList = service.findTrainsByDate(startDate, endDate);
+		trainList = service.findTrainsByDate(startDate, endDate);
 		
-		request.setAttribute("trainBeanList", trainBeanList);
+		request.setAttribute("trainList", trainList);
 		
 		LOG.debug("Command finished");
 		forward = Path.LIST_TRAINS_PAGE;
