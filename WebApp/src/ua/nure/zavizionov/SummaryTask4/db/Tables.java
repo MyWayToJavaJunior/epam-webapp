@@ -1,4 +1,4 @@
-package ua.nure.zavizionov.SummaryTask4.db.dao;
+package ua.nure.zavizionov.SummaryTask4.db;
 
 import ua.nure.zavizionov.SummaryTask4.db.entity.*;
 

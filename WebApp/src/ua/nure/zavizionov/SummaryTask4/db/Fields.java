@@ -1,4 +1,4 @@
-package ua.nure.zavizionov.SummaryTask4.db.dao;
+package ua.nure.zavizionov.SummaryTask4.db;
 
 public final class Fields {
 	

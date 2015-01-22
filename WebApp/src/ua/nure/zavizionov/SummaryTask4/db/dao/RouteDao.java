@@ -9,6 +9,7 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
+import ua.nure.zavizionov.SummaryTask4.db.Fields;
 import ua.nure.zavizionov.SummaryTask4.db.entity.Route;
 
 public class RouteDao extends AbstractDao<Route>{

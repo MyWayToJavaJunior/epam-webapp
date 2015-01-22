@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
+import ua.nure.zavizionov.SummaryTask4.db.Fields;
 import ua.nure.zavizionov.SummaryTask4.db.entity.Entity;
 
 public abstract class AbstractDao<T extends Entity> implements GenericDao<T> {

@@ -10,6 +10,7 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
+import ua.nure.zavizionov.SummaryTask4.db.Fields;
 import ua.nure.zavizionov.SummaryTask4.db.bean.TrainBean;
 
 public class TrainBeanDao extends AbstractDao<TrainBean> {
