@@ -90,7 +90,7 @@ public class RouteCompositionDao extends AbstractDao<RouteComposition>{
 	}
 	
 	public List<RouteComposition> getByRoute(int routeId) throws SQLException{
-		List<RouteComposition> list = new ArrayList<RouteComposition>();
+		List<RouteComposition> list = null;
 		String sql = getSelectQuery();
 		sql += " WHERE " + Fields.ROUTE_COMPOSITION_ROUTE_ID + " = ?";
 		try (PreparedStatement statement = connection.prepareStatement(sql)){
@@ -98,6 +98,7 @@ public class RouteCompositionDao extends AbstractDao<RouteComposition>{
 			ResultSet rs = statement.executeQuery();
 			list = parseResultSet(rs);
 		}catch (Exception e){
+			LOG.error("SQL exception occured", e);
 			throw new SQLException(e);
 		}
 		if (list == null || list.size() == 0){

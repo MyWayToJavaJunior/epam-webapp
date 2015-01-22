@@ -10,6 +10,7 @@ import java.util.List;
 import org.apache.log4j.Logger;
 
 import ua.nure.zavizionov.SummaryTask4.db.Fields;
+import ua.nure.zavizionov.SummaryTask4.db.entity.RouteComposition;
 import ua.nure.zavizionov.SummaryTask4.db.entity.Station;
 
 
@@ -83,6 +84,23 @@ public class StationDao extends AbstractDao<Station>{
 		
 	}
 	
+	public Station findByName(String stationName) throws SQLException{
+		List<Station> list = null;
+		String sql = getSelectQuery();
+		sql += " WHERE " + Fields.STATION_NAME+ " = ?";
+		try (PreparedStatement statement = connection.prepareStatement(sql)){
+			statement.setString(1, stationName);
+			ResultSet rs = statement.executeQuery();
+			list = parseResultSet(rs);
+		}catch (Exception e){
+			LOG.error("SQL exception occured", e);
+			throw new SQLException(e);
+		}
+		if (list == null || list.size() == 0){
+			LOG.warn("Nothing was founded.");
+		}
+		return list.iterator().next();
+	}
 	
 
 }

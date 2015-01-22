@@ -10,9 +10,11 @@ import org.apache.log4j.Logger;
 
 import ua.nure.zavizionov.SummaryTask4.db.dao.DaoFactory;
 import ua.nure.zavizionov.SummaryTask4.db.dao.RouteCompositionDao;
+import ua.nure.zavizionov.SummaryTask4.db.dao.StationDao;
 import ua.nure.zavizionov.SummaryTask4.db.dao.TrainDao;
 import ua.nure.zavizionov.SummaryTask4.db.dao.UserDao;
 import ua.nure.zavizionov.SummaryTask4.db.entity.RouteComposition;
+import ua.nure.zavizionov.SummaryTask4.db.entity.Station;
 import ua.nure.zavizionov.SummaryTask4.db.entity.Train;
 import ua.nure.zavizionov.SummaryTask4.db.entity.User;
 
@@ -114,6 +116,38 @@ public class DBService {
 				}
 			}
 			return result;
+		}
+		
+		public String addStation(String stationName){
+			StationDao dao = null;
+			String message = null;
+			Connection connection = null;
+			Station station = null;
+			try {
+				LOG.debug("Opening connection with DB.");
+				connection = factory.getConnection();
+				LOG.debug("Geting DAO");
+				dao = factory.getStationDao(connection);
+				if(dao.findByName(stationName)==null){
+					LOG.trace("Adding station");
+					dao.persist(station);
+					message = "Station added.";
+				}else{
+					message = "Station already exists.";
+					LOG.trace(message);
+				}
+			} catch (SQLException e) {
+				LOG.error("Error occured: ", e);
+			}
+			finally{
+				try {
+					LOG.debug("Closing connection with DB.");
+					connection.close();
+				} catch (SQLException e) {
+					LOG.error("Error occured: ", e);
+				}
+			}
+			return message;
 		}
 		
 }
