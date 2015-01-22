@@ -11,6 +11,7 @@ import org.apache.log4j.Logger;
 
 import ua.nure.zavizionov.SummaryTask4.db.Fields;
 import ua.nure.zavizionov.SummaryTask4.db.entity.Route;
+import ua.nure.zavizionov.SummaryTask4.db.util.DBService;
 
 public class RouteDao extends AbstractDao<Route>{
 	
@@ -67,6 +68,7 @@ public class RouteDao extends AbstractDao<Route>{
 						rs.getInt(Fields.ROUTE_ARRIVAL_STATION_ID)));
 				route.setDepartureTime(rs.getTime(Fields.ROUTE_DEPARTURE_TIME));
 				route.setArrivalTime(rs.getTime(Fields.ROUTE_ARRIVAL_TIME));
+				route.setRouteComposition(DBService.getInstance().findRouteComposition(route.getId()));
 				result.add(route);
 			}
 		} catch (SQLException e) {

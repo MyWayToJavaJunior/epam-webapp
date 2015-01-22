@@ -60,7 +60,6 @@ public class StationDao extends AbstractDao<Station>{
 				Station station = new Station();
 				station.setId(rs.getInt(Fields.ID));
 				station.setName(rs.getString(Fields.STATION_NAME));
-				LOG.debug("Name " + rs.getString(Fields.STATION_NAME)+" writen");
 				result.add(station);
 			}
 		} catch (SQLException e) {
