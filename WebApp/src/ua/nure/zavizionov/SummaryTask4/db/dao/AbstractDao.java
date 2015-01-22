@@ -6,11 +6,15 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
+import org.apache.log4j.Logger;
+
 import ua.nure.zavizionov.SummaryTask4.db.Fields;
 import ua.nure.zavizionov.SummaryTask4.db.entity.Entity;
+import ua.nure.zavizionov.SummaryTask4.db.util.DBService;
 
 public abstract class AbstractDao<T extends Entity> implements GenericDao<T> {
 	
+	private static final Logger LOG = Logger.getLogger(AbstractDao.class);
 	
 	protected Connection connection;
 
@@ -71,25 +75,31 @@ public abstract class AbstractDao<T extends Entity> implements GenericDao<T> {
 		String sql = getCreateQuery();
 		try (PreparedStatement statement = connection.prepareStatement(sql)){
 			prepareStatementForInsert(statement, object);
+			LOG.debug("Executing query");
 			int count = statement.executeUpdate();
 			if (count != 1){
+				LOG.error("Error occured");
 				throw new SQLException("On persist modify " + count + " rows, expected 1");
 			}
 		}catch (Exception e){
+			LOG.error("Error occured", e);
 			throw new SQLException(e);
 		}
-		
+		LOG.debug("Getting object");
 		sql = getSelectQuery() + "WHERE id = last_insert_id();";
 		try (PreparedStatement statement = connection.prepareStatement(sql)){
 			ResultSet rs = statement.executeQuery();
 			List<T> list = parseResultSet(rs);
 			if (list == null || list.size() == 0){
+				LOG.error("Cant find inserted object");
 				throw new SQLException("Cant find inserted data");
 			}
 			persistInstance = list.iterator().next();
 		}catch(Exception e){
 			throw new SQLException(e);
 		}
+		LOG.trace("Object founded, commiting changes.");
+		connection.commit();
 		return persistInstance;
 	}
 	

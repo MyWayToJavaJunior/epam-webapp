@@ -122,7 +122,8 @@ public class DBService {
 			StationDao dao = null;
 			String message = null;
 			Connection connection = null;
-			Station station = null;
+			Station station = new Station();
+			station.setName(stationName);
 			try {
 				LOG.debug("Opening connection with DB.");
 				connection = factory.getConnection();

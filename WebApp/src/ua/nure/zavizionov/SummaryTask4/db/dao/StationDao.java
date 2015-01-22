@@ -48,8 +48,7 @@ public class StationDao extends AbstractDao<Station>{
 
 	@Override
 	public String getCreateQuery() {
-		// TODO Auto-generated method stub
-		return null;
+		return "INSERT INTO stations (`name`) VALUES (?)";
 	}
 
 	@Override
@@ -73,7 +72,12 @@ public class StationDao extends AbstractDao<Station>{
 	@Override
 	protected void prepareStatementForInsert(PreparedStatement statement,
 			Station object) {
-		// TODO Auto-generated method stub
+		try {
+			LOG.trace("Prepearing statement fo insert");
+			statement.setString(1, object.getName());
+		} catch (SQLException e) {
+			LOG.error("Error occured", e);
+		}
 		
 	}
 
@@ -87,7 +91,7 @@ public class StationDao extends AbstractDao<Station>{
 	public Station findByName(String stationName) throws SQLException{
 		List<Station> list = null;
 		String sql = getSelectQuery();
-		sql += " WHERE " + Fields.STATION_NAME+ " = ?";
+		sql += " WHERE " + Fields.STATION_NAME + " = ?";
 		try (PreparedStatement statement = connection.prepareStatement(sql)){
 			statement.setString(1, stationName);
 			ResultSet rs = statement.executeQuery();
@@ -98,6 +102,7 @@ public class StationDao extends AbstractDao<Station>{
 		}
 		if (list == null || list.size() == 0){
 			LOG.warn("Nothing was founded.");
+			return null;
 		}
 		return list.iterator().next();
 	}

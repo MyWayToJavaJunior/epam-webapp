@@ -10,7 +10,8 @@ import javax.servlet.http.HttpSession;
 import org.apache.log4j.Logger;
 
 import ua.nure.zavivionov.SummaryTask4.Path;
-import ua.nure.zavizionov.SummaryTask4.db.Role;
+import ua.nure.zavizionov.SummaryTask4.db.Roles;
+import ua.nure.zavizionov.SummaryTask4.db.entity.Role;
 import ua.nure.zavizionov.SummaryTask4.db.entity.User;
 import ua.nure.zavizionov.SummaryTask4.db.util.DBService;
 
@@ -49,19 +50,19 @@ public class LoginCommand extends Command {
 		LOG.error("Error occured: " + errorMessage);
 		return forward;
 		}else{
-			String userRole = user.getRole().getName();
-			LOG.trace("User role is " + userRole);
-			if(userRole.equals(Role.ADMIN.getName())){
+			Role userRole = user.getRole();
+			LOG.trace("User role is " + userRole.getName());
+			if(userRole.getName().equals(Roles.ADMIN.getName())){
 				//TODO
 			}
 			
-			if(userRole.equals(Role.USER.getName())){
+			if(userRole.getName().equals(Roles.USER.getName())){
 				//TODO
 			}
 			
 			LOG.trace("Associating session with user " + user);
 			session.setAttribute("user", user);
-			LOG.trace("Associating session with userRole " + userRole);
+			LOG.trace("Associating session with userRole " + userRole.getName());
 			session.setAttribute("userRole", userRole);
 			
 			LOG.info("User " + user + "logged as " + userRole);

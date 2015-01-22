@@ -9,12 +9,12 @@ import ua.nure.zavizionov.SummaryTask4.db.entity.User;
  * 
  */
 
-public enum Role {
+public enum Roles {
 	ADMIN("admin"), USER("user");
 	
 	private String name;
 	
-	Role(String name){
+	Roles(String name){
 		this.name = name;
 	}
 	

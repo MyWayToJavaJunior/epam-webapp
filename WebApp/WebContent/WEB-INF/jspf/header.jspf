@@ -2,7 +2,6 @@
 Header (top area). 
 ===========================================================================--%> 
 
-<%@ page import="ua.nure.zavizionov.SummaryTask4.db.Role" %>
 <%@ include file="/WEB-INF/jspf/directive/page.jspf" %>
 <%@ include file="/WEB-INF/jspf/directive/taglib.jspf" %>
 
@@ -20,10 +19,7 @@ This is the user menu.
 
 <%--=========================================================================== 
 This way we define the ADMIN MENU. 
-===========================================================================--%> 
-		<c:when test="${userRole.name == 'admin' }">
-			<a href="controller?command=listOrders">All orders</a> &nbsp;
-		</c:when>
+===========================================================================--%>
 		
 		<c:when test="${userRole.name == 'admin' }">
 			<a href="controller?command=addStation">Add station</a> &nbsp;
@@ -33,7 +29,7 @@ This way we define the ADMIN MENU.
 <%--=========================================================================== 
 This way we define the USER MENU.
 ===========================================================================--%> 
-		<c:when test="${userRole.name == 'client'}">
+		<c:when test="${userRole.name == 'user'}">
 			<a href="controller?command=listMenu">Menu</a> &nbsp;
 		</c:when>
 	</c:choose>
