@@ -1,6 +1,7 @@
 package ua.nure.zavizionov.SummaryTask4.db.entity;
 
 import java.util.Date;
+import java.util.List;
 
 public class Train extends Entity{
 	
@@ -9,7 +10,7 @@ public class Train extends Entity{
 	private Route route;
 	private Date departureDate;
 	private Date arrivalDate;
-	
+	private List<Wagon> wagons;
 
 	public Route getRoute() {
 		return route;
@@ -28,6 +29,12 @@ public class Train extends Entity{
 	}
 	public void setArrivalDate(Date arrivalDate) {
 		this.arrivalDate = arrivalDate;
+	}
+	public List<Wagon> getWagons() {
+		return wagons;
+	}
+	public void setWagons(List<Wagon> wagons) {
+		this.wagons = wagons;
 	}
 
 

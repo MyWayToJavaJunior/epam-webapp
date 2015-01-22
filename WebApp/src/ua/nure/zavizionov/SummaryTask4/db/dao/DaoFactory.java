@@ -63,6 +63,14 @@ public class DaoFactory {
 	public RouteCompositionDao getRouteCompositionDao(Connection connection) {
 		return new RouteCompositionDao(connection);
 	}
+	
+	public WagonTypeDao getWagonTypeDao(Connection connection) {
+		return new WagonTypeDao(connection);
+	}
+	
+	public WagonDao getWagonDao(Connection connection) {
+		return new WagonDao(connection);
+	}
 
 	private DaoFactory() {
 		

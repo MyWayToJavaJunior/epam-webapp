@@ -5,33 +5,33 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import org.apache.log4j.Logger;
 
 import ua.nure.zavizionov.SummaryTask4.db.Fields;
-import ua.nure.zavizionov.SummaryTask4.db.bean.TrainBean;
-import ua.nure.zavizionov.SummaryTask4.db.entity.Train;
+import ua.nure.zavizionov.SummaryTask4.db.entity.Entity;
+import ua.nure.zavizionov.SummaryTask4.db.entity.Role;
+import ua.nure.zavizionov.SummaryTask4.db.entity.RouteComposition;
 
-public class TrainDao extends AbstractDao<Train>{
+public class RouteCompositionDao extends AbstractDao<RouteComposition>{
+
+	private static final Logger LOG = Logger.getLogger(RouteCompositionDao.class);
 	
-	private static final Logger LOG = Logger.getLogger(TrainDao.class);
-	
-	public TrainDao(Connection connection) {
+	public RouteCompositionDao(Connection connection) {
 		super(connection);
 		// TODO Auto-generated constructor stub
 	}
 
 	@Override
-	public Train create() throws SQLException {
+	public RouteComposition create() throws SQLException {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public String getSelectQuery() {
-		return "SELECT * FROM trains ";
+		return "SELECT * from route_compositions " ;
 	}
 
 	@Override
@@ -53,24 +53,20 @@ public class TrainDao extends AbstractDao<Train>{
 	}
 
 	@Override
-	protected List<Train> parseResultSet(ResultSet rs) {
+	protected List<RouteComposition> parseResultSet(ResultSet rs) {
 		LOG.debug("Parsing starts");
-		List<Train> result = new ArrayList<Train>();
+		List<RouteComposition> result = new ArrayList<RouteComposition>();
 		DaoFactory factory = DaoFactory.getInstance();
-		LOG.debug("Getting route DAO");
-		RouteDao routeDao = factory.getRouteDao(connection);
-		LOG.debug("Getting wagon DAO");
-		WagonDao wagonDao = factory.getWagonDao(connection);
-		
+		LOG.debug("Getting station DAO");
+		StationDao stationDao = factory.getStationDao(connection);
 		try {
 			while (rs.next()){
-				Train train = new Train();
-				train.setId(rs.getInt(Fields.ID));
-				train.setDepartureDate(rs.getDate(Fields.TRAIN_DEPARTURE_DATE));
-				train.setArrivalDate(rs.getDate(Fields.TRAIN_ARRIVAL_DATE));
-				train.setRoute(routeDao.getByPK(rs.getInt(Fields.TRAIN_ROUTE_ID)));
-				train.setWagons(wagonDao.findWagonsByTrain(train.getId()));
-				result.add(train);
+				RouteComposition rc = new RouteComposition();
+				rc.setDepartureTime(rs.getTime(Fields.ROUTE_COMPOSITION_DEPARTURE_TIME));
+				rc.setArrivalTime(rs.getTime(Fields.ROUTE_COMPOSITION_ARRIVAL_TIME));
+				rc.setStay(rs.getInt(Fields.ROUTE_COMPOSITION_STAY));
+				rc.setStation(stationDao.getByPK(rs.getInt(Fields.ROUTE_COMPOSITION_STATION_ID)));
+				result.add(rc);
 			}
 		} catch (SQLException e) {
 			LOG.error("Error occured while parsing", e);
@@ -81,30 +77,35 @@ public class TrainDao extends AbstractDao<Train>{
 
 	@Override
 	protected void prepareStatementForInsert(PreparedStatement statement,
-			Train object) {
+			RouteComposition object) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	protected void prepareStatementForUpdate(PreparedStatement statement,
-			Train object) {
+			RouteComposition object) {
 		// TODO Auto-generated method stub
 		
 	}
-
-	public List<Train> findTrainsByDate(Date startDate, Date endDate) throws SQLException{
-		List<Train> list = new ArrayList<Train>();
+	
+	public List<RouteComposition> getByRoute(int routeId) throws SQLException{
+		List<RouteComposition> list = new ArrayList<RouteComposition>();
 		String sql = getSelectQuery();
-		sql += " WHERE "+ Fields.TRAIN_DEPARTURE_DATE +" between ? and ?";
+		sql += " WHERE " + Fields.ROUTE_COMPOSITION_ROUTE_ID + " = ?";
 		try (PreparedStatement statement = connection.prepareStatement(sql)){
-			statement.setDate(1, new java.sql.Date(startDate.getTime()));
-			statement.setDate(2, new java.sql.Date(endDate.getTime()));
+			statement.setInt(1, routeId);
 			ResultSet rs = statement.executeQuery();
 			list = parseResultSet(rs);
-		}catch (SQLException e){
+		}catch (Exception e){
 			throw new SQLException(e);
+		}
+		if (list == null || list.size() == 0){
+			LOG.warn("Empry route composition.");
 		}
 		return list;
 	}
+
+	
+
 }

@@ -28,6 +28,16 @@ public interface Fields {
 	String ROUTE_COMPOSITION_STAY = "stay";
 	String ROUTE_COMPOSITION_STATION_ID = "station_id";
 	
+	//wagons_types
+	String WAGON_SEATS = "seats";
+	String WAGON_TYPE_ID = "type_id";
+	String WAGON_TRAIN_ID = "train_id";
+
+	
+	//wagon_types
+	String WAGON_TYPE_NAME = "type_name";
+	String WAGON_TYPE_SEATS = "seats";
+	
 	//stations
 	String STATION_NAME = "name";
 	

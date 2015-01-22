@@ -32,6 +32,10 @@
 						<td><fmt:formatDate value="${bean.route.departureTime}" pattern="HH:mm:ss" /></td>
 						<td>${bean.route.arrivalStation.name}</td>
 						<td>${bean.arrivalDate}</td>
+						<td><c:forEach var="wagon" items="${bean.wagons}">
+								${wagon.type.typeName}
+						</c:forEach>
+						</td>
 						<td><fmt:formatDate value="${bean.route.arrivalTime}" pattern="HH:mm:ss" /></td>
 						<td><a href="controller?command=ListRouteInfo&routeId=${bean.route.id}">Info</a><</td>
 					</tr>

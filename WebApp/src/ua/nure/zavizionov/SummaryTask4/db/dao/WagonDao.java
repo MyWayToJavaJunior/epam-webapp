@@ -5,33 +5,34 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import org.apache.log4j.Logger;
 
 import ua.nure.zavizionov.SummaryTask4.db.Fields;
-import ua.nure.zavizionov.SummaryTask4.db.bean.TrainBean;
-import ua.nure.zavizionov.SummaryTask4.db.entity.Train;
+import ua.nure.zavizionov.SummaryTask4.db.entity.Route;
+import ua.nure.zavizionov.SummaryTask4.db.entity.RouteComposition;
+import ua.nure.zavizionov.SummaryTask4.db.entity.Wagon;
+import ua.nure.zavizionov.SummaryTask4.db.util.DBService;
 
-public class TrainDao extends AbstractDao<Train>{
+public class WagonDao extends AbstractDao<Wagon>{
 	
-	private static final Logger LOG = Logger.getLogger(TrainDao.class);
-	
-	public TrainDao(Connection connection) {
+	private static final Logger LOG = Logger.getLogger(WagonDao.class);
+
+	public WagonDao(Connection connection) {
 		super(connection);
 		// TODO Auto-generated constructor stub
 	}
 
 	@Override
-	public Train create() throws SQLException {
+	public Wagon create() throws SQLException {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public String getSelectQuery() {
-		return "SELECT * FROM trains ";
+		return "SELECT * FROM wagons ";
 	}
 
 	@Override
@@ -53,24 +54,19 @@ public class TrainDao extends AbstractDao<Train>{
 	}
 
 	@Override
-	protected List<Train> parseResultSet(ResultSet rs) {
+	protected List<Wagon> parseResultSet(ResultSet rs) {
 		LOG.debug("Parsing starts");
-		List<Train> result = new ArrayList<Train>();
+		List<Wagon> result = new ArrayList<Wagon>();
 		DaoFactory factory = DaoFactory.getInstance();
-		LOG.debug("Getting route DAO");
-		RouteDao routeDao = factory.getRouteDao(connection);
-		LOG.debug("Getting wagon DAO");
-		WagonDao wagonDao = factory.getWagonDao(connection);
-		
+		LOG.debug("Getting wagon type DAO");
+		WagonTypeDao wtDao = factory.getWagonTypeDao(connection);
 		try {
 			while (rs.next()){
-				Train train = new Train();
-				train.setId(rs.getInt(Fields.ID));
-				train.setDepartureDate(rs.getDate(Fields.TRAIN_DEPARTURE_DATE));
-				train.setArrivalDate(rs.getDate(Fields.TRAIN_ARRIVAL_DATE));
-				train.setRoute(routeDao.getByPK(rs.getInt(Fields.TRAIN_ROUTE_ID)));
-				train.setWagons(wagonDao.findWagonsByTrain(train.getId()));
-				result.add(train);
+				Wagon wagon = new Wagon();
+				wagon.setId(rs.getInt(Fields.ID));
+				wagon.setSeats(rs.getInt(Fields.WAGON_SEATS));
+				wagon.setType(wtDao.getByPK(rs.getInt(Fields.WAGON_TYPE_ID)));
+				result.add(wagon);
 			}
 		} catch (SQLException e) {
 			LOG.error("Error occured while parsing", e);
@@ -81,30 +77,34 @@ public class TrainDao extends AbstractDao<Train>{
 
 	@Override
 	protected void prepareStatementForInsert(PreparedStatement statement,
-			Train object) {
+			Wagon object) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	protected void prepareStatementForUpdate(PreparedStatement statement,
-			Train object) {
+			Wagon object) {
 		// TODO Auto-generated method stub
 		
 	}
-
-	public List<Train> findTrainsByDate(Date startDate, Date endDate) throws SQLException{
-		List<Train> list = new ArrayList<Train>();
+	
+	public List<Wagon> findWagonsByTrain(int trainId) throws SQLException{
+		List<Wagon> list = new ArrayList<Wagon>();
 		String sql = getSelectQuery();
-		sql += " WHERE "+ Fields.TRAIN_DEPARTURE_DATE +" between ? and ?";
+		sql += " WHERE " + Fields.WAGON_TRAIN_ID + " = ?";
 		try (PreparedStatement statement = connection.prepareStatement(sql)){
-			statement.setDate(1, new java.sql.Date(startDate.getTime()));
-			statement.setDate(2, new java.sql.Date(endDate.getTime()));
+			statement.setInt(1, trainId);
 			ResultSet rs = statement.executeQuery();
 			list = parseResultSet(rs);
-		}catch (SQLException e){
+		}catch (Exception e){
 			throw new SQLException(e);
+		}
+		if (list == null || list.size() == 0){
+			LOG.warn("No wagons was founded.");
 		}
 		return list;
 	}
+	
+
 }
