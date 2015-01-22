@@ -24,6 +24,10 @@ This way we define the ADMIN MENU.
 		<c:when test="${userRole.name == 'admin' }">
 			<a href="controller?command=listOrders">All orders</a> &nbsp;
 		</c:when>
+		
+		<c:when test="${userRole.name == 'admin' }">
+			<a href="controller?command=addStation">Add station</a> &nbsp;
+		</c:when>
 
 		
 <%--=========================================================================== 

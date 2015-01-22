@@ -20,12 +20,15 @@ public class CommandContainer {
 		commands.put("listTrains", new ListTrainsCommand());
 //		commands.put("listRoutes", new ListRoutesCommand());
 //		commands.put("createUser", new CreateUserCommand());
-//		
+		
+		commands.put("addStation", new AddStationCommand());
 //		commands.put("addRoute", new AddRouteCommand());
 //		commands.put("addTrain", new AddTrainCommand());
 //		commands.put("editRoute", new EditRouteCommand());
+//		commands.put("editStation", new EditStationCommand());
 //		commands.put("editTrain", new EditTrainCommand());
 //		commands.put("removeRoute", new AddRouteCommand());
+//		commands.put("removeStation", new RemoveStationCommand());
 //		commands.put("removeTrain", new AddTrainCommand());
 //		
 //		commands.put("buyTicket", new BuyTicketCommand());
