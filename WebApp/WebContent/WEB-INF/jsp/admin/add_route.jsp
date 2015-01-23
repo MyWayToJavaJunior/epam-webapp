@@ -7,6 +7,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+	<form id="addRoute" action="addRoute" method="post">
+		
+	</form>
 </body>
 </html>

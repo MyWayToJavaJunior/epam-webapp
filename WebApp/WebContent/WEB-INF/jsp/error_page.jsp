@@ -23,7 +23,6 @@
 				<h2 class="error">
 					The following error occurred
 				</h2>
-			
 				<%-- this way we get the error information (error 404)--%>
 				<c:set var="code" value="${requestScope['javax.servlet.error.status_code']}"/>
 				<c:set var="message" value="${requestScope['javax.servlet.error.message']}"/>

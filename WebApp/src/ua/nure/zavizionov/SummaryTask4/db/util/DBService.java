@@ -9,10 +9,13 @@ import java.util.List;
 import org.apache.log4j.Logger;
 
 import ua.nure.zavizionov.SummaryTask4.db.dao.DaoFactory;
+import ua.nure.zavizionov.SummaryTask4.db.dao.RoleDao;
 import ua.nure.zavizionov.SummaryTask4.db.dao.RouteCompositionDao;
+import ua.nure.zavizionov.SummaryTask4.db.dao.RouteDao;
 import ua.nure.zavizionov.SummaryTask4.db.dao.StationDao;
 import ua.nure.zavizionov.SummaryTask4.db.dao.TrainDao;
 import ua.nure.zavizionov.SummaryTask4.db.dao.UserDao;
+import ua.nure.zavizionov.SummaryTask4.db.entity.Route;
 import ua.nure.zavizionov.SummaryTask4.db.entity.RouteComposition;
 import ua.nure.zavizionov.SummaryTask4.db.entity.Station;
 import ua.nure.zavizionov.SummaryTask4.db.entity.Train;
@@ -150,5 +153,31 @@ public class DBService {
 			}
 			return message;
 		}
+		
+		public List<Route> findRoutes(){
+				LOG.trace("Searching for routes");
+				RouteDao dao = null;
+				List<Route> result = null;
+				Connection connection = null;
+				try {
+					LOG.debug("Opening connection with DB.");
+					connection = factory.getConnection();
+					LOG.debug("Geting DAO");
+					dao = factory.getRouteDao(connection);
+					result = dao.getAll();
+				} catch (SQLException e) {
+					LOG.error("Error occured: ", e);
+				}
+				finally{
+					try {
+						LOG.debug("Closing connection with DB.");
+						connection.close();
+					} catch (SQLException e) {
+						LOG.error("Error occured: ", e);
+					}
+				}
+				return result;
+			}
+		
 		
 }

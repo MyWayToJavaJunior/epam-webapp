@@ -25,24 +25,27 @@ public class AddStationCommand extends Command {
 	@Override
 	public String execute(HttpServletRequest request,
 			HttpServletResponse response) throws IOException, ServletException {
-		String forward = Path.ADD_STATION_PAGE;
-		String message = null;
+		String forward = null;
+		String errorMessage = null;
 		DBService service = DBService.getInstance();
 		LOG.debug("Command starts");
 		String stationName = request.getParameter("stationName");
 		if(stationName == null){
+			forward = Path.ADD_STATION_PAGE;
 			return forward;
 		}
 		if(stationName.isEmpty()){
-			message = "Station name is empty.";
-			request.setAttribute("message", message);
+			errorMessage = "Station name is empty.";
+			request.setAttribute("errorMessage", errorMessage);
+			forward = Path.ERROR_PAGE;
 			return forward;
 		}
 		LOG.trace("Recieved station name: " + stationName);
-		message = service.addStation(stationName);
-		request.setAttribute("message", message);
+		errorMessage = service.addStation(stationName);
+//		request.setAttribute("errorMessage", errorMessage);
 		
 		LOG.debug("Command finished");
+		response.sendRedirect(Path.ADD_STATION_COMMAND);
 		return forward;
 	}
 

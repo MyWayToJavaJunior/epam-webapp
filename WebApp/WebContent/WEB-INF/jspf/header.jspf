@@ -76,6 +76,7 @@ Type link to logout
 
 <div id="rightHeader">
 		<a href="controller?command=listTrains">List trains</a>
+		<a href="controller?command=listRoutes">List routes</a> &nbsp;
 	</div>
 
 	</td>
