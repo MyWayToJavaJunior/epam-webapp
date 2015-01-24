@@ -9,19 +9,17 @@
 
 <body>
 	<table id="main-container">
+	
 			
 		<%@ include file="/WEB-INF/jspf/header.jspf" %>
-			
-		<tr>
-		<td>
-			<form id="listTrains" action="controller">
+		<form id="listTrains" action="controller">
 				<input type="hidden" name="command" value="listTrains"/>
 				<input type="date" name="startDate" />
 				<input type="date" name = "endDate" />
 				<input type="submit" value = "Show"/>
 			</form>
 			
-		</td>
+		<tr>
 			<td class="content">			
 			<%-- CONTENT --%>
 			
@@ -32,12 +30,9 @@
 						<td><fmt:formatDate value="${bean.route.departureTime}" pattern="HH:mm:ss" /></td>
 						<td>${bean.route.arrivalStation.name}</td>
 						<td>${bean.arrivalDate}</td>
-						<td><c:forEach var="wagon" items="${bean.wagons}">
-								${wagon.type.typeName}
-						</c:forEach>
-						</td>
 						<td><fmt:formatDate value="${bean.route.arrivalTime}" pattern="HH:mm:ss" /></td>
 						<td><a href="controller?command=ListRouteInfo&routeId=${bean.route.id}">Info</a><</td>
+						<td><a href="controller?command=buyTicket&trainId=${bean.id}">Buy ticket</a><</td>
 					</tr>
 
 				</c:forEach>			

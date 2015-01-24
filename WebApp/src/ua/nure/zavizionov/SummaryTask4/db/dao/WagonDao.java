@@ -37,8 +37,8 @@ public class WagonDao extends AbstractDao<Wagon>{
 
 	@Override
 	public String getUpdateQuery() {
-		// TODO Auto-generated method stub
-		return null;
+		return "UPDATE wagons SET seats = ?, type_id = ? "
+				+ "WHERE id = ?";
 	}
 
 	@Override
@@ -85,7 +85,14 @@ public class WagonDao extends AbstractDao<Wagon>{
 	@Override
 	protected void prepareStatementForUpdate(PreparedStatement statement,
 			Wagon object) {
-		// TODO Auto-generated method stub
+		try {
+			LOG.trace("Prepearing statement fo update");
+			statement.setInt(1, object.getSeats());
+			statement.setInt(2, object.getType().getId());
+			statement.setInt(3, object.getId());
+		} catch (SQLException e) {
+			LOG.error("Error occured", e);
+		}
 		
 	}
 	
@@ -106,5 +113,5 @@ public class WagonDao extends AbstractDao<Wagon>{
 		return list;
 	}
 	
-
+	
 }
