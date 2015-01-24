@@ -20,7 +20,7 @@ public class BuyTicketCommand extends Command{
 	public String execute(HttpServletRequest request,
 			HttpServletResponse response) throws IOException, ServletException {
 		String forward = null;
-		String errorMessage = null;
+		int message = 0;
 		DBService service = DBService.getInstance();
 		LOG.debug("Command starts");
 		String wagonId = request.getParameter("wagonId");
@@ -32,11 +32,11 @@ public class BuyTicketCommand extends Command{
 		LOG.trace("Recieved wagon id: " + wagonId);
 //		errorMessage = service.addStation(stationName);
 		try{
-			service.buyTicket(Integer.parseInt(wagonId), 1);
+			message = service.buyTicket(Integer.parseInt(wagonId), 1);
 		}catch(NumberFormatException e){
 			LOG.error("Bad id format", e);
 		}
-		
+		//TODO
 //		request.setAttribute("errorMessage", errorMessage);
 		
 		LOG.debug("Command finished");

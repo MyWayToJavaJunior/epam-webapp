@@ -173,9 +173,9 @@ public class DBService {
 		return result;
 	}
 
-	public String buyTicket(int wagonId, int count) {
+	public int buyTicket(int wagonId, int count) {
 		WagonDao dao = null;
-		String message = null;
+		int message=0;
 		Connection connection = null;
 		try {
 			LOG.debug("Opening connection with DB.");
@@ -184,17 +184,18 @@ public class DBService {
 			dao = factory.getWagonDao(connection);
 			Wagon wagon = dao.getByPK(wagonId);
 			if (dao.getByPK(wagonId) == null) {
-				message = "No wagon with such id in db";
-				LOG.trace(message);
+				message = Errors.NO_SUCH_ELEMENT_ERROR;
+				LOG.trace("Can't find wagon with such id");
 				return message;
 			}
 			if (wagon.getSeats()<=0){
-				message = "No seats in this wagon";
-				LOG.trace(message);
+				message = Errors.NO_TICKETS_ERROR;
+				LOG.trace("No sears in this wagon.");
 				return message;
 			}
 			wagon.setSeats(wagon.getSeats() - count);
 			dao.update(wagon);
+			message = Errors.SUCCESS;
 		} catch (SQLException e) {
 			LOG.error("Error occured: ", e);
 		} finally {
