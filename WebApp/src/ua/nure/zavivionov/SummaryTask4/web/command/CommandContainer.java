@@ -31,7 +31,7 @@ public class CommandContainer {
 //		commands.put("removeStation", new RemoveStationCommand());
 //		commands.put("removeTrain", new AddTrainCommand());
 //		
-//		commands.put("buyTicket", new BuyTicketCommand());
+		commands.put("buyTicket", new BuyTicketCommand());
 		
 		
 		

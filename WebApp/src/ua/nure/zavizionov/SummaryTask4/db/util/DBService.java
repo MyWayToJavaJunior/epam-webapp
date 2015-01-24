@@ -172,7 +172,7 @@ public class DBService {
 		return result;
 	}
 
-	public String sellTicket(int wagonId, int count) {
+	public String buyTicket(int wagonId, int count) {
 		WagonDao dao = null;
 		String message = null;
 		Connection connection = null;
@@ -184,6 +184,11 @@ public class DBService {
 			Wagon wagon = dao.getByPK(wagonId);
 			if (dao.getByPK(wagonId) == null) {
 				message = "No wagon with such id in db";
+				LOG.trace(message);
+				return message;
+			}
+			if (wagon.getSeats()<=0){
+				message = "No seats in this wagon";
 				LOG.trace(message);
 				return message;
 			}

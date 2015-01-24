@@ -7,6 +7,7 @@ public interface Path {
 	String WELCOME_PAGE = "index.jsp";
 	String LIST_TRAINS_PAGE = "/WEB-INF/jsp/all/list_trains.jsp";
 	String LIST_ROUTES_PAGE = "/WEB-INF/jsp/all/list_routes.jsp";
+	String TICKET_INFO = "/WEB-INF/jsp/all/ticket_info.jsp";
 	
 	String ADD_STATION_PAGE = "/WEB-INF/jsp/admin/add_station.jsp";
 	
@@ -15,5 +16,6 @@ public interface Path {
 	String LIST_TRAINS_COMMAND = "controller?command=listTrains";
 	String LIST_ROUTES_COMMAND = "controller?command=listRoutes";
 	String LIST_ROUTE_COMMAND = "controller?command=listRoute";
+	
 	
 }
