@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
+import ua.nure.zavivionov.SummaryTask4.Errors;
 import ua.nure.zavizionov.SummaryTask4.db.dao.DaoFactory;
 import ua.nure.zavizionov.SummaryTask4.db.dao.RoleDao;
 import ua.nure.zavizionov.SummaryTask4.db.dao.RouteCompositionDao;
@@ -116,9 +117,9 @@ public class DBService {
 		return result;
 	}
 
-	public String addStation(String stationName) {
+	public int addStation(String stationName) {
 		StationDao dao = null;
-		String message = null;
+		int code = 0;
 		Connection connection = null;
 		Station station = new Station();
 		station.setName(stationName);
@@ -130,10 +131,10 @@ public class DBService {
 			if (dao.findByName(stationName) == null) {
 				LOG.trace("Adding station");
 				dao.persist(station);
-				message = "Station added.";
+				code = Errors.SUCCESS;
 			} else {
-				message = "Station already exists.";
-				LOG.trace(message);
+				code = Errors.ELEMENT_ALREADY_EXISTS_ERROR;
+				LOG.trace("Station already exists, returning error code.");
 			}
 		} catch (SQLException e) {
 			LOG.error("Error occured: ", e);
@@ -145,7 +146,7 @@ public class DBService {
 				LOG.error("Error occured: ", e);
 			}
 		}
-		return message;
+		return code;
 	}
 
 	public List<Route> findRoutes() {

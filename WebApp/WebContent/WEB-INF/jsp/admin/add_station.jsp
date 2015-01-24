@@ -8,16 +8,15 @@
 <body>
 
 	
-<%-- 	<c:when test="${message != null }"> --%>
-<%-- 			<c:out value="${message}"/> --%>
-<%-- 		</c:when> --%>
+	<%= request.getParameter("message") %>
 
 	<form id="addStation" action="controller" method = "post">
+				
 				<input type="hidden" name="command" value="addStation"/>
 				<input type="text" name="stationName" />
 				<input type="submit" value = "Add"/>
 	</form>
-	
+
 	<%@ include file="/WEB-INF/jspf/footer.jspf" %>
 	
 	
