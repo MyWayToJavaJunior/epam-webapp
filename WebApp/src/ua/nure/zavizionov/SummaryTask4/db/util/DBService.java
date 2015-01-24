@@ -7,7 +7,7 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
-import ua.nure.zavivionov.SummaryTask4.Errors;
+import ua.nure.zavizionov.SummaryTask4.Errors;
 import ua.nure.zavizionov.SummaryTask4.db.dao.DaoFactory;
 import ua.nure.zavizionov.SummaryTask4.db.dao.RoleDao;
 import ua.nure.zavizionov.SummaryTask4.db.dao.RouteCompositionDao;
@@ -129,7 +129,7 @@ public class DBService {
 			LOG.debug("Geting DAO");
 			dao = factory.getStationDao(connection);
 			if (dao.findByName(stationName) == null) {
-				LOG.trace("Adding station");
+				LOG.trace("Adding station " + stationName);
 				dao.persist(station);
 				code = Errors.SUCCESS;
 			} else {

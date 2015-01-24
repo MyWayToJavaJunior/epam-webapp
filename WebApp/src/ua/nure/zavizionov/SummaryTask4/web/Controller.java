@@ -1,4 +1,4 @@
-package ua.nure.zavivionov.SummaryTask4.web.command;
+package ua.nure.zavizionov.SummaryTask4.web;
 
 import java.io.IOException;
 
@@ -11,11 +11,14 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 
+import ua.nure.zavizionov.SummaryTask4.web.command.Command;
+import ua.nure.zavizionov.SummaryTask4.web.command.CommandContainer;
+
 
 /**
  * Servlet implementation class Controller
  */
-@WebServlet({ "/Controller", "/controller" })
+
 public class Controller extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

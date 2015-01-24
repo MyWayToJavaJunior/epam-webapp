@@ -1,4 +1,4 @@
-package ua.nure.zavivionov.SummaryTask4.web.command;
+package ua.nure.zavizionov.SummaryTask4.web.command;
 
 import java.io.IOException;
 
@@ -9,7 +9,7 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 
-import ua.nure.zavivionov.SummaryTask4.Path;
+import ua.nure.zavizionov.SummaryTask4.Path;
 import ua.nure.zavizionov.SummaryTask4.db.Roles;
 import ua.nure.zavizionov.SummaryTask4.db.entity.Role;
 import ua.nure.zavizionov.SummaryTask4.db.entity.User;

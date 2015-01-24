@@ -1,4 +1,4 @@
-package ua.nure.zavivionov.SummaryTask4.web.command;
+package ua.nure.zavizionov.SummaryTask4.web.command;
 
 import java.io.IOException;
 import java.io.Serializable;

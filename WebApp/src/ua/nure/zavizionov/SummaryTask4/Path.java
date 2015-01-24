@@ -1,4 +1,4 @@
-package ua.nure.zavivionov.SummaryTask4;
+package ua.nure.zavizionov.SummaryTask4;
 
 public interface Path {
 	

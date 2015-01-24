@@ -2,6 +2,10 @@ package ua.nure.zavizionov.SummaryTask4.db.entity;
 
 public class Role extends Entity {
 	
+	private String name;
+	
+	private String description;
+	
 	public String getName() {
 		return name;
 	}
@@ -18,8 +22,11 @@ public class Role extends Entity {
 		this.description = description;
 	}
 
-	private String name;
+	@Override
+	public String toString() {
+		return description;
+	}
+
 	
-	private String description;
 
 }

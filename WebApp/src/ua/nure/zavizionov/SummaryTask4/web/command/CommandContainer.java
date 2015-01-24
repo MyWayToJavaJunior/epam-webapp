@@ -1,4 +1,4 @@
-package ua.nure.zavivionov.SummaryTask4.web.command;
+package ua.nure.zavizionov.SummaryTask4.web.command;
 
 import java.util.Map;
 import java.util.TreeMap;

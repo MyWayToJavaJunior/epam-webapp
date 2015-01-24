@@ -1,4 +1,4 @@
-package ua.nure.zavivionov.SummaryTask4.web.command;
+package ua.nure.zavizionov.SummaryTask4.web.command;
 
 import java.io.IOException;
 import java.text.DateFormat;
@@ -11,7 +11,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import ua.nure.zavivionov.SummaryTask4.Path;
+import ua.nure.zavizionov.SummaryTask4.Path;
 import ua.nure.zavizionov.SummaryTask4.db.bean.TrainBean;
 import ua.nure.zavizionov.SummaryTask4.db.entity.Train;
 import ua.nure.zavizionov.SummaryTask4.db.util.DBService;
