@@ -112,6 +112,8 @@ public abstract class AbstractDao<T extends Entity> implements GenericDao<T> {
 			if (count != 1){
 				throw new SQLException("Updated " + count + " rows, expected 1");
 			}
+			LOG.trace("Updated successful, commiting changes");
+			connection.commit();
 		}catch (Exception e){
 			throw new SQLException(e);
 		}

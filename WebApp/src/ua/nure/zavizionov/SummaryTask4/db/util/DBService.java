@@ -193,7 +193,10 @@ public class DBService {
 				LOG.trace("No sears in this wagon.");
 				return message;
 			}
-			wagon.setSeats(wagon.getSeats() - count);
+			LOG.trace("Wagon obtained, decreasing number of seats.");
+			int seatsLeft = wagon.getSeats() - count;
+			LOG.trace(seatsLeft + " seats left in wagon.");
+			wagon.setSeats(seatsLeft);
 			dao.update(wagon);
 			message = Errors.SUCCESS;
 		} catch (SQLException e) {
@@ -207,5 +210,31 @@ public class DBService {
 			}
 		}
 		return message;
+	}
+	
+	public List<Wagon> findWagonsByTrain(int trainId){
+		WagonDao dao = null;
+		Connection connection = null;
+		List<Wagon> wagons = null;
+		try {
+			LOG.debug("Opening connection with DB.");
+			connection = factory.getConnection();
+			LOG.debug("Geting DAO");
+			dao = factory.getWagonDao(connection);
+			wagons = dao.findWagonsByTrain(trainId);
+			if (wagons == null || wagons.isEmpty()) {
+				LOG.trace("Can't find wagons with such train");
+			}
+		} catch (SQLException e) {
+			LOG.error("Error occured: ", e);
+		} finally {
+			try {
+				LOG.debug("Closing connection with DB.");
+				connection.close();
+			} catch (SQLException e) {
+				LOG.error("Error occured: ", e);
+			}
+		}
+		return wagons;
 	}
 }

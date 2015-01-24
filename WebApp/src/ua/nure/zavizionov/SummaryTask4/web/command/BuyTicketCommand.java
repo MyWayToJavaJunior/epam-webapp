@@ -30,7 +30,6 @@ public class BuyTicketCommand extends Command{
 		}
 		
 		LOG.trace("Recieved wagon id: " + wagonId);
-//		errorMessage = service.addStation(stationName);
 		try{
 			message = service.buyTicket(Integer.parseInt(wagonId), 1);
 		}catch(NumberFormatException e){
