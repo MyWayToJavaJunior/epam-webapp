@@ -47,8 +47,8 @@ public class TrainDao extends AbstractDao<Train>{
 
 	@Override
 	public String getCreateQuery() {
-		// TODO Auto-generated method stub
-		return null;
+		return "INSERT INTO trains (`" + Fields.TRAIN_ARRIVAL_DATE +"`, `" + Fields.TRAIN_DEPARTURE_DATE +
+				"`, `" + Fields.TRAIN_ROUTE_ID + "`) VALUES (?, ?, ?)";
 	}
 
 	@Override
@@ -81,8 +81,14 @@ public class TrainDao extends AbstractDao<Train>{
 	@Override
 	protected void prepareStatementForInsert(PreparedStatement statement,
 			Train object) {
-		// TODO Auto-generated method stub
-		
+		LOG.trace("Prepearing statement for insert");
+		try {
+			statement.setDate(1, new java.sql.Date(object.getArrivalDate().getTime()));
+			statement.setDate(2, new java.sql.Date(object.getDepartureDate().getTime()));
+			statement.setInt(3, object.getRoute().getId());
+		} catch (SQLException e) {
+			LOG.error("Error occured while prepearing statement", e);
+		}
 	}
 
 	@Override
@@ -106,4 +112,5 @@ public class TrainDao extends AbstractDao<Train>{
 		}
 		return list;
 	}
+
 }

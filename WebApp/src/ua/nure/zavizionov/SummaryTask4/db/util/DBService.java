@@ -263,6 +263,41 @@ public class DBService {
 		return wagons;
 	}
 
+	public int addTrain(int routeId, Date departureDate, Date arrivalDate) {
+		TrainDao dao = null;
+		RouteDao routeDao = null;
+		int code = 0;
+		Connection connection = null;
+		Train train = new Train();
+		train.setArrivalDate(arrivalDate);
+		train.setDepartureDate(departureDate);
+		try {
+			LOG.debug("Opening connection with DB.");
+			connection = factory.getConnection();
+			LOG.debug("Geting DAO");
+			dao = factory.getTrainDao(connection);
+			//TODO
+			routeDao = factory.getRouteDao(connection);
+			train.setRoute(routeDao.getByPK(routeId));
+			dao.persist(train);
+		} catch (SQLException e) {
+			LOG.error("Error occured: ", e);
+		} finally {
+			try {
+				LOG.debug("Closing connection with DB.");
+				connection.close();
+			} catch (SQLException e) {
+				LOG.error("Error occured: ", e);
+			}
+		}
+		return code;
+	}
+
+	private Train Train() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 
 
 }

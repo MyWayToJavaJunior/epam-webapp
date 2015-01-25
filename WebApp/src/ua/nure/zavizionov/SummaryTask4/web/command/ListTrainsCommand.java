@@ -50,7 +50,7 @@ public class ListTrainsCommand extends Command {
 				LOG.error("Error during parsing date", e);
 				errorMessage = "Wrong date format.";
 				request.setAttribute("errorMessage", errorMessage);
-				forward = Path.LIST_TRAINS_PAGE;
+				forward = Path.ERROR_PAGE;
 				return forward;
 			}
 		}

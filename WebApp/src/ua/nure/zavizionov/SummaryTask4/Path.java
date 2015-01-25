@@ -12,12 +12,14 @@ public interface Path {
 	String TICKET_INFO = "/WEB-INF/jsp/all/ticket_info.jsp";
 	
 	String ADD_STATION_PAGE = "/WEB-INF/jsp/admin/add_station.jsp";
+	String ADD_TRAIN_PAGE = "/WEB-INF/jsp/admin/add_train.jsp";
 	
 	String ADD_STATION_COMMAND = "controller?command=addStation";
 	
 	String LIST_TRAINS_COMMAND = "controller?command=listTrains";
 	String LIST_ROUTES_COMMAND = "controller?command=listRoutes";
 	String LIST_ROUTE_COMMAND = "controller?command=listRoute";
+	String ADD_TRAIN_COMMAND = "controller?command=addTrain";
 	
 	
 }

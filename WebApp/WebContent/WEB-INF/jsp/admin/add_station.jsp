@@ -6,7 +6,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+<%@ include file="/WEB-INF/jspf/header.jspf" %>
 	
 	<%= request.getParameter("message") %>
 

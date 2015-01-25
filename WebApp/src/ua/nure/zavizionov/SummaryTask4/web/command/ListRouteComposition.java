@@ -16,7 +16,7 @@ import ua.nure.zavizionov.SummaryTask4.db.util.DBService;
 public class ListRouteComposition extends Command{
 	
 	private static final long serialVersionUID = -4930196585000252508L;
-	private static final Logger LOG = Logger.getLogger(ListRoutesCommand.class);
+	private static final Logger LOG = Logger.getLogger(ListRouteComposition.class);
 	DBService service = DBService.getInstance();
 			
 	@Override
