@@ -8,10 +8,11 @@
 <%@ include file="/WEB-INF/jspf/head.jspf" %>
 
 <body>
+	<%@ include file="/WEB-INF/jspf/header.jspf" %>
 	<table id="main-container">
 	
 			
-		<%@ include file="/WEB-INF/jspf/header.jspf" %>
+		
 		<form id="listTrains" action="controller">
 				<input type="hidden" name="command" value="listTrains"/>
 				<input type="date" name="startDate" />

@@ -20,6 +20,7 @@ public class CommandContainer {
 		commands.put("listTrains", new ListTrainsCommand());
 		commands.put("listRoutes", new ListRoutesCommand());
 		commands.put("listTrainWagons", new ListTrainWagons());
+		commands.put("listRouteComposition", new ListRouteComposition());
 //		commands.put("createUser", new CreateUserCommand());
 		
 		commands.put("addStation", new AddStationCommand());

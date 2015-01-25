@@ -8,9 +8,10 @@
 <%@ include file="/WEB-INF/jspf/head.jspf" %>
 
 <body>
+<%@ include file="/WEB-INF/jspf/header.jspf" %>
 	<table id="main-container">
 			
-		<%@ include file="/WEB-INF/jspf/header.jspf" %>
+		
 			
 		<tr>
 		<td>
@@ -31,7 +32,7 @@
 						<td><fmt:formatDate value="${bean.departureTime}" pattern="HH:mm:ss" /></td>
 						<td>${bean.arrivalStation.name}</td>
 						<td><fmt:formatDate value="${bean.arrivalTime}" pattern="HH:mm:ss" /></td>
-						<td><a href="controller?command=ListRouteInfo&routeId=${bean.id}">Info</a><</td>
+						<td><a href="controller?command=listRouteComposition&routeId=${bean.id}">Info</a><</td>
 					</tr>
 
 				</c:forEach>			

@@ -173,6 +173,31 @@ public class DBService {
 		return result;
 	}
 
+	public Route findRoute(int routeId){
+		
+		LOG.trace("Searching for route");
+		RouteDao dao = null;
+		Route result = null;
+		Connection connection = null;
+		try {
+			LOG.debug("Opening connection with DB.");
+			connection = factory.getConnection();
+			LOG.debug("Geting DAO");
+			dao = factory.getRouteDao(connection);
+			result = dao.getByPK(routeId);
+		} catch (SQLException e) {
+			LOG.error("Error occured: ", e);
+		} finally {
+			try {
+				LOG.debug("Closing connection with DB.");
+				connection.close();
+			} catch (SQLException e) {
+				LOG.error("Error occured: ", e);
+			}
+		}
+		return result;
+	}
+	
 	public int buyTicket(int wagonId, int count) {
 		WagonDao dao = null;
 		int message=0;
@@ -237,4 +262,7 @@ public class DBService {
 		}
 		return wagons;
 	}
+
+
+
 }

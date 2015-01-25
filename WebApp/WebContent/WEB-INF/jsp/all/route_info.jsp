@@ -11,7 +11,6 @@
 <%@ include file="/WEB-INF/jspf/header.jspf" %>
 	<table id="main-container">
 			
-		
 			
 		<tr>
 		<td>
@@ -25,22 +24,20 @@
 		</td>
 			<td class="content">			
 			<%-- CONTENT --%>
+			
+			
+			Departure station: ${route.departureStation.name}
+			<fmt:formatDate value="${route.departureTime}" pattern="HH:mm:ss" />
+			<c:forEach var="bean" items="${route.routeComposition}">
 					<tr>
-						<td>${bean.type.typeName} </td>
-						<td>${bean.seats}</td>
-						<td><a href="controller?command=buyTicket&wagonId=${bean.id}">Buy ticket</a></td>
+						<td>${bean.station.name} </td>
+						<td><fmt:formatDate value="${bean.arrivalTime}" pattern="HH:mm:ss" /></td>
+						<td>${bean.stay}m</td>
+						<td><fmt:formatDate value="${bean.departureTime}" pattern="HH:mm:ss" /></td>
 					</tr>
-
-						
+				</c:forEach>	
+			Arrival station: ${route.arrivalStation.name}
+			<fmt:formatDate value="${bean.arrivalTime}" pattern="HH:mm:ss" />
 			
 			
 			
-			
-			<%-- CONTENT --%>
-			</td>
-		</tr>
-		
-		<%@ include file="/WEB-INF/jspf/footer.jspf" %>
-		
-	</table>
-</body>
