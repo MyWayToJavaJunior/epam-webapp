@@ -26,8 +26,10 @@
 			<%-- CONTENT --%>
 			
 			
-			Departure station: ${route.departureStation.name}
-			<fmt:formatDate value="${route.departureTime}" pattern="HH:mm:ss" />
+			Departure station: ${route.departureStation.name}<br>
+			Departure time: <fmt:formatDate value="${route.departureTime}" pattern="HH:mm:ss" /><br>
+			Arrival station: ${route.arrivalStation.name}<br>
+			Arrival time :<fmt:formatDate value="${route.arrivalTime}" pattern="HH:mm:ss" /><br>
 			<c:forEach var="bean" items="${route.routeComposition}">
 					<tr>
 						<td>${bean.station.name} </td>
@@ -36,7 +38,7 @@
 						<td><fmt:formatDate value="${bean.departureTime}" pattern="HH:mm:ss" /></td>
 					</tr>
 				</c:forEach>	
-			Arrival station: ${route.arrivalStation.name}
+			
 			<fmt:formatDate value="${bean.arrivalTime}" pattern="HH:mm:ss" />
 			
 			

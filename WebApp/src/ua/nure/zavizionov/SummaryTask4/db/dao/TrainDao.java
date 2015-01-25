@@ -47,8 +47,8 @@ public class TrainDao extends AbstractDao<Train>{
 
 	@Override
 	public String getCreateQuery() {
-		return "INSERT INTO trains (`" + Fields.TRAIN_ARRIVAL_DATE +"`, `" + Fields.TRAIN_DEPARTURE_DATE +
-				"`, `" + Fields.TRAIN_ROUTE_ID + "`) VALUES (?, ?, ?)";
+		return "INSERT INTO trains (" + Fields.TRAIN_ARRIVAL_DATE +", " + Fields.TRAIN_DEPARTURE_DATE +
+				", " + Fields.TRAIN_ROUTE_ID + ") VALUES (?, ?, ?)";
 	}
 
 	@Override
