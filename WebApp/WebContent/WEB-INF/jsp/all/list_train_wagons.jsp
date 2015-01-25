@@ -29,7 +29,8 @@
 			<input type = "text" name="fullName" />
 			<c:forEach var="bean" items="${wagons}">
 					<tr>
-						<td>${bean.type.typeName} </td>
+						<td>№${bean.number}</td>
+						<td>${bean.type.typeName}</td>
 						<td>${bean.seats}</td>
 						<td><input type = "radio" name = "wagonId" value = "${bean.id}"/></td>
 					</tr>
