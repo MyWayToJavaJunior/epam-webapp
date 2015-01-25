@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 
+import ua.nure.zavizionov.SummaryTask4.Errors;
 import ua.nure.zavizionov.SummaryTask4.Path;
 import ua.nure.zavizionov.SummaryTask4.db.util.DBService;
 
@@ -20,21 +21,37 @@ public class BuyTicketCommand extends Command{
 	public String execute(HttpServletRequest request,
 			HttpServletResponse response) throws IOException, ServletException {
 		String forward = null;
-		int message = 0;
+		String errorMessage = null;
+		int messageCode = 0;
 		DBService service = DBService.getInstance();
 		LOG.debug("Command starts");
 		String wagonId = request.getParameter("wagonId");
 		if(wagonId == null){
+			errorMessage = "No wagon selected";
+			request.setAttribute("errorMessage", errorMessage);
 			forward = Path.ERROR_PAGE;
 			return forward;
 		}
 		
 		LOG.trace("Recieved wagon id: " + wagonId);
 		try{
-			message = service.buyTicket(Integer.parseInt(wagonId), 1);
+			messageCode = service.buyTicket(Integer.parseInt(wagonId), 1);
 		}catch(NumberFormatException e){
 			LOG.error("Bad id format", e);
 		}
+		if(messageCode == Errors.NO_SUCH_ELEMENT_ERROR){
+			errorMessage = "No such wagon";
+			request.setAttribute("errorMessage", errorMessage);
+			forward = Path.ERROR_PAGE;
+			return forward;
+		}
+		if(messageCode == Errors.NO_TICKETS_ERROR){
+			errorMessage = "There is no free seats in this wagon";
+			request.setAttribute("errorMessage", errorMessage);
+			forward = Path.ERROR_PAGE;
+			return forward;
+		}
+		
 		//TODO
 //		request.setAttribute("errorMessage", errorMessage);
 		
