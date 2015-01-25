@@ -6,7 +6,14 @@ public class Wagon extends Entity {
 	//to train in every object like private Train train;;
 	private Integer seats;
 	private WagonType type;
+	private int number;
 	
+	public int getNumber() {
+		return number;
+	}
+	public void setNumber(int number) {
+		this.number = number;
+	}
 	public Integer getSeats() {
 		return seats;
 	}

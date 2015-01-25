@@ -10,7 +10,7 @@
 <%--=========================================================================== 
 Bind CSS document.
 ===========================================================================--%> 
-	<link rel="stylesheet" type="text/css" media="screen" href="style/style.css"/>
+<!-- 	<link rel="stylesheet" type="text/css" media="screen" href="style/style.css"/> -->
 	
 <%--=========================================================================== 
 If you define http-equiv attribute, set the content type and the charset the same

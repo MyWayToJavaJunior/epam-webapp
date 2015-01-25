@@ -37,7 +37,7 @@ public class WagonDao extends AbstractDao<Wagon>{
 
 	@Override
 	public String getUpdateQuery() {
-		return "UPDATE wagons SET seats = ?, type_id = ? "
+		return "UPDATE wagons SET seats = ?, type_id = ?, number = ? "
 				+ "WHERE id = ?";
 	}
 
@@ -66,6 +66,7 @@ public class WagonDao extends AbstractDao<Wagon>{
 				wagon.setId(rs.getInt(Fields.ID));
 				wagon.setSeats(rs.getInt(Fields.WAGON_SEATS));
 				wagon.setType(wtDao.getByPK(rs.getInt(Fields.WAGON_TYPE_ID)));
+				wagon.setNumber(rs.getInt(Fields.WAGON_NUMBER));
 				result.add(wagon);
 			}
 		} catch (SQLException e) {
@@ -89,7 +90,8 @@ public class WagonDao extends AbstractDao<Wagon>{
 			LOG.trace("Prepearing statement fo update");
 			statement.setInt(1, object.getSeats());
 			statement.setInt(2, object.getType().getId());
-			statement.setInt(3, object.getId());
+			statement.setInt(3, object.getNumber());
+			statement.setInt(4, object.getId());
 		} catch (SQLException e) {
 			LOG.error("Error occured", e);
 		}

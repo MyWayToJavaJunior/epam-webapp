@@ -32,8 +32,15 @@ public class BuyTicketCommand extends Command{
 			forward = Path.ERROR_PAGE;
 			return forward;
 		}
+		String fullName = request.getParameter("fullName");
+		if(fullName == null){
+			errorMessage = "Type full name of passenger";
+			request.setAttribute("errorMessage", errorMessage);
+			forward = Path.ERROR_PAGE;
+			return forward;
+		}
 		
-		LOG.trace("Recieved wagon id: " + wagonId);
+		LOG.trace("Recieved wagon id: " + wagonId + " and passenger name " + fullName);
 		try{
 			messageCode = service.buyTicket(Integer.parseInt(wagonId), 1);
 		}catch(NumberFormatException e){
@@ -52,8 +59,7 @@ public class BuyTicketCommand extends Command{
 			return forward;
 		}
 		
-		//TODO
-//		request.setAttribute("errorMessage", errorMessage);
+		//TODO Some PDF or just forward to another page with unique ticket info.
 		
 		LOG.debug("Command finished");
 		response.sendRedirect(Path.TICKET_INFO);

@@ -11,7 +11,6 @@ import java.util.List;
 import org.apache.log4j.Logger;
 
 import ua.nure.zavizionov.SummaryTask4.db.Fields;
-import ua.nure.zavizionov.SummaryTask4.db.bean.TrainBean;
 import ua.nure.zavizionov.SummaryTask4.db.entity.Train;
 
 public class TrainDao extends AbstractDao<Train>{

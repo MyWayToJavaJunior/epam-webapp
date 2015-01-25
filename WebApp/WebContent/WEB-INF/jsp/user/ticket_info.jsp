@@ -24,26 +24,13 @@
 		</td>
 			<td class="content">			
 			<%-- CONTENT --%>
-			<form action="controller" method = "post"> 
-			<input type = "hidden" name="command" value = "buyTicket" />
-			<input type = "text" name="fullName" />
-			<c:forEach var="bean" items="${wagons}">
 					<tr>
 						<td>${bean.type.typeName} </td>
 						<td>${bean.seats}</td>
-						<td><input type = "radio" name = "wagonId" value = "${bean.id}"/></td>
+						<td><a href="controller?command=buyTicket&wagonId=${bean.id}">Buy ticket</a></td>
 					</tr>
-				</c:forEach>	
-			<tr><input type = "submit" value = "Buy" align = "ABSBOTTOM"/></tr>
-			</form>
-<%-- 			<c:forEach var="bean" items="${wagons}"> --%>
-<!-- 					<tr> -->
-<%-- 						<td>${bean.type.typeName} </td> --%>
-<%-- 						<td>${bean.seats}</td> --%>
-<%-- 						<td><a href="controller?command=buyTicket&wagonId=${bean.id}">Buy ticket</a></td> --%>
-<!-- 					</tr> -->
 
-<%-- 				</c:forEach>			 --%>
+						
 			
 			
 			
