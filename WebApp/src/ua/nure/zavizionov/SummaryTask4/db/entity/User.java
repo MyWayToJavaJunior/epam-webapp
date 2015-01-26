@@ -10,7 +10,14 @@ public class User extends Entity {
 	private String password;
 	private String email;
 	private Role role;
+	private String fullName;
 	
+	public String getFullName() {
+		return fullName;
+	}
+	public void setFullName(String fullName) {
+		this.fullName = fullName;
+	}
 	public String getLogin() {
 		return login;
 	}
@@ -40,10 +47,10 @@ public class User extends Entity {
 	}
 	@Override
 	public String toString() {
-		String result = login;
-		//TODO
-		return result;
+		return "User [login=" + login + ", password=" + password + ", email="
+				+ email + ", role=" + role + ", fullName=" + fullName + "]";
 	}
+
 	
 	
 	

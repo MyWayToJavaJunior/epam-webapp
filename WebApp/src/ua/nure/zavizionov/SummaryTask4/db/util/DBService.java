@@ -292,6 +292,40 @@ public class DBService {
 		}
 		return code;
 	}
+	
+	public int addUser(String login, String password, String email, String fullName, int roleId){
+		UserDao dao = null;
+		RoleDao roleDao = null;
+		int code = 0;
+		Connection connection = null;
+		User user = new User();
+		user.setLogin(login);
+		user.setPassword(password);
+		user.setEmail(email);
+		user.setFullName(fullName);
+		try {
+			LOG.debug("Opening connection with DB.");
+			connection = factory.getConnection();
+			LOG.debug("Geting DAO");
+			dao = factory.getUserDao(connection);
+			if(dao.getByLogin(login) != null){
+				return Errors.ELEMENT_ALREADY_EXISTS_ERROR;
+			}
+			roleDao = factory.getRoleDao(connection);
+			user.setRole(roleDao.getByPK(roleId));
+			dao.persist(user);
+		} catch (SQLException e) {
+			LOG.error("Error occured: ", e);
+		} finally {
+			try {
+				LOG.debug("Closing connection with DB.");
+				connection.close();
+			} catch (SQLException e) {
+				LOG.error("Error occured: ", e);
+			}
+		}
+		return code;
+	}
 
 	private Train Train() {
 		// TODO Auto-generated method stub

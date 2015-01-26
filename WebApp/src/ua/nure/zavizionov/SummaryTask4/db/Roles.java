@@ -10,12 +10,14 @@ import ua.nure.zavizionov.SummaryTask4.db.entity.User;
  */
 
 public enum Roles {
-	ADMIN("admin"), USER("user");
+	ADMIN("admin", 1), USER("user", 2);
 	
 	private String name;
+	private int id;
 	
-	Roles(String name){
+	Roles(String name, int id){
 		this.name = name;
+		this.id = id;
 	}
 	
 	
@@ -23,4 +25,7 @@ public enum Roles {
 		return name;
 	}
 	
+	public int getId() {
+		return id;
+	}
 }

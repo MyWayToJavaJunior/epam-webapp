@@ -72,6 +72,7 @@ Type link to logout
 <c:if test="${empty user and title ne 'Login'}">
 	<div id="rightHeader">
 		<a href="login.jsp">Login</a>
+		<a href="controller?command=addUser">Register</a>
 	</div>
 </c:if>
 

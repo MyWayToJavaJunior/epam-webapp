@@ -46,8 +46,8 @@ public class UserDao extends AbstractDao<User> {
 
 	@Override
 	public String getCreateQuery() {
-		// TODO Auto-generated method stub
-		return null;
+		return "INSERT INTO users (" + Fields.USER_LOGIN + ", " + Fields.USER_PASSWORD +
+				", " + Fields.USER_EMAIL + ", " + Fields.USER_ROLE_ID + ", " + Fields.USER_FULL_NAME + ") VALUES (?, ?, ?, ?, ?)";
 	}
 
 	@Override
@@ -66,6 +66,7 @@ public class UserDao extends AbstractDao<User> {
 				user.setPassword(rs.getString(Fields.USER_PASSWORD));
 				user.setEmail(rs.getString(Fields.USER_EMAIL));
 				user.setRole(roleDao.getByPK(rs.getInt(Fields.USER_ROLE_ID)));
+				user.setFullName(rs.getString(Fields.USER_FULL_NAME));
 				result.add(user);
 			}
 		} catch (SQLException e) {
@@ -78,6 +79,16 @@ public class UserDao extends AbstractDao<User> {
 	@Override
 	protected void prepareStatementForInsert(PreparedStatement statement, 
 			User object) {
+		LOG.debug("Prepearing statemant for object: " + object);
+		try {
+			statement.setString(1, object.getLogin());
+			statement.setString(2, object.getPassword());
+			statement.setString(3, object.getEmail());
+			statement.setInt(4, object.getRole().getId());
+			statement.setString(5, object.getFullName());
+		} catch (SQLException e) {
+			LOG.error("Error occured", e);
+		}
 		
 	}
 
@@ -106,4 +117,5 @@ public class UserDao extends AbstractDao<User> {
 		return list.iterator().next();
 	}
 
+	
 }

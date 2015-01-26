@@ -9,6 +9,7 @@ public interface Fields {
 	String USER_PASSWORD = "password";
 	String USER_EMAIL = "email";
 	String USER_ROLE_ID = "role_id";
+	String USER_FULL_NAME = "full_name";
 	
 	//trains
 	String TRAIN_ROUTE_ID = "route_id";

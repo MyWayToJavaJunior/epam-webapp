@@ -5,6 +5,7 @@ public interface Path {
 	String ERROR_PAGE = "/WEB-INF/jsp/error_page.jsp";
 	String LOGIN_PAGE = "login.jsp";
 	String WELCOME_PAGE = "index.jsp";
+	String REGISTER_PAGE = "/WEB-INF/jsp/all/register.jsp";;
 	String LIST_TRAINS_PAGE = "/WEB-INF/jsp/all/list_trains.jsp";
 	String LIST_ROUTES_PAGE = "/WEB-INF/jsp/all/list_routes.jsp";
 	String LIST_WAGONS_PAGE = "/WEB-INF/jsp/all/list_train_wagons.jsp";
