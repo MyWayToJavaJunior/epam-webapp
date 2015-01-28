@@ -124,7 +124,7 @@ public class UserDaoTests extends TestCase {
 			e.printStackTrace();
 		}
 		assertEquals(user.getLogin(), testUser.getLogin());
-		
+		dao.delete(user);
 		
 	}
 

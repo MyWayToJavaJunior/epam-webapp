@@ -8,6 +8,7 @@ public class Init {
 	
 	public static final String PATH = "jdbc:mysql://localhost:3306/train_booking?useEncoding=true&amp;characterEncoding=UTF-8";
 	
+	
 	static{
 		try {
 			Class.forName("com.mysql.jdbc.Driver");

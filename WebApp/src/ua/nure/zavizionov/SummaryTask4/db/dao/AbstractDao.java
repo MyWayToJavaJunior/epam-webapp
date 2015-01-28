@@ -128,6 +128,7 @@ public abstract class AbstractDao<T extends Entity> implements GenericDao<T> {
 	@Override
 	public void delete(T object) throws SQLException {
 		String sql = getDeleteQuery();
+		LOG.trace("Deleting object " + object);
 		try (PreparedStatement statement = connection.prepareStatement(sql)){
 			try{
 				statement.setInt(1, object.getId());
@@ -142,7 +143,7 @@ public abstract class AbstractDao<T extends Entity> implements GenericDao<T> {
 		}catch(Exception e){
 			throw new SQLException(e);
 		}
-		
+		LOG.trace("Object deleted.");
 	}
 	
 	public AbstractDao(Connection connection){

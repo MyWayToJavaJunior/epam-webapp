@@ -40,14 +40,13 @@ public class UserDao extends AbstractDao<User> {
 
 	@Override
 	public String getDeleteQuery() {
-		// TODO Auto-generated method stub
-		return null;
+		return "DELETE FROM users WHERE id = ?;";
 	}
 
 	@Override
 	public String getCreateQuery() {
 		return "INSERT INTO users (" + Fields.USER_LOGIN + ", " + Fields.USER_PASSWORD +
-				", " + Fields.USER_EMAIL + ", " + Fields.USER_ROLE_ID + ", " + Fields.USER_FULL_NAME + ") VALUES (?, ?, ?, ?, ?)";
+				", " + Fields.USER_EMAIL + ", " + Fields.USER_ROLE_ID + ", " + Fields.USER_FULL_NAME + ") VALUES (?, ?, ?, ?, ?) ";
 	}
 
 	@Override
