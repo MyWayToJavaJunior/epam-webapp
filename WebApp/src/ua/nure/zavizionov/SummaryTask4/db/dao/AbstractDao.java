@@ -73,6 +73,7 @@ public abstract class AbstractDao<T extends Entity> implements GenericDao<T> {
 		}
 		T persistInstance;
 		String sql = getCreateQuery();
+		System.out.println(sql);
 		try (PreparedStatement statement = connection.prepareStatement(sql)){
 			prepareStatementForInsert(statement, object);
 			LOG.debug("Executing query");
@@ -85,9 +86,15 @@ public abstract class AbstractDao<T extends Entity> implements GenericDao<T> {
 			LOG.error("Error occured", e);
 			throw new SQLException(e);
 		}
+		PreparedStatement lastIdStatement = connection.prepareStatement("SELECT LAST_INSERT_ID();");
+		ResultSet lastIdRS =  lastIdStatement.executeQuery();
+		lastIdRS.next();
+		int lastId = lastIdRS.getInt(1);
 		LOG.debug("Getting object");
-		sql = getSelectQuery() + "WHERE id = last_insert_id();";
+		sql = getSelectQuery() + " WHERE id = ?;";
+		System.out.println(sql);
 		try (PreparedStatement statement = connection.prepareStatement(sql)){
+			statement.setInt(1, lastId);
 			ResultSet rs = statement.executeQuery();
 			List<T> list = parseResultSet(rs);
 			if (list == null || list.size() == 0){
@@ -99,7 +106,6 @@ public abstract class AbstractDao<T extends Entity> implements GenericDao<T> {
 			throw new SQLException(e);
 		}
 		LOG.trace("Object founded, commiting changes.");
-		connection.commit();
 		return persistInstance;
 	}
 	
