@@ -104,6 +104,7 @@ public abstract class AbstractDao<T extends Entity> implements GenericDao<T> {
 			throw new SQLException(e);
 		}
 		LOG.trace("Object founded, commiting changes.");
+		connection.commit();
 		return persistInstance;
 	}
 	
@@ -121,6 +122,7 @@ public abstract class AbstractDao<T extends Entity> implements GenericDao<T> {
 		}catch (Exception e){
 			throw new SQLException(e);
 		}
+		connection.commit();
 	}
 	
 	@Override
@@ -141,6 +143,7 @@ public abstract class AbstractDao<T extends Entity> implements GenericDao<T> {
 		}catch(Exception e){
 			throw new SQLException(e);
 		}
+		connection.commit();
 		LOG.trace("Object deleted.");
 	}
 	

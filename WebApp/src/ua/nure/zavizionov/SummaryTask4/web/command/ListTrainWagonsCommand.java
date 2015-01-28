@@ -30,7 +30,7 @@ public class ListTrainWagonsCommand extends Command{
 		String forward = Path.LIST_WAGONS_PAGE;
 		String errorMessage = null;
 		int trainId = 0;
-		List<Wagon> wagons;
+		Train train;
 		LOG.debug("Command starts");
 		try{
 			trainId = Integer.parseInt(request.getParameter("trainId"));
@@ -41,8 +41,8 @@ public class ListTrainWagonsCommand extends Command{
 			forward = Path.ERROR_PAGE;
 		}
 		LOG.debug("Geting beans.");
-		wagons = service.findWagonsByTrain(trainId);
-		request.setAttribute("wagons", wagons);
+		train = service.findTrainById(trainId);
+		request.setAttribute("train", train);
 		LOG.debug("Command finished");
 		return forward;
 	}

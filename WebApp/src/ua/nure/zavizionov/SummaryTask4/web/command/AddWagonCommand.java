@@ -74,14 +74,14 @@ public class AddWagonCommand extends Command {
 
 		switch (errorCode) {
 		case Errors.ERROR:
-			message = "Cant add wagon.";
+			message = "Can't add wagon.";
 			break;
 		case Errors.SUCCESS:
 			message = "Wagon added succesfull";
 		}
 
 		LOG.debug("Command finished");
-		response.sendRedirect(Path.LIST_TRAIN_INFO_COMMAND + "&message=" + message + "&trainId=" + trainId);
+		response.sendRedirect(Path.LIST_TRAIN_WAGONS_COMMAND + "&message=" + message + "&trainId=" + trainId);
 		return forward;
 	}
 

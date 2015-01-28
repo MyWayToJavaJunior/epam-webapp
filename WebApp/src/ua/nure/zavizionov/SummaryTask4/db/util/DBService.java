@@ -364,7 +364,29 @@ public class DBService {
 		return code;
 	}
 
-	
+	public Train findTrainById(int trainId){
+		LOG.trace("Searching for train");
+		TrainDao dao = null;
+		Train result = null;
+		Connection connection = null;
+		try {
+			LOG.debug("Opening connection with DB.");
+			connection = factory.getConnection();
+			LOG.debug("Geting DAO");
+			dao = factory.getTrainDao(connection);
+			result = dao.getByPK(trainId);
+		} catch (SQLException e) {
+			LOG.error("Error occured: ", e);
+		} finally {
+			try {
+				LOG.debug("Closing connection with DB.");
+				connection.close();
+			} catch (SQLException e) {
+				LOG.error("Error occured: ", e);
+			}
+		}
+		return result;
+	}
 
 	
 
