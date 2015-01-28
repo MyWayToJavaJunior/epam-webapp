@@ -1,14 +1,36 @@
 package ua.nure.zavizionov.SummaryTask4.db.dao.test;
 
+import java.sql.Connection;
+
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import ua.nure.zavizionov.SummaryTask4.db.dao.DaoFactory;
+import ua.nure.zavizionov.SummaryTask4.db.dao.TrainDao;
+import ua.nure.zavizionov.SummaryTask4.db.dao.WagonDao;
+import ua.nure.zavizionov.SummaryTask4.db.entity.Wagon;
+import ua.nure.zavizionov.SummaryTask4.db.entity.WagonType;
+import ua.nure.zavizionov.SummaryTask4.db.util.DBService;
 import junit.framework.TestCase;
 
 public class DBServiceTests extends TestCase {
+	
+
+	static Connection con = null;
+	static DaoFactory factory = DaoFactory.getInstance();
+	DBService service = DBService.getInstance();
+	
+	static{
+		con = Init.getConnection();
+		
+	}
+	
+	
+	
+	
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
@@ -16,6 +38,7 @@ public class DBServiceTests extends TestCase {
 
 	@AfterClass
 	public static void tearDownAfterClass() throws Exception {
+		System.out.println("done");
 	}
 
 	@Before
@@ -85,7 +108,7 @@ public class DBServiceTests extends TestCase {
 	
 	@Test
 	public void testAddWagon() {
-		fail("Not yet implemented");
+		service.addWagon(3, 1, 4);
 	}
 
 }

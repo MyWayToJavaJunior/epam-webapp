@@ -131,7 +131,7 @@ public class WagonDaoTests extends TestCase {
 		assertEquals(wagon.getTrainId(), testWagon.getTrainId());
 		assertEquals(wagon.getType().getId(), testWagon.getType().getId());
 		assertEquals(wagon.getNumber(), testWagon.getNumber());
-//		dao.delete(wagon);
+		dao.delete(wagon);
 	}
 	
 	

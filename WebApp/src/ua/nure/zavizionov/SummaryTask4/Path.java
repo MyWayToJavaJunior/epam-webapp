@@ -9,7 +9,8 @@ public interface Path {
 	String LIST_TRAINS_PAGE = "/WEB-INF/jsp/all/list_trains.jsp";
 	String LIST_ROUTES_PAGE = "/WEB-INF/jsp/all/list_routes.jsp";
 	String LIST_WAGONS_PAGE = "/WEB-INF/jsp/all/list_train_wagons.jsp";
-	String LIST_ROUTE_INFO = "/WEB-INF/jsp/all/route_info.jsp";
+	String LIST_TRAIN_INFO_PAGE = "/WEB-INF/jsp/all/train_info.jsp";
+	String LIST_ROUTE_INFO_PAGE = "/WEB-INF/jsp/all/route_info.jsp";
 	String TICKET_INFO = "/WEB-INF/jsp/all/ticket_info.jsp";
 	
 	String ADD_STATION_PAGE = "/WEB-INF/jsp/admin/add_station.jsp";
@@ -17,6 +18,7 @@ public interface Path {
 	
 	String ADD_STATION_COMMAND = "controller?command=addStation";
 	
+	String LIST_TRAIN_INFO_COMMAND = "controller?command=listTrainInfo";
 	String LIST_TRAINS_COMMAND = "controller?command=listTrains";
 	String LIST_ROUTES_COMMAND = "controller?command=listRoutes";
 	String LIST_ROUTE_COMMAND = "controller?command=listRoute";

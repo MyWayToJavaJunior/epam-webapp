@@ -18,9 +18,9 @@ import ua.nure.zavizionov.SummaryTask4.db.entity.Train;
 import ua.nure.zavizionov.SummaryTask4.db.entity.Wagon;
 import ua.nure.zavizionov.SummaryTask4.db.util.DBService;
 
-public class ListTrainWagons extends Command{
+public class ListTrainWagonsCommand extends Command{
 	
-	private static final Logger LOG = Logger.getLogger(ListTrainWagons.class);
+	private static final Logger LOG = Logger.getLogger(ListTrainWagonsCommand.class);
 	private static final long serialVersionUID = -7584274176016388863L;
 	DBService service = DBService.getInstance();
 	@SuppressWarnings("unchecked")

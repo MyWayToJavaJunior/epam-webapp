@@ -13,10 +13,10 @@ import ua.nure.zavizionov.SummaryTask4.Path;
 import ua.nure.zavizionov.SummaryTask4.db.entity.Route;
 import ua.nure.zavizionov.SummaryTask4.db.util.DBService;
 
-public class ListRouteComposition extends Command{
+public class ListRouteCompositionCommand extends Command{
 	
 	private static final long serialVersionUID = -4930196585000252508L;
-	private static final Logger LOG = Logger.getLogger(ListRouteComposition.class);
+	private static final Logger LOG = Logger.getLogger(ListRouteCompositionCommand.class);
 	DBService service = DBService.getInstance();
 			
 	@Override
@@ -34,7 +34,7 @@ public class ListRouteComposition extends Command{
 		route = service.findRoute(routeId);
 		request.setAttribute("route", route);
 		LOG.debug("Command finished");
-		forward = Path.LIST_ROUTE_INFO;
+		forward = Path.LIST_ROUTE_INFO_PAGE;
 		return forward;
 		
 	}

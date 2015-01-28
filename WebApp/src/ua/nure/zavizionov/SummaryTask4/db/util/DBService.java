@@ -16,12 +16,14 @@ import ua.nure.zavizionov.SummaryTask4.db.dao.StationDao;
 import ua.nure.zavizionov.SummaryTask4.db.dao.TrainDao;
 import ua.nure.zavizionov.SummaryTask4.db.dao.UserDao;
 import ua.nure.zavizionov.SummaryTask4.db.dao.WagonDao;
+import ua.nure.zavizionov.SummaryTask4.db.dao.WagonTypeDao;
 import ua.nure.zavizionov.SummaryTask4.db.entity.Route;
 import ua.nure.zavizionov.SummaryTask4.db.entity.RouteComposition;
 import ua.nure.zavizionov.SummaryTask4.db.entity.Station;
 import ua.nure.zavizionov.SummaryTask4.db.entity.Train;
 import ua.nure.zavizionov.SummaryTask4.db.entity.User;
 import ua.nure.zavizionov.SummaryTask4.db.entity.Wagon;
+import ua.nure.zavizionov.SummaryTask4.db.entity.WagonType;
 
 public class DBService {
 
@@ -327,14 +329,42 @@ public class DBService {
 		return code;
 	}
 	
-	public int addWagon(int trainId, int wagonTypeId){
-		return 0;
+	public int addWagon(int trainId, int wagonTypeId, int wagonNumber){
+		WagonDao dao = null;
+		WagonTypeDao wagonTypeDao = null;
+		WagonType wagonType = null;
+ 		int code = 0;
+		Connection connection = null;
+		Wagon wagon = new Wagon();
+		wagon.setNumber(wagonNumber);
+		wagon.setTrainId(trainId);
+		try {
+			LOG.debug("Opening connection with DB.");
+			connection = factory.getConnection();
+			LOG.debug("Geting DAO");
+			dao = factory.getWagonDao(connection);
+			wagonTypeDao = factory.getWagonTypeDao(connection);
+			LOG.trace("Getting wagon type by id");
+			wagonType = wagonTypeDao.getByPK(wagonTypeId);
+			wagon.setSeats(wagonType.getSeats());
+			wagon.setType(wagonType);
+			dao.persist(wagon);
+		} catch (SQLException e) {
+			code = Errors.ERROR;
+			LOG.error("Error occured: ", e);
+		} finally {
+			try {
+				LOG.debug("Closing connection with DB.");
+				connection.close();
+			} catch (SQLException e) {
+				LOG.error("Error occured: ", e);
+			}
+		}
+		code = Errors.SUCCESS;
+		return code;
 	}
 
-	private Train Train() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
 
 	
 
