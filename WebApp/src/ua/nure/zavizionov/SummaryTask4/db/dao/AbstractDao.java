@@ -73,7 +73,6 @@ public abstract class AbstractDao<T extends Entity> implements GenericDao<T> {
 		}
 		T persistInstance;
 		String sql = getCreateQuery();
-		System.out.println(sql);
 		try (PreparedStatement statement = connection.prepareStatement(sql)){
 			prepareStatementForInsert(statement, object);
 			LOG.debug("Executing query");
@@ -92,7 +91,6 @@ public abstract class AbstractDao<T extends Entity> implements GenericDao<T> {
 		int lastId = lastIdRS.getInt(1);
 		LOG.debug("Getting object");
 		sql = getSelectQuery() + " WHERE id = ?;";
-		System.out.println(sql);
 		try (PreparedStatement statement = connection.prepareStatement(sql)){
 			statement.setInt(1, lastId);
 			ResultSet rs = statement.executeQuery();

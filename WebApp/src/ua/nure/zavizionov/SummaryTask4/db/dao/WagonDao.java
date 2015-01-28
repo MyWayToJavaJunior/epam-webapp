@@ -49,8 +49,8 @@ public class WagonDao extends AbstractDao<Wagon>{
 
 	@Override
 	public String getCreateQuery() {
-		// TODO Auto-generated method stub
-		return null;
+		return "INSERT INTO wagons (" + Fields.WAGON_SEATS +", " + Fields.WAGON_TYPE_ID +
+		", " + Fields.WAGON_NUMBER + ", " + Fields.WAGON_TRAIN_ID + ") VALUES (?, ?, ?, ?)";
 	}
 
 	@Override
@@ -64,6 +64,7 @@ public class WagonDao extends AbstractDao<Wagon>{
 			while (rs.next()){
 				Wagon wagon = new Wagon();
 				wagon.setId(rs.getInt(Fields.ID));
+				wagon.setTrainId(rs.getInt(Fields.WAGON_TRAIN_ID));
 				wagon.setSeats(rs.getInt(Fields.WAGON_SEATS));
 				wagon.setType(wtDao.getByPK(rs.getInt(Fields.WAGON_TYPE_ID)));
 				wagon.setNumber(rs.getInt(Fields.WAGON_NUMBER));
@@ -79,8 +80,15 @@ public class WagonDao extends AbstractDao<Wagon>{
 	@Override
 	protected void prepareStatementForInsert(PreparedStatement statement,
 			Wagon object) {
-		// TODO Auto-generated method stub
-		
+		LOG.debug("Prepearing statemant");
+		try {
+			statement.setInt(1, object.getSeats());
+			statement.setInt(2, object.getType().getId());
+			statement.setInt(3, object.getNumber());
+			statement.setInt(4, object.getTrainId());
+		} catch (SQLException e) {
+			LOG.error("Error occured", e);
+		}
 	}
 
 	@Override
@@ -114,6 +122,5 @@ public class WagonDao extends AbstractDao<Wagon>{
 		}
 		return list;
 	}
-	
 	
 }

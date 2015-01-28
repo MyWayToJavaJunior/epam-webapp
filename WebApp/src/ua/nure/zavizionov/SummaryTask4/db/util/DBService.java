@@ -326,12 +326,17 @@ public class DBService {
 		}
 		return code;
 	}
+	
+	public int addWagon(int trainId, int wagonTypeId){
+		return 0;
+	}
 
 	private Train Train() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	
 
 
 }
