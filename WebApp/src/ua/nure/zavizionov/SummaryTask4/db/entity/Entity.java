@@ -22,4 +22,5 @@ public abstract class Entity implements Serializable {
 		this.id = id;
 	}
 
+	
 }

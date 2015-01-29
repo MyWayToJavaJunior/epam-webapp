@@ -1,6 +1,7 @@
 package ua.nure.zavizionov.SummaryTask4.db.dao;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -41,14 +42,13 @@ public class RouteDao extends AbstractDao<Route>{
 
 	@Override
 	public String getDeleteQuery() {
-		// TODO Auto-generated method stub
-		return null;
+		return "DELETE FROM routes WHERE id = ?;";
 	}
 
 	@Override
 	public String getCreateQuery() {
-		// TODO Auto-generated method stub
-		return null;
+		return "INSERT INTO routes (" + Fields.ROUTE_DEPARTURE_STATION_ID +", " + Fields.ROUTE_DEPARTURE_TIME +
+				", " + Fields.ROUTE_ARRIVAL_STATION_ID + ", " + Fields.ROUTE_ARRIVAL_TIME + ") VALUES (?, ?, ?, ?)";
 	}
 
 	@Override
@@ -82,8 +82,15 @@ public class RouteDao extends AbstractDao<Route>{
 	@Override
 	protected void prepareStatementForInsert(PreparedStatement statement,
 			Route object) {
-		// TODO Auto-generated method stub
-		
+		LOG.debug("Prepearing statemant");
+		try {
+			statement.setInt(1, object.getDepartureStation().getId());
+			statement.setDate(2, new java.sql.Date(object.getDepartureTime().getTime()));
+			statement.setInt(3, object.getArrivalStation().getId());
+			statement.setDate(4, new java.sql.Date(object.getArrivalTime().getTime()));
+		} catch (SQLException e) {
+			LOG.error("Error occured", e);
+		}
 	}
 
 	@Override

@@ -15,7 +15,7 @@
 			
 			<c:out value="${message}"/>
 			
-			<form id="addUser action="controller" method = "post">
+			<form id="addUser" action="controller" method = "post">
 			
 				<input type="hidden" name="command" value="addUser"/>
 				<input type="text" name="login" />
