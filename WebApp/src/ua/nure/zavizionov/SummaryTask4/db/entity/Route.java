@@ -42,5 +42,60 @@ public class Route extends Entity {
 	public void setRouteComposition(List<RouteComposition> routeComposition) {
 		this.routeComposition = routeComposition;
 	}
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result
+				+ ((arrivalStation == null) ? 0 : arrivalStation.hashCode());
+		result = prime * result
+				+ ((arrivalTime == null) ? 0 : arrivalTime.hashCode());
+		result = prime
+				* result
+				+ ((departureStation == null) ? 0 : departureStation.hashCode());
+		result = prime * result
+				+ ((departureTime == null) ? 0 : departureTime.hashCode());
+		result = prime
+				* result
+				+ ((routeComposition == null) ? 0 : routeComposition.hashCode());
+		return result;
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Route other = (Route) obj;
+		if (arrivalStation == null) {
+			if (other.arrivalStation != null)
+				return false;
+		} else if (!arrivalStation.equals(other.arrivalStation))
+			return false;
+		if (arrivalTime == null) {
+			if (other.arrivalTime != null)
+				return false;
+		} else if (!arrivalTime.equals(other.arrivalTime))
+			return false;
+		if (departureStation == null) {
+			if (other.departureStation != null)
+				return false;
+		} else if (!departureStation.equals(other.departureStation))
+			return false;
+		if (departureTime == null) {
+			if (other.departureTime != null)
+				return false;
+		} else if (!departureTime.equals(other.departureTime))
+			return false;
+		if (routeComposition == null) {
+			if (other.routeComposition != null)
+				return false;
+		} else if (!routeComposition.equals(other.routeComposition))
+			return false;
+		return true;
+	}
 
+	
 }

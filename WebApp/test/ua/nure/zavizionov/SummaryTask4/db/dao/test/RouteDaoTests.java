@@ -95,7 +95,7 @@ public class RouteDaoTests extends TestCase {
 	@Test
 	public void testAddRoute() throws SQLException {
 		Route route = dao.persist(testRoute);
-		assertEquals();
+		assertEquals(route, testRoute);
 		dao.delete(route);
 	}
 	

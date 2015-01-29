@@ -35,5 +35,50 @@ public class RouteComposition extends Entity {
 	public void setArrivalTime(Date arrivalTime) {
 		this.arrivalTime = arrivalTime;
 	}
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result
+				+ ((arrivalTime == null) ? 0 : arrivalTime.hashCode());
+		result = prime * result
+				+ ((departureTime == null) ? 0 : departureTime.hashCode());
+		result = prime * result + ((station == null) ? 0 : station.hashCode());
+		result = prime * result + ((stay == null) ? 0 : stay.hashCode());
+		return result;
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		RouteComposition other = (RouteComposition) obj;
+		if (arrivalTime == null) {
+			if (other.arrivalTime != null)
+				return false;
+		} else if (!arrivalTime.equals(other.arrivalTime))
+			return false;
+		if (departureTime == null) {
+			if (other.departureTime != null)
+				return false;
+		} else if (!departureTime.equals(other.departureTime))
+			return false;
+		if (station == null) {
+			if (other.station != null)
+				return false;
+		} else if (!station.equals(other.station))
+			return false;
+		if (stay == null) {
+			if (other.stay != null)
+				return false;
+		} else if (!stay.equals(other.stay))
+			return false;
+		return true;
+	}
+	
+	
 
 }
