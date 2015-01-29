@@ -68,7 +68,7 @@ public class RouteDao extends AbstractDao<Route>{
 						rs.getInt(Fields.ROUTE_ARRIVAL_STATION_ID)));
 				route.setDepartureTime(rs.getTime(Fields.ROUTE_DEPARTURE_TIME));
 				route.setArrivalTime(rs.getTime(Fields.ROUTE_ARRIVAL_TIME));
-				route.setRouteComposition(DBService.getInstance().findRouteComposition(route.getId()));
+				route.setRouteComposition(factory.getRouteCompositionDao(connection).getByRoute(route.getId()));
 				result.add(route);
 			}
 		} catch (SQLException e) {
@@ -76,7 +76,6 @@ public class RouteDao extends AbstractDao<Route>{
 		}
 		LOG.debug("Parsed.");
 		return result;
-		
 	}
 
 	@Override
@@ -85,9 +84,9 @@ public class RouteDao extends AbstractDao<Route>{
 		LOG.debug("Prepearing statemant");
 		try {
 			statement.setInt(1, object.getDepartureStation().getId());
-			statement.setDate(2, new java.sql.Date(object.getDepartureTime().getTime()));
+			statement.setTime(2, new java.sql.Time(object.getDepartureTime().getTime()));
 			statement.setInt(3, object.getArrivalStation().getId());
-			statement.setDate(4, new java.sql.Date(object.getArrivalTime().getTime()));
+			statement.setTime(4, new java.sql.Time(object.getArrivalTime().getTime()));
 		} catch (SQLException e) {
 			LOG.error("Error occured", e);
 		}

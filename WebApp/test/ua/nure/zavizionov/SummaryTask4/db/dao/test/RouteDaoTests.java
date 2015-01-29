@@ -2,6 +2,7 @@ package ua.nure.zavizionov.SummaryTask4.db.dao.test;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Date;
 
 import org.junit.Test;
@@ -11,6 +12,7 @@ import ua.nure.zavizionov.SummaryTask4.db.dao.RouteDao;
 import ua.nure.zavizionov.SummaryTask4.db.dao.UserDao;
 import ua.nure.zavizionov.SummaryTask4.db.entity.Role;
 import ua.nure.zavizionov.SummaryTask4.db.entity.Route;
+import ua.nure.zavizionov.SummaryTask4.db.entity.RouteComposition;
 import ua.nure.zavizionov.SummaryTask4.db.entity.Station;
 import ua.nure.zavizionov.SummaryTask4.db.entity.User;
 import junit.framework.TestCase;
@@ -37,6 +39,7 @@ public class RouteDaoTests extends TestCase {
 		testRoute.setArrivalStation(testStation2);
 		testRoute.setDepartureTime(new Date(1500000));
 		testRoute.setArrivalTime(new Date(1000000));
+		testRoute.setRouteComposition(new ArrayList<RouteComposition>());
 	}
 
 	@Test
@@ -96,6 +99,8 @@ public class RouteDaoTests extends TestCase {
 	public void testAddRoute() throws SQLException {
 		Route route = dao.persist(testRoute);
 		testRoute.setId(route.getId());
+		testRoute.getArrivalStation().setName(route.getArrivalStation().getName());
+		testRoute.getDepartureStation().setName(route.getDepartureStation().getName());
 		assertEquals(route, testRoute);
 		testRoute.setId(null);
 		dao.delete(route);

@@ -23,6 +23,7 @@ public class Init {
 		try {
 			con = DriverManager.getConnection(PATH,
 					"root", "");
+			con.setAutoCommit(false);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
