@@ -18,25 +18,26 @@ import ua.nure.zavizionov.SummaryTask4.db.util.DBService;
 public class LoginCommand extends Command {
 
 	private static final long serialVersionUID = 6563596502700707329L;
-	
+
 	private static final Logger LOG = Logger.getLogger(LoginCommand.class);
 
 	DBService service = DBService.getInstance();
-	
+
 	@Override
 	public String execute(HttpServletRequest request,
 			HttpServletResponse response) throws IOException, ServletException {
 		String forward = null;
 		String errorMessage = null;
 		LOG.debug("Command starts");
-		
+
 		HttpSession session = request.getSession();
-		
+
 		String login = request.getParameter("login");
 		String password = request.getParameter("password");
 		LOG.trace("Get parameter login: " + login);
-		
-		if (login == null || password == null || login.isEmpty() || password.isEmpty()) {
+
+		if (login == null || password == null || login.isEmpty()
+				|| password.isEmpty()) {
 			errorMessage = "Login/password cannot be empty";
 			request.setAttribute("errorMessage", errorMessage);
 			LOG.error("Error occured: " + errorMessage);
@@ -44,35 +45,35 @@ public class LoginCommand extends Command {
 			return forward;
 		}
 		User user = service.findUserByLogin(login);
-		if (user == null || !password.equals(user.getPassword())){
-		errorMessage = "No user with such login/password";
-		request.setAttribute("errorMessage", errorMessage);
-		LOG.error("Error occured: " + errorMessage);
-		return forward;
-		}else{
+		if (user == null || !password.equals(user.getPassword())) {
+			errorMessage = "No user with such login/password";
+			request.setAttribute("errorMessage", errorMessage);
+			LOG.error("Error occured: " + errorMessage);
+			forward = Path.ERROR_PAGE;
+			return forward;
+		} else {
 			Role userRole = user.getRole();
 			LOG.trace("User role is " + userRole.getName());
-			if(userRole.getName().equals(Roles.ADMIN.getName())){
-				//TODO
+			if (userRole.getName().equals(Roles.ADMIN.getName())) {
+				forward = Path.WELCOME_PAGE;
 			}
-			
-			if(userRole.getName().equals(Roles.USER.getName())){
-				//TODO
+
+			if (userRole.getName().equals(Roles.USER.getName())) {
+				forward = Path.WELCOME_PAGE;
 			}
-			
+
 			LOG.trace("Associating session with user " + user);
 			session.setAttribute("user", user);
 			LOG.trace("Associating session with userRole " + userRole.getName());
 			session.setAttribute("userRole", userRole);
-			
+
 			LOG.info("User " + user + "logged as " + userRole);
-			
-			
+
 		}
 		LOG.debug("Command finished");
-		
+
 		return forward;
-		
+
 	}
 
 }

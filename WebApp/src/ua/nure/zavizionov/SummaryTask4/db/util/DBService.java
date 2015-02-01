@@ -239,6 +239,7 @@ public class DBService {
 		return message;
 	}
 	
+	@Deprecated
 	public List<Wagon> findWagonsByTrain(int trainId){
 		WagonDao dao = null;
 		Connection connection = null;
