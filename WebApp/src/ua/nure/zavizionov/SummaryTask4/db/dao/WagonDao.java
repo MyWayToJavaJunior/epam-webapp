@@ -37,7 +37,7 @@ public class WagonDao extends AbstractDao<Wagon>{
 
 	@Override
 	public String getUpdateQuery() {
-		return "UPDATE wagons SET seats = ?, type_id = ?, number = ? "
+		return "UPDATE wagons SET seats = ?, type_id = ?, number = ?, ticket_price = ? "
 				+ "WHERE id = ?";
 	}
 
@@ -49,7 +49,8 @@ public class WagonDao extends AbstractDao<Wagon>{
 	@Override
 	public String getCreateQuery() {
 		return "INSERT INTO wagons (" + Fields.WAGON_SEATS +", " + Fields.WAGON_TYPE_ID +
-		", " + Fields.WAGON_NUMBER + ", " + Fields.WAGON_TRAIN_ID + ") VALUES (?, ?, ?, ?)";
+		", " + Fields.WAGON_NUMBER + ", " + Fields.WAGON_TRAIN_ID + ", " + Fields.WAGON_TICKET_PRICE 
+		+ ") VALUES (?, ?, ?, ?, ?)";
 	}
 
 	@Override
@@ -67,6 +68,7 @@ public class WagonDao extends AbstractDao<Wagon>{
 				wagon.setSeats(rs.getInt(Fields.WAGON_SEATS));
 				wagon.setType(wtDao.getByPK(rs.getInt(Fields.WAGON_TYPE_ID)));
 				wagon.setNumber(rs.getInt(Fields.WAGON_NUMBER));
+				wagon.setTicketPrice(rs.getDouble(Fields.WAGON_TICKET_PRICE));
 				result.add(wagon);
 			}
 		} catch (SQLException e) {
@@ -85,6 +87,7 @@ public class WagonDao extends AbstractDao<Wagon>{
 			statement.setInt(2, object.getType().getId());
 			statement.setInt(3, object.getNumber());
 			statement.setInt(4, object.getTrainId());
+			statement.setDouble(5, object.getTicketPrice());
 		} catch (SQLException e) {
 			LOG.error("Error occured", e);
 		}
@@ -99,6 +102,7 @@ public class WagonDao extends AbstractDao<Wagon>{
 			statement.setInt(2, object.getType().getId());
 			statement.setInt(3, object.getNumber());
 			statement.setInt(4, object.getId());
+			statement.setDouble(5, object.getTicketPrice());
 		} catch (SQLException e) {
 			LOG.error("Error occured", e);
 		}

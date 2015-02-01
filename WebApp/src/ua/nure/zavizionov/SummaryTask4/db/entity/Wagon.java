@@ -9,6 +9,7 @@ public class Wagon extends Entity {
 	private Integer seats;
 	private WagonType type;
 	private int number;
+	private double ticketPrice;
 	
 	public int getNumber() {
 		return number;
@@ -69,6 +70,13 @@ public class Wagon extends Entity {
 			return false;
 		return true;
 	}
+	public double getTicketPrice() {
+		return ticketPrice;
+	}
+	public void setTicketPrice(double price) {
+		this.ticketPrice = price;
+	}
+
 
 	
 	

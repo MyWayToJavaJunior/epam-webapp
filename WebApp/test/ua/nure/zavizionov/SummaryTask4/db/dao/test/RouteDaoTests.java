@@ -101,9 +101,12 @@ public class RouteDaoTests extends TestCase {
 		testRoute.setId(route.getId());
 		testRoute.getArrivalStation().setName(route.getArrivalStation().getName());
 		testRoute.getDepartureStation().setName(route.getDepartureStation().getName());
-		assertEquals(route, testRoute);
-		testRoute.setId(null);
-		dao.delete(route);
+		try{
+			assertEquals(route, testRoute);
+		}finally{
+			testRoute.setId(null);
+			dao.delete(route);
+		}
 	}
 	
 }

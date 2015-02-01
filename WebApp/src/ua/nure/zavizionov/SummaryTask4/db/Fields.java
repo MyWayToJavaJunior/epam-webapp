@@ -34,6 +34,7 @@ public interface Fields {
 	String WAGON_TYPE_ID = "type_id";
 	String WAGON_TRAIN_ID = "train_id";
 	String WAGON_NUMBER = "number";
+	String WAGON_TICKET_PRICE = "ticket_price";
 
 	
 	//wagon_types

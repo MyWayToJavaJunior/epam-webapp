@@ -34,6 +34,7 @@ public class WagonDaoTests extends TestCase {
 		testWagon.setNumber(999);
 		testWagon.setSeats(20);
 		testWagon.setTrainId(3);
+		testWagon.setTicketPrice(6.7);
 		testWagonType = new WagonType();
 		testWagonType.setId(1);
 		testWagonType.setSeats(120);
@@ -126,12 +127,16 @@ public class WagonDaoTests extends TestCase {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		assertNotNull(wagon);
-		assertEquals(wagon.getSeats(), testWagon.getSeats());
-		assertEquals(wagon.getTrainId(), testWagon.getTrainId());
-		assertEquals(wagon.getType().getId(), testWagon.getType().getId());
-		assertEquals(wagon.getNumber(), testWagon.getNumber());
-		dao.delete(wagon);
+		try{
+			assertNotNull(wagon);
+			assertEquals(wagon.getSeats(), testWagon.getSeats());
+			assertEquals(wagon.getTrainId(), testWagon.getTrainId());
+			assertEquals(wagon.getType().getId(), testWagon.getType().getId());
+			assertEquals(wagon.getNumber(), testWagon.getNumber());
+			assertEquals(wagon.getTicketPrice(), testWagon.getTicketPrice());
+		}finally{
+			dao.delete(wagon);
+		}
 	}
 	
 	

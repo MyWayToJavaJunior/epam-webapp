@@ -123,8 +123,13 @@ public class UserDaoTests extends TestCase {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		assertEquals(user.getLogin(), testUser.getLogin());
-		dao.delete(user);
+		try{
+			assertEquals(user.getLogin(), testUser.getLogin());
+		}finally{
+			dao.delete(user);
+		}
+		
+		
 		
 	}
 
