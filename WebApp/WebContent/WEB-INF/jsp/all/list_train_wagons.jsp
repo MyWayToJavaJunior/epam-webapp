@@ -33,10 +33,11 @@
 						<td>№${bean.number}</td>
 						<td>${bean.type.typeName}</td>
 						<td>${bean.seats}</td>
+						<td>${bean.ticketPrice}</td>
 						<td><input type = "radio" name = "wagonId" value = "${bean.id}"/></td>
 					</tr>
 				</c:forEach>	
-			<tr><input type = "submit" value = "Buy" align = "ABSBOTTOM"/></tr>
+			<input type = "submit" value = "Buy"/>
 			</form>
 			
 			<c:if test="${userRole.name == 'admin' }">
@@ -44,9 +45,10 @@
 			<form action="controller" method = "post"> 
 			<input type = "hidden" name="command" value = "addWagon" />
 			<input type = "hidden" name="trainId" value = "${train.id}"/>
-			<input type = "text" name="wagonTypeId" />
-			<input type = "text" name="wagonNumber" />
-			<tr><input type = "submit" value = "Add"/></tr>
+			Type: <input type = "text" name="wagonTypeId" />
+			Number: <input type = "text" name="wagonNumber" />
+			Ticket price: <input type = "text" name="wagonTicketPrice" />
+			<input type = "submit" value = "Add"/>
 			</form>
 			
 		</c:if>

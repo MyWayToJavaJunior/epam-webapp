@@ -21,7 +21,7 @@ public interface Path {
 	String LIST_TRAINS_COMMAND = "controller?command=listTrains";
 	String LIST_ROUTES_COMMAND = "controller?command=listRoutes";
 	String LIST_ROUTE_COMMAND = "controller?command=listRoute";
-	String LIST_TRAIN_WAGONS_COMMAND = "controller?command=listTrainWagons";
+	String LIST_TRAIN_WAGONS_COMMAND = "controller?command=listTrainInfo";
 	String ADD_TRAIN_COMMAND = "controller?command=addTrain";
 	
 	
