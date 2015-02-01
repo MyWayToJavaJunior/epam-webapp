@@ -33,7 +33,7 @@ public class AddWagonCommand extends Command {
 		String trainIdString = request.getParameter("trainId");
 		String wagonTypeIdString = request.getParameter("wagonTypeId");
 		String wagonNumberString = request.getParameter("wagonNumber");
-		
+		String wagonTicketPriceString = request.getParameter("wagonTicketPrice");
 		if(trainIdString == null || trainIdString.isEmpty()){
 			errorMessage = "Train id is undefined.";
 			LOG.error(errorMessage);
@@ -52,14 +52,22 @@ public class AddWagonCommand extends Command {
 			forward = Path.ERROR_PAGE;
 			return forward;
 		}
+		if(wagonTicketPriceString==null || wagonTicketPriceString.isEmpty()){
+			errorMessage = "Wagon ticket price is empty.";
+			LOG.error(errorMessage);
+			forward = Path.ERROR_PAGE;
+			return forward;
+		}
 		
 		int trainId = 0;
 		int wagonTypeId = 0;
 		int wagonNumber = 0;
+		double wagonTicketPrice = 0;
 		try {
 			trainId = Integer.parseInt(trainIdString);
 			wagonTypeId = Integer.parseInt(wagonTypeIdString);
 			wagonNumber = Integer.parseInt(wagonNumberString);
+			wagonTicketPrice = Double.parseDouble(wagonTicketPriceString);
 		} catch (Exception e) {
 			errorMessage = "Some of inputed values has bad format";
 			LOG.error(errorMessage);
@@ -70,7 +78,7 @@ public class AddWagonCommand extends Command {
 
 
 
-		errorCode = service.addWagon(trainId, wagonTypeId, wagonNumber);
+		errorCode = service.addWagon(trainId, wagonTypeId, wagonNumber, wagonTicketPrice);
 
 		switch (errorCode) {
 		case Errors.ERROR:

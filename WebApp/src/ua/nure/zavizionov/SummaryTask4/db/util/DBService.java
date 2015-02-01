@@ -329,7 +329,7 @@ public class DBService {
 		return code;
 	}
 	
-	public int addWagon(int trainId, int wagonTypeId, int wagonNumber){
+	public int addWagon(int trainId, int wagonTypeId, int wagonNumber, double ticket_price){
 		WagonDao dao = null;
 		WagonTypeDao wagonTypeDao = null;
 		WagonType wagonType = null;
@@ -338,6 +338,7 @@ public class DBService {
 		Wagon wagon = new Wagon();
 		wagon.setNumber(wagonNumber);
 		wagon.setTrainId(trainId);
+		wagon.setTicketPrice(ticket_price);
 		try {
 			LOG.debug("Opening connection with DB.");
 			connection = factory.getConnection();

@@ -108,7 +108,7 @@ public class DBServiceTests extends TestCase {
 	
 	@Test
 	public void testAddWagon() {
-		service.addWagon(3, 1, 4);
+		service.addWagon(3, 1, 4, 2.5);
 	}
 
 }
