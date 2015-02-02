@@ -8,8 +8,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 
-import ua.nure.zavizionov.SummaryTask4.Errors;
 import ua.nure.zavizionov.SummaryTask4.Path;
+import ua.nure.zavizionov.SummaryTask4.db.exception.ElementNotFoundException;
+import ua.nure.zavizionov.SummaryTask4.db.exception.NoTicketsException;
 import ua.nure.zavizionov.SummaryTask4.db.util.DBService;
 
 public class BuyTicketCommand extends Command{
@@ -42,22 +43,26 @@ public class BuyTicketCommand extends Command{
 		
 		LOG.trace("Recieved wagon id: " + wagonId + " and passenger name " + fullName);
 		try{
-			messageCode = service.buyTicket(Integer.parseInt(wagonId), 1);
+			service.buyTicket(Integer.parseInt(wagonId), 1);
 		}catch(NumberFormatException e){
-			LOG.error("Bad id format", e);
-		}
-		if(messageCode == Errors.NO_SUCH_ELEMENT_ERROR){
+			errorMessage = "Bad id format";
+			request.setAttribute("errorMessage", errorMessage);
+			forward = Path.ERROR_PAGE;
+			LOG.error(errorMessage, e);
+			return forward;
+		} catch (ElementNotFoundException e) {
 			errorMessage = "No such wagon";
 			request.setAttribute("errorMessage", errorMessage);
 			forward = Path.ERROR_PAGE;
 			return forward;
-		}
-		if(messageCode == Errors.NO_TICKETS_ERROR){
+		} catch (NoTicketsException e) {
 			errorMessage = "There is no free seats in this wagon";
 			request.setAttribute("errorMessage", errorMessage);
 			forward = Path.ERROR_PAGE;
 			return forward;
 		}
+		
+
 		
 		//TODO Some PDF or just forward to another page with unique ticket info.
 		

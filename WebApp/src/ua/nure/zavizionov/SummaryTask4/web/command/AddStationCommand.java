@@ -13,9 +13,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 
-import ua.nure.zavizionov.SummaryTask4.Errors;
 import ua.nure.zavizionov.SummaryTask4.Path;
 import ua.nure.zavizionov.SummaryTask4.db.entity.Train;
+import ua.nure.zavizionov.SummaryTask4.db.exception.ElementAlreadyExistsException;
 import ua.nure.zavizionov.SummaryTask4.db.util.DBService;
 
 public class AddStationCommand extends Command {
@@ -28,7 +28,6 @@ public class AddStationCommand extends Command {
 			HttpServletResponse response) throws IOException, ServletException {
 		String forward = null;
 		String message = null;
-		int errorCode;
 		DBService service = DBService.getInstance();
 		LOG.debug("Command starts");
 		String stationName = request.getParameter("stationName");
@@ -41,16 +40,14 @@ public class AddStationCommand extends Command {
 			message = "Station name is empty";
 		}else{
 			LOG.trace("Recieved station name: " + stationName);
-			errorCode = service.addStation(stationName);
-			
-			switch(errorCode){
-			case Errors.ELEMENT_ALREADY_EXISTS_ERROR: message = "Station already exists";
-						break;
-			case Errors.SUCCESS: message = "Station added succesfull";
+			try {
+				service.addStation(stationName);
+				message = "Station added succesfull";
+			} catch (ElementAlreadyExistsException e) {
+				message = "Station already exists";
 			}
 			
 		}
-		
 		LOG.debug("Command finished");
 		response.sendRedirect(Path.ADD_STATION_COMMAND+"&message="+message);
 		return forward;

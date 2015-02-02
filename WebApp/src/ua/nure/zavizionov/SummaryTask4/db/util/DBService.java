@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.derby.client.am.SqlException;
 import org.apache.log4j.Logger;
 
 import ua.nure.zavizionov.SummaryTask4.db.dao.DaoFactory;
@@ -260,10 +261,9 @@ public class DBService {
 		return wagons;
 	}
 
-	public int addTrain(int routeId, Date departureDate, Date arrivalDate) {
+	public void addTrain(int routeId, Date departureDate, Date arrivalDate) throws SqlException {
 		TrainDao dao = null;
 		RouteDao routeDao = null;
-		int code = 0;
 		Connection connection = null;
 		Train train = new Train();
 		train.setArrivalDate(arrivalDate);
@@ -279,6 +279,7 @@ public class DBService {
 			dao.persist(train);
 		} catch (SQLException e) {
 			LOG.error("Error occured: ", e);
+			throw new SqlException(e);
 		} finally {
 			try {
 				LOG.debug("Closing connection with DB.");
@@ -287,7 +288,6 @@ public class DBService {
 				LOG.error("Error occured: ", e);
 			}
 		}
-		return code;
 	}
 	
 	public void addUser(String login, String password, String email, String fullName, int roleId) throws ElementAlreadyExistsException{

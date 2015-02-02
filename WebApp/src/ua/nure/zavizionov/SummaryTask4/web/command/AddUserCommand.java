@@ -12,9 +12,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 
-import ua.nure.zavizionov.SummaryTask4.Errors;
 import ua.nure.zavizionov.SummaryTask4.Path;
 import ua.nure.zavizionov.SummaryTask4.db.Roles;
+import ua.nure.zavizionov.SummaryTask4.db.exception.ElementAlreadyExistsException;
 import ua.nure.zavizionov.SummaryTask4.db.util.DBService;
 
 public class AddUserCommand extends Command {
@@ -57,15 +57,13 @@ public class AddUserCommand extends Command {
 			return forward;
 		}
 
-		errorCode = service.addUser(login, password, email, fullName, Roles.USER.getId());
-
-		switch (errorCode) {
-		case Errors.ELEMENT_ALREADY_EXISTS_ERROR:
-			errorMessage = "User with such login already exists.";
-			break;
-		case Errors.SUCCESS:
+		try {
+			service.addUser(login, password, email, fullName, Roles.USER.getId());
 			message = "Station added succesfull";
+		} catch (ElementAlreadyExistsException e) {
+			errorMessage = "User with such login already exists.";
 		}
+
 		
 		if (errorMessage != null){
 			LOG.error(errorMessage);

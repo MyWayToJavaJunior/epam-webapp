@@ -10,9 +10,9 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.derby.client.am.SqlException;
 import org.apache.log4j.Logger;
 
-import ua.nure.zavizionov.SummaryTask4.Errors;
 import ua.nure.zavizionov.SummaryTask4.Path;
 import ua.nure.zavizionov.SummaryTask4.db.util.DBService;
 
@@ -77,15 +77,13 @@ public class AddTrainCommand extends Command {
 		}
 
 
-		errorCode = service.addTrain(routeId, departureDate, arrivalDate);
-
-		switch (errorCode) {
-		case Errors.ELEMENT_ALREADY_EXISTS_ERROR:
-			message = "Station already exists";
-			break;
-		case Errors.SUCCESS:
-			message = "Station added succesfull";
+		try {
+			service.addTrain(routeId, departureDate, arrivalDate);
+			message = "Traid added succesfull";
+		} catch (SqlException e) {
+			message = "Cant put data to DB.";
 		}
+
 
 		LOG.debug("Command finished");
 		response.sendRedirect(Path.ADD_TRAIN_COMMAND + "&message=" + message);

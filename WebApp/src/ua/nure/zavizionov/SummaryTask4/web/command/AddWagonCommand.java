@@ -1,6 +1,7 @@
 package ua.nure.zavizionov.SummaryTask4.web.command;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -12,7 +13,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 
-import ua.nure.zavizionov.SummaryTask4.Errors;
+
+
 import ua.nure.zavizionov.SummaryTask4.Path;
 import ua.nure.zavizionov.SummaryTask4.db.util.DBService;
 
@@ -78,14 +80,11 @@ public class AddWagonCommand extends Command {
 
 
 
-		errorCode = service.addWagon(trainId, wagonTypeId, wagonNumber, wagonTicketPrice);
-
-		switch (errorCode) {
-		case Errors.ERROR:
-			message = "Can't add wagon.";
-			break;
-		case Errors.SUCCESS:
+		try {
+			service.addWagon(trainId, wagonTypeId, wagonNumber, wagonTicketPrice);
 			message = "Wagon added succesfull";
+		} catch (SQLException e) {
+			message = "Can't add wagon.";
 		}
 
 		LOG.debug("Command finished");
