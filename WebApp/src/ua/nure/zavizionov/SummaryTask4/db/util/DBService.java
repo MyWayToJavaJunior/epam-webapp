@@ -7,7 +7,6 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
-import ua.nure.zavizionov.SummaryTask4.Errors;
 import ua.nure.zavizionov.SummaryTask4.db.dao.DaoFactory;
 import ua.nure.zavizionov.SummaryTask4.db.dao.RoleDao;
 import ua.nure.zavizionov.SummaryTask4.db.dao.RouteCompositionDao;
@@ -24,6 +23,9 @@ import ua.nure.zavizionov.SummaryTask4.db.entity.Train;
 import ua.nure.zavizionov.SummaryTask4.db.entity.User;
 import ua.nure.zavizionov.SummaryTask4.db.entity.Wagon;
 import ua.nure.zavizionov.SummaryTask4.db.entity.WagonType;
+import ua.nure.zavizionov.SummaryTask4.db.exception.ElementAlreadyExistsException;
+import ua.nure.zavizionov.SummaryTask4.db.exception.ElementNotFoundException;
+import ua.nure.zavizionov.SummaryTask4.db.exception.NoTicketsException;
 
 public class DBService {
 
@@ -119,9 +121,8 @@ public class DBService {
 		return result;
 	}
 
-	public int addStation(String stationName) {
+	public void addStation(String stationName) throws ElementAlreadyExistsException {
 		StationDao dao = null;
-		int code = 0;
 		Connection connection = null;
 		Station station = new Station();
 		station.setName(stationName);
@@ -133,10 +134,9 @@ public class DBService {
 			if (dao.findByName(stationName) == null) {
 				LOG.trace("Adding station " + stationName);
 				dao.persist(station);
-				code = Errors.SUCCESS;
 			} else {
-				code = Errors.ELEMENT_ALREADY_EXISTS_ERROR;
-				LOG.trace("Station already exists, returning error code.");
+				LOG.trace("Station already exists, generating exception");
+				throw new ElementAlreadyExistsException();
 			}
 		} catch (SQLException e) {
 			LOG.error("Error occured: ", e);
@@ -148,7 +148,6 @@ public class DBService {
 				LOG.error("Error occured: ", e);
 			}
 		}
-		return code;
 	}
 
 	public List<Route> findRoutes() {
@@ -200,9 +199,8 @@ public class DBService {
 		return result;
 	}
 	
-	public int buyTicket(int wagonId, int count) {
+	public void buyTicket(int wagonId, int count) throws ElementNotFoundException, NoTicketsException {
 		WagonDao dao = null;
-		int message=0;
 		Connection connection = null;
 		try {
 			LOG.debug("Opening connection with DB.");
@@ -211,21 +209,18 @@ public class DBService {
 			dao = factory.getWagonDao(connection);
 			Wagon wagon = dao.getByPK(wagonId);
 			if (dao.getByPK(wagonId) == null) {
-				message = Errors.NO_SUCH_ELEMENT_ERROR;
 				LOG.trace("Can't find wagon with such id");
-				return message;
+				throw new ElementNotFoundException();
 			}
 			if (wagon.getSeats()<=0){
-				message = Errors.NO_TICKETS_ERROR;
 				LOG.trace("No sears in this wagon.");
-				return message;
+				throw new NoTicketsException();
 			}
 			LOG.trace("Wagon obtained, decreasing number of seats.");
 			int seatsLeft = wagon.getSeats() - count;
 			LOG.trace(seatsLeft + " seats left in wagon.");
 			wagon.setSeats(seatsLeft);
 			dao.update(wagon);
-			message = Errors.SUCCESS;
 		} catch (SQLException e) {
 			LOG.error("Error occured: ", e);
 		} finally {
@@ -236,7 +231,6 @@ public class DBService {
 				LOG.error("Error occured: ", e);
 			}
 		}
-		return message;
 	}
 	
 	@Deprecated
@@ -296,10 +290,9 @@ public class DBService {
 		return code;
 	}
 	
-	public int addUser(String login, String password, String email, String fullName, int roleId){
+	public void addUser(String login, String password, String email, String fullName, int roleId) throws ElementAlreadyExistsException{
 		UserDao dao = null;
 		RoleDao roleDao = null;
-		int code = 0;
 		Connection connection = null;
 		User user = new User();
 		user.setLogin(login);
@@ -312,7 +305,7 @@ public class DBService {
 			LOG.debug("Geting DAO");
 			dao = factory.getUserDao(connection);
 			if(dao.getByLogin(login) != null){
-				return Errors.ELEMENT_ALREADY_EXISTS_ERROR;
+				throw new ElementAlreadyExistsException();
 			}
 			roleDao = factory.getRoleDao(connection);
 			user.setRole(roleDao.getByPK(roleId));
@@ -327,14 +320,12 @@ public class DBService {
 				LOG.error("Error occured: ", e);
 			}
 		}
-		return code;
 	}
 	
-	public int addWagon(int trainId, int wagonTypeId, int wagonNumber, double ticket_price){
+	public void addWagon(int trainId, int wagonTypeId, int wagonNumber, double ticket_price) throws SQLException{
 		WagonDao dao = null;
 		WagonTypeDao wagonTypeDao = null;
 		WagonType wagonType = null;
- 		int code = 0;
 		Connection connection = null;
 		Wagon wagon = new Wagon();
 		wagon.setNumber(wagonNumber);
@@ -352,8 +343,8 @@ public class DBService {
 			wagon.setType(wagonType);
 			dao.persist(wagon);
 		} catch (SQLException e) {
-			code = Errors.ERROR;
 			LOG.error("Error occured: ", e);
+			throw new SQLException(e);
 		} finally {
 			try {
 				LOG.debug("Closing connection with DB.");
@@ -362,8 +353,6 @@ public class DBService {
 				LOG.error("Error occured: ", e);
 			}
 		}
-		code = Errors.SUCCESS;
-		return code;
 	}
 
 	public Train findTrainById(int trainId){
