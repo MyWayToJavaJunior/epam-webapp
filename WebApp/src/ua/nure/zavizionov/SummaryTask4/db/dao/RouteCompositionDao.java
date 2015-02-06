@@ -48,8 +48,9 @@ public class RouteCompositionDao extends AbstractDao<RouteComposition>{
 
 	@Override
 	public String getCreateQuery() {
-		// TODO Auto-generated method stub
-		return null;
+		return "INSERT INTO route_compositions (" + Fields.ROUTE_COMPOSITION_ROUTE_ID +", " + Fields.ROUTE_COMPOSITION_STATION_ID +
+				", " + Fields.ROUTE_COMPOSITION_ARRIVAL_TIME + ", " + Fields.ROUTE_COMPOSITION_DEPARTURE_TIME 
+				+ ", " + Fields.ROUTE_COMPOSITION_STAY +") VALUES (?, ?, ?, ?, ?)";
 	}
 
 	@Override
@@ -78,7 +79,17 @@ public class RouteCompositionDao extends AbstractDao<RouteComposition>{
 	@Override
 	protected void prepareStatementForInsert(PreparedStatement statement,
 			RouteComposition object) {
-		// TODO Auto-generated method stub
+		LOG.trace("Prepearing statement for insert");
+		try {
+			statement.setInt(1, object.getRouteId());
+			statement.setInt(2, object.getStation().getId());
+			statement.setTime(3, new java.sql.Time(object.getArrivalTime().getTime()));
+			statement.setTime(4, new java.sql.Time(object.getDepartureTime().getTime()));
+			statement.setInt(5,object.getStay());
+		} catch (SQLException e) {
+			LOG.error("Error occured",e);
+		}
+		
 		
 	}
 

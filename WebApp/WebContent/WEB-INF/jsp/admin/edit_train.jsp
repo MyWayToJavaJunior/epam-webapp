@@ -22,7 +22,7 @@
 				Route:<input type="text" name="routeId" /><br>
 				Departure date:<input type="date" name="departureDate" /><br>
 				Arrival date:<input type="date" name="arrivalDate" /><br>
-				<input type="submit" value = "Add"/>
+				<input type="submit" value = "Edit"/>
 				
 			</form>
 			

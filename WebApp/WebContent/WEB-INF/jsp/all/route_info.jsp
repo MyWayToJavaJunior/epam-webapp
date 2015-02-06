@@ -40,6 +40,21 @@
 				</c:forEach>	
 			
 			<fmt:formatDate value="${bean.arrivalTime}" pattern="HH:mm:ss" />
+			<br>
+			<br>
+			<c:if test="${userRole.name == 'admin'}">
+					<form id="addRouteComposition" action="controller" method = "post">
+				
+				<input type="hidden" name="command" value="addRouteComposition"/>
+				<input type="hidden" name="routeId" value="${route.id}"/>
+				Station:<input type="text" name="stationId" /><br>
+				Arrival time:<input type="time" name="arrivalTime" /><br>
+				Departure time:<input type="time" name="departureTime" /><br>
+				Stay time:<input type="text" name="stay" /><br>
+				
+				<input type="submit" value = "Add"/><br>
+	</form>
+			</c:if>
 			
 			
 			

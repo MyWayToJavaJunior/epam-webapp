@@ -6,6 +6,14 @@ public class RouteComposition extends Entity {
 	
 	//will use List<RouteComposition> instead of reference
 	//to route in every object like private Route route;
+	//but need to store route id
+	private int routeId;
+	public int getRouteId() {
+		return routeId;
+	}
+	public void setRouteId(int routeId) {
+		this.routeId = routeId;
+	}
 	private Station station;
 	private Date departureTime;
 	private Integer stay;

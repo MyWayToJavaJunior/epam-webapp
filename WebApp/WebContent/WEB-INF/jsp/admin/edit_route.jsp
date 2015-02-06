@@ -18,7 +18,7 @@
 				Departure time:<input type="time" name="departureTime" /><br>
 				Arrival station:<input type="text" name="arrivalStationId" /><br>
 				Arrival time:<input type="time" name="arrivalTime" /><br>
-				<input type="submit" value = "Add"/><br>
+				<input type="submit" value = "Edit"/><br>
 	</form>
 
 	<%@ include file="/WEB-INF/jspf/footer.jspf" %>

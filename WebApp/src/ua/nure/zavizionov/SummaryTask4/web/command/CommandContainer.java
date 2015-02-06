@@ -27,6 +27,7 @@ public class CommandContainer {
 		commands.put("addRoute", new AddRouteCommand());
 		commands.put("addTrain", new AddTrainCommand());
 		commands.put("addWagon", new AddWagonCommand());
+		commands.put("addRouteComposition", new AddRouteCompositionCommand());
 		commands.put("addUser", new AddUserCommand());
 		commands.put("editRoute", new EditRouteCommand());
 //		commands.put("editStation", new EditStationCommand());

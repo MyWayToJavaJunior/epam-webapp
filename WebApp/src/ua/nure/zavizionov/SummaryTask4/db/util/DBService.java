@@ -292,9 +292,9 @@ public class DBService {
 			}
 		}
 	}
-	
-	public void editTrain(int trainId, int routeId, Date departureDate, Date arrivalDate)
-			throws SqlException {
+
+	public void editTrain(int trainId, int routeId, Date departureDate,
+			Date arrivalDate) throws SqlException {
 		TrainDao dao = null;
 		RouteDao routeDao = null;
 		Connection connection = null;
@@ -415,7 +415,8 @@ public class DBService {
 	}
 
 	public void editRoute(int routeId, int departureStationId,
-			Date departureTime, int arrivalStationId, Date arrivalTime) throws SqlException {
+			Date departureTime, int arrivalStationId, Date arrivalTime)
+			throws SqlException {
 		RouteDao dao = null;
 		StationDao stationDao = null;
 		Connection connection = null;
@@ -479,6 +480,40 @@ public class DBService {
 			}
 		}
 		return id;
+	}
+
+	public void addRouteComposition(int routeId, int stationId,
+			Date arrivalTime, Date departureTime, int stay) throws SqlException {
+		RouteCompositionDao dao = null;
+		StationDao stationDao = null;
+		Connection connection = null;
+		RouteComposition rc = new RouteComposition();
+		try {
+			LOG.debug("Opening connection with DB.");
+			connection = factory.getConnection();
+			LOG.debug("Geting DAO");
+			dao = factory.getRouteCompositionDao(connection);
+			stationDao = factory.getStationDao(connection);
+			LOG.debug("Prepearing object");
+			rc.setDepartureTime(departureTime);
+			rc.setArrivalTime(arrivalTime);
+			rc.setStation(stationDao.getByPK(stationId));
+			rc.setStay(stay);
+			rc.setRouteId(routeId);
+			LOG.debug("R id is" + rc.getRouteId());
+			LOG.debug("Updating");
+			dao.persist(rc);
+		} catch (SQLException e) {
+			LOG.error("Error occured: ", e);
+			throw new SqlException(e);
+		} finally {
+			try {
+				LOG.debug("Closing connection with DB.");
+				connection.close();
+			} catch (SQLException e) {
+				LOG.error("Error occured: ", e);
+			}
+		}
 	}
 
 }
