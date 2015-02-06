@@ -34,7 +34,12 @@
 						<td>${bean.type.typeName}</td>
 						<td>${bean.seats}</td>
 						<td>${bean.ticketPrice}</td>
+						<c:if test="${userRole.name == 'user' }">
 						<td><input type = "radio" name = "wagonId" value = "${bean.id}"/></td>
+						</c:if>
+						<c:if test="${userRole.name == 'admin' }">
+						<td><a href="controller?command=deleteWagon&wagonId=${bean.id}">Delete</a></td>
+						</c:if>
 					</tr>
 				</c:forEach>	
 			<input type = "submit" value = "Buy"/>

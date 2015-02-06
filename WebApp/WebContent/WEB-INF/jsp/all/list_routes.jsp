@@ -35,6 +35,7 @@
 						<td><a href="controller?command=listRouteComposition&routeId=${bean.id}">Info</a></td>
 						<c:if test="${userRole.name == 'admin'}">
 						<td><a href="controller?command=editRoute&routeId=${bean.id}">Edit</a></td>
+						<td><a href="controller?command=deleteRoute&routeId=${bean.id}">Delete</a></td>
 						</c:if>
 						
 					</tr>

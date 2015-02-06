@@ -42,8 +42,7 @@ public class RouteCompositionDao extends AbstractDao<RouteComposition>{
 
 	@Override
 	public String getDeleteQuery() {
-		// TODO Auto-generated method stub
-		return null;
+		return "DELETE FROM route_compositions WHERE id = ?;";
 	}
 
 	@Override

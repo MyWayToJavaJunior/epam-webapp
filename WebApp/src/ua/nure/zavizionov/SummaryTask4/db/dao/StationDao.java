@@ -42,8 +42,7 @@ public class StationDao extends AbstractDao<Station>{
 
 	@Override
 	public String getDeleteQuery() {
-		// TODO Auto-generated method stub
-		return null;
+		return "DELETE FROM stations WHERE id = ?;";
 	}
 
 	@Override

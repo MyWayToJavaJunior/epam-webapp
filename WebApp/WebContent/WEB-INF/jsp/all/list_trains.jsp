@@ -36,6 +36,7 @@
 						<td><a href="controller?command=listTrainInfo&trainId=${bean.id}">Buy ticket</a></td>
 						<c:if test="${userRole.name == 'admin'}">
 						<td><a href="controller?command=editTrain&trainId=${bean.id}">Edit</a></td>
+						<td><a href="controller?command=deleteTrain&trainId=${bean.id}">Delete</a></td>
 						</c:if>
 					</tr>
 

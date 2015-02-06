@@ -42,8 +42,7 @@ public class TrainDao extends AbstractDao<Train> {
 
 	@Override
 	public String getDeleteQuery() {
-		// TODO Auto-generated method stub
-		return null;
+		return "DELETE FROM trains WHERE id = ?;";
 	}
 
 	@Override
@@ -121,6 +120,21 @@ public class TrainDao extends AbstractDao<Train> {
 		try (PreparedStatement statement = connection.prepareStatement(sql)) {
 			statement.setDate(1, new java.sql.Date(startDate.getTime()));
 			statement.setDate(2, new java.sql.Date(endDate.getTime()));
+			ResultSet rs = statement.executeQuery();
+			list = parseResultSet(rs);
+		} catch (SQLException e) {
+			throw new SQLException(e);
+		}
+		return list;
+	}
+	
+	public List<Train> findTrainsByRoute(int routeId)
+			throws SQLException {
+		List<Train> list = new ArrayList<Train>();
+		String sql = getSelectQuery();
+		sql += " WHERE " + Fields.TRAIN_ROUTE_ID + " = ?";
+		try (PreparedStatement statement = connection.prepareStatement(sql)) {
+			statement.setInt(1, routeId);
 			ResultSet rs = statement.executeQuery();
 			list = parseResultSet(rs);
 		} catch (SQLException e) {

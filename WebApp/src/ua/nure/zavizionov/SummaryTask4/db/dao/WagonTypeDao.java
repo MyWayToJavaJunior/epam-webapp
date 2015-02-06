@@ -42,8 +42,7 @@ public class WagonTypeDao extends AbstractDao<WagonType>{
 
 	@Override
 	public String getDeleteQuery() {
-		// TODO Auto-generated method stub
-		return null;
+		return "DELETE FROM wagon_types WHERE id = ?;";
 	}
 
 	@Override

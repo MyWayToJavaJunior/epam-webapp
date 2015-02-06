@@ -24,6 +24,7 @@ import ua.nure.zavizionov.SummaryTask4.db.entity.Train;
 import ua.nure.zavizionov.SummaryTask4.db.entity.User;
 import ua.nure.zavizionov.SummaryTask4.db.entity.Wagon;
 import ua.nure.zavizionov.SummaryTask4.db.entity.WagonType;
+import ua.nure.zavizionov.SummaryTask4.db.exception.DataIntegrityException;
 import ua.nure.zavizionov.SummaryTask4.db.exception.ElementAlreadyExistsException;
 import ua.nure.zavizionov.SummaryTask4.db.exception.ElementNotFoundException;
 import ua.nure.zavizionov.SummaryTask4.db.exception.NoTicketsException;
@@ -500,9 +501,103 @@ public class DBService {
 			rc.setStation(stationDao.getByPK(stationId));
 			rc.setStay(stay);
 			rc.setRouteId(routeId);
-			LOG.debug("R id is" + rc.getRouteId());
 			LOG.debug("Updating");
 			dao.persist(rc);
+		} catch (SQLException e) {
+			LOG.error("Error occured: ", e);
+			throw new SqlException(e);
+		} finally {
+			try {
+				LOG.debug("Closing connection with DB.");
+				connection.close();
+			} catch (SQLException e) {
+				LOG.error("Error occured: ", e);
+			}
+		}
+	}
+	
+	public void deleteRouteComposition(int id) throws SqlException {
+		RouteCompositionDao dao = null;
+		Connection connection = null;
+		RouteComposition rc = null;
+		try {
+			LOG.debug("Opening connection with DB.");
+			connection = factory.getConnection();
+			LOG.debug("Geting DAO");
+			dao = factory.getRouteCompositionDao(connection);
+			LOG.debug("Getting object");
+			rc = dao.getByPK(id);
+			LOG.debug("Deleting");
+			dao.delete(rc);			
+		} catch (SQLException e) {
+			LOG.error("Error occured: ", e);
+			throw new SqlException(e);
+		} finally {
+			try {
+				LOG.debug("Closing connection with DB.");
+				connection.close();
+			} catch (SQLException e) {
+				LOG.error("Error occured: ", e);
+			}
+		}
+	}
+	
+	public void deleteTrain(int id) throws SqlException {
+		TrainDao dao = null;
+		WagonDao wagonDao = null;
+		Connection connection = null;
+		Train train = null;
+		try {
+			LOG.debug("Opening connection with DB.");
+			connection = factory.getConnection();
+			LOG.debug("Geting DAO");
+			dao = factory.getTrainDao(connection);
+			wagonDao = factory.getWagonDao(connection);
+			LOG.debug("Getting object");
+			train = dao.getByPK(id);
+			LOG.debug("Deleting wagons");
+			for(Wagon wagon : train.getWagons()){
+				wagonDao.delete(wagon);
+			}
+			LOG.debug("Deleting train");
+			dao.delete(train);			
+		} catch (SQLException e) {
+			LOG.error("Error occured: ", e);
+			throw new SqlException(e);
+		} finally {
+			try {
+				LOG.debug("Closing connection with DB.");
+				connection.close();
+			} catch (SQLException e) {
+				LOG.error("Error occured: ", e);
+			}
+		}
+	}
+	
+	public void deleteRoute(int id) throws SqlException, DataIntegrityException {
+		RouteDao dao = null;
+		Connection connection = null;
+		Route route = null;
+		TrainDao trainDao = null;
+		RouteCompositionDao routeCompositionDao = null;
+		try {
+			LOG.debug("Opening connection with DB.");
+			connection = factory.getConnection();
+			LOG.debug("Geting DAO");
+			dao = factory.getRouteDao(connection);
+			routeCompositionDao = factory.getRouteCompositionDao(connection);
+			trainDao = factory.getTrainDao(connection);
+			LOG.debug("Getting object");
+			route = dao.getByPK(id);
+			if (!trainDao.findTrainsByRoute(id).isEmpty()){
+				throw new DataIntegrityException("There are trains with this route");
+			}
+			LOG.debug("Deleting route composition");
+			for(RouteComposition rc : route.getRouteComposition()){
+				routeCompositionDao.delete(rc);
+			}
+			LOG.debug("Deleting route");
+			dao.delete(route);			
 		} catch (SQLException e) {
 			LOG.error("Error occured: ", e);
 			throw new SqlException(e);
