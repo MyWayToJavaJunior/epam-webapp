@@ -610,5 +610,31 @@ public class DBService {
 			}
 		}
 	}
+	
+	public void deleteWagon(int id) throws SqlException{
+		WagonDao dao = null;
+		Connection connection = null;
+		Wagon wagon = null;
+		try {
+			LOG.debug("Opening connection with DB.");
+			connection = factory.getConnection();
+			LOG.debug("Geting DAO");
+			dao = factory.getWagonDao(connection);
+			LOG.debug("Getting object");
+			wagon = dao.getByPK(id);
+			LOG.debug("Deleting");
+			dao.delete(wagon);	
+		} catch (SQLException e) {
+			LOG.error("Error occured: ", e);
+			throw new SqlException(e);
+		} finally {
+			try {
+				LOG.debug("Closing connection with DB.");
+				connection.close();
+			} catch (SQLException e) {
+				LOG.error("Error occured: ", e);
+			}
+		}
+	}
 
 }

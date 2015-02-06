@@ -32,9 +32,11 @@ public class CommandContainer {
 		commands.put("editRoute", new EditRouteCommand());
 //		commands.put("editStation", new EditStationCommand());
 		commands.put("editTrain", new EditTrainCommand());
-//		commands.put("removeRoute", new AddRouteCommand());
-//		commands.put("removeStation", new RemoveStationCommand());
-//		commands.put("removeTrain", new AddTrainCommand());
+		commands.put("deleteRoute", new DeleteRouteCommand());
+		commands.put("deleteRouteComposition", new DeleteRouteCompositionCommand());
+//		commands.put("deleteStation", new RemoveStationCommand());
+		commands.put("deleteTrain", new DeleteTrainCommand());
+		commands.put("deleteWagon", new DeleteWagonCommand());
 //		
 		commands.put("buyTicket", new BuyTicketCommand());
 		

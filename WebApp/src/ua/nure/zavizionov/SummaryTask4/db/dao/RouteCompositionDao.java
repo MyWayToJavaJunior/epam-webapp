@@ -62,6 +62,7 @@ public class RouteCompositionDao extends AbstractDao<RouteComposition>{
 		try {
 			while (rs.next()){
 				RouteComposition rc = new RouteComposition();
+				rc.setId(rs.getInt(Fields.ID));
 				rc.setDepartureTime(rs.getTime(Fields.ROUTE_COMPOSITION_DEPARTURE_TIME));
 				rc.setArrivalTime(rs.getTime(Fields.ROUTE_COMPOSITION_ARRIVAL_TIME));
 				rc.setStay(rs.getInt(Fields.ROUTE_COMPOSITION_STAY));

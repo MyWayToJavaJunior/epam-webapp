@@ -36,6 +36,9 @@
 						<td><fmt:formatDate value="${bean.arrivalTime}" pattern="HH:mm:ss" /></td>
 						<td>${bean.stay}m</td>
 						<td><fmt:formatDate value="${bean.departureTime}" pattern="HH:mm:ss" /></td>
+						<c:if test="${userRole.name == 'admin'}">
+							<td><a href="controller?command=deleteRouteComposition&routeCompositionId=${bean.id}&routeId=${route.id}">Delete</a></td>
+						</c:if>
 					</tr>
 				</c:forEach>	
 			

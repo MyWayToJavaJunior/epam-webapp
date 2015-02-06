@@ -38,7 +38,7 @@
 						<td><input type = "radio" name = "wagonId" value = "${bean.id}"/></td>
 						</c:if>
 						<c:if test="${userRole.name == 'admin' }">
-						<td><a href="controller?command=deleteWagon&wagonId=${bean.id}">Delete</a></td>
+						<td><a href="controller?command=deleteWagon&wagonId=${bean.id}&trainId=${train.id}">Delete</a></td>
 						</c:if>
 					</tr>
 				</c:forEach>	
