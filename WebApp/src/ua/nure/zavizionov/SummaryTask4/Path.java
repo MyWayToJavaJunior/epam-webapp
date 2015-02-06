@@ -19,6 +19,7 @@ public interface Path {
 	String ADD_ROUTE_PAGE = "/WEB-INF/jsp/admin/add_route.jsp";
 	
 	String EDIT_ROUTE_PAGE = "/WEB-INF/jsp/admin/edit_route.jsp";
+	String EDIT_TRAIN_PAGE = "/WEB-INF/jsp/admin/edit_train.jsp";
 	
 	String ADD_STATION_COMMAND = "controller?command=addStation";
 	
@@ -28,6 +29,7 @@ public interface Path {
 	String LIST_ROUTE_COMMAND = "controller?command=listRouteComposition";
 	String LIST_TRAIN_WAGONS_COMMAND = "controller?command=listTrainInfo";
 	String ADD_TRAIN_COMMAND = "controller?command=addTrain";
+	
 	
 	
 	

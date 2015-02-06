@@ -292,6 +292,36 @@ public class DBService {
 			}
 		}
 	}
+	
+	public void editTrain(int trainId, int routeId, Date departureDate, Date arrivalDate)
+			throws SqlException {
+		TrainDao dao = null;
+		RouteDao routeDao = null;
+		Connection connection = null;
+		Train train = new Train();
+		train.setArrivalDate(arrivalDate);
+		train.setDepartureDate(departureDate);
+		train.setId(trainId);
+		try {
+			LOG.debug("Opening connection with DB.");
+			connection = factory.getConnection();
+			LOG.debug("Geting DAO");
+			dao = factory.getTrainDao(connection);
+			routeDao = factory.getRouteDao(connection);
+			train.setRoute(routeDao.getByPK(routeId));
+			dao.update(train);
+		} catch (SQLException e) {
+			LOG.error("Error occured: ", e);
+			throw new SqlException(e);
+		} finally {
+			try {
+				LOG.debug("Closing connection with DB.");
+				connection.close();
+			} catch (SQLException e) {
+				LOG.error("Error occured: ", e);
+			}
+		}
+	}
 
 	public void addUser(String login, String password, String email,
 			String fullName, int roleId) throws ElementAlreadyExistsException {

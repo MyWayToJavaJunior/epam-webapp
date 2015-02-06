@@ -20,7 +20,7 @@ import junit.framework.TestCase;
 public class RouteDaoTests extends TestCase {
 	
 	 Connection con = null;
-	private  RouteDao dao = null;
+	 private  RouteDao dao = null;
 	 DaoFactory factory = DaoFactory.getInstance();
 	 Route testRoute = null;
 	 Station testStation1 = null;

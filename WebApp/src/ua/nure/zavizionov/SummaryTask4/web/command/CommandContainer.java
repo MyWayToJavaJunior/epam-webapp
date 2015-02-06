@@ -30,7 +30,7 @@ public class CommandContainer {
 		commands.put("addUser", new AddUserCommand());
 		commands.put("editRoute", new EditRouteCommand());
 //		commands.put("editStation", new EditStationCommand());
-//		commands.put("editTrain", new EditTrainCommand());
+		commands.put("editTrain", new EditTrainCommand());
 //		commands.put("removeRoute", new AddRouteCommand());
 //		commands.put("removeStation", new RemoveStationCommand());
 //		commands.put("removeTrain", new AddTrainCommand());

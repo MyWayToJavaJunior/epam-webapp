@@ -35,7 +35,7 @@ public class ListTrainsCommand extends Command {
 		LOG.trace("Recieved start date " + startDateString + " and end date " + endDateString);
 		
 		LOG.debug("Formating date");
-		DateFormat format = new SimpleDateFormat("yyyy-mm-dd");
+		DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 		Date startDate = null;
 		Date endDate = null;
 		if(startDateString == null || startDateString.isEmpty()){
