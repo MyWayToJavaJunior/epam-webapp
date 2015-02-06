@@ -33,7 +33,10 @@
 						<td>${bean.arrivalStation.name}</td>
 						<td><fmt:formatDate value="${bean.arrivalTime}" pattern="HH:mm:ss" /></td>
 						<td><a href="controller?command=listRouteComposition&routeId=${bean.id}">Info</a></td>
+						<c:if test="${userRole.name == 'admin'}">
 						<td><a href="controller?command=editRoute&routeId=${bean.id}">Edit</a></td>
+						</c:if>
+						
 					</tr>
 
 				</c:forEach>			

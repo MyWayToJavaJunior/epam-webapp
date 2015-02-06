@@ -417,4 +417,38 @@ public class DBService {
 		}
 	}
 
+	public int addRoute(int departureStationId, Date departureTime,
+			int arrivalStationId, Date arrivalTime) throws SqlException {
+		RouteDao dao = null;
+		StationDao stationDao = null;
+		Connection connection = null;
+		Route route = new Route();
+		int id = 0;
+		try {
+			LOG.debug("Opening connection with DB.");
+			connection = factory.getConnection();
+			LOG.debug("Geting DAO");
+			dao = factory.getRouteDao(connection);
+			stationDao = factory.getStationDao(connection);
+			LOG.debug("Prepearing object");
+			route.setDepartureTime(departureTime);
+			route.setDepartureStation(stationDao.getByPK(departureStationId));
+			route.setArrivalTime(arrivalTime);
+			route.setArrivalStation(stationDao.getByPK(arrivalStationId));
+			LOG.debug("Updating");
+			id = dao.persist(route).getId();
+		} catch (SQLException e) {
+			LOG.error("Error occured: ", e);
+			throw new SqlException(e);
+		} finally {
+			try {
+				LOG.debug("Closing connection with DB.");
+				connection.close();
+			} catch (SQLException e) {
+				LOG.error("Error occured: ", e);
+			}
+		}
+		return id;
+	}
+
 }

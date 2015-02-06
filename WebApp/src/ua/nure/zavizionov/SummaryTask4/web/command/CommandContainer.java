@@ -21,10 +21,10 @@ public class CommandContainer {
 		commands.put("listRoutes", new ListRoutesCommand());
 		commands.put("listTrainInfo", new ListTrainInfoCommand());
 		commands.put("listRouteComposition", new ListRouteCompositionCommand());
-//		commands.put("createUser", new CreateUserCommand());
+
 		
 		commands.put("addStation", new AddStationCommand());
-//		commands.put("addRoute", new AddRouteCommand());
+		commands.put("addRoute", new AddRouteCommand());
 		commands.put("addTrain", new AddTrainCommand());
 		commands.put("addWagon", new AddWagonCommand());
 		commands.put("addUser", new AddUserCommand());

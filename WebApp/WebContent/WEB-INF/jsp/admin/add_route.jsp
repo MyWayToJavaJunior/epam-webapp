@@ -1,14 +1,35 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ page pageEncoding="UTF-8"%>
+<%@ include file="/WEB-INF/jspf/directive/page.jspf" %>
+<%@ include file="/WEB-INF/jspf/directive/taglib.jspf" %>
+
 <html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
-</head>
+
+<c:set var="title" value="Routes" scope="page" />
+<%@ include file="/WEB-INF/jspf/head.jspf" %>
+
 <body>
-	<form id="addRoute" action="addRoute" method="post">
-		
+<%@ include file="/WEB-INF/jspf/header.jspf" %>
+	<table id="main-container">
+			<td class="content">			
+			<%-- CONTENT --%>
+			
+			<c:out value="${message}"/>
+			
+			<form id="editRoute" action="controller" method = "post">
+				
+				<input type="hidden" name="command" value="addRoute"/>
+				Departure station:<input type="text" name="departureStationId" /><br>
+				Departure time:<input type="time" name="departureTime" /><br>
+				Arrival station:<input type="text" name="arrivalStationId" /><br>
+				Arrival time:<input type="time" name="arrivalTime" /><br>
+				<input type="submit" value = "Add"/><br>
 	</form>
+			
+			<%-- CONTENT --%>
+			</td>
+		</tr>
+		
+		<%@ include file="/WEB-INF/jspf/footer.jspf" %>
+		
+	</table>
 </body>
-</html>
