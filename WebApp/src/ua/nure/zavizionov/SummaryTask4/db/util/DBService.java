@@ -122,7 +122,8 @@ public class DBService {
 		return result;
 	}
 
-	public void addStation(String stationName) throws ElementAlreadyExistsException {
+	public void addStation(String stationName)
+			throws ElementAlreadyExistsException {
 		StationDao dao = null;
 		Connection connection = null;
 		Station station = new Station();
@@ -175,8 +176,8 @@ public class DBService {
 		return result;
 	}
 
-	public Route findRoute(int routeId){
-		
+	public Route findRoute(int routeId) {
+
 		LOG.trace("Searching for route");
 		RouteDao dao = null;
 		Route result = null;
@@ -199,8 +200,9 @@ public class DBService {
 		}
 		return result;
 	}
-	
-	public void buyTicket(int wagonId, int count) throws ElementNotFoundException, NoTicketsException {
+
+	public void buyTicket(int wagonId, int count)
+			throws ElementNotFoundException, NoTicketsException {
 		WagonDao dao = null;
 		Connection connection = null;
 		try {
@@ -213,7 +215,7 @@ public class DBService {
 				LOG.trace("Can't find wagon with such id");
 				throw new ElementNotFoundException();
 			}
-			if (wagon.getSeats()<=0){
+			if (wagon.getSeats() <= 0) {
 				LOG.trace("No sears in this wagon.");
 				throw new NoTicketsException();
 			}
@@ -233,9 +235,9 @@ public class DBService {
 			}
 		}
 	}
-	
+
 	@Deprecated
-	public List<Wagon> findWagonsByTrain(int trainId){
+	public List<Wagon> findWagonsByTrain(int trainId) {
 		WagonDao dao = null;
 		Connection connection = null;
 		List<Wagon> wagons = null;
@@ -261,7 +263,8 @@ public class DBService {
 		return wagons;
 	}
 
-	public void addTrain(int routeId, Date departureDate, Date arrivalDate) throws SqlException {
+	public void addTrain(int routeId, Date departureDate, Date arrivalDate)
+			throws SqlException {
 		TrainDao dao = null;
 		RouteDao routeDao = null;
 		Connection connection = null;
@@ -273,7 +276,7 @@ public class DBService {
 			connection = factory.getConnection();
 			LOG.debug("Geting DAO");
 			dao = factory.getTrainDao(connection);
-			//TODO
+			// TODO
 			routeDao = factory.getRouteDao(connection);
 			train.setRoute(routeDao.getByPK(routeId));
 			dao.persist(train);
@@ -289,8 +292,9 @@ public class DBService {
 			}
 		}
 	}
-	
-	public void addUser(String login, String password, String email, String fullName, int roleId) throws ElementAlreadyExistsException{
+
+	public void addUser(String login, String password, String email,
+			String fullName, int roleId) throws ElementAlreadyExistsException {
 		UserDao dao = null;
 		RoleDao roleDao = null;
 		Connection connection = null;
@@ -304,7 +308,7 @@ public class DBService {
 			connection = factory.getConnection();
 			LOG.debug("Geting DAO");
 			dao = factory.getUserDao(connection);
-			if(dao.getByLogin(login) != null){
+			if (dao.getByLogin(login) != null) {
 				throw new ElementAlreadyExistsException();
 			}
 			roleDao = factory.getRoleDao(connection);
@@ -321,8 +325,9 @@ public class DBService {
 			}
 		}
 	}
-	
-	public void addWagon(int trainId, int wagonTypeId, int wagonNumber, double ticket_price) throws SQLException{
+
+	public void addWagon(int trainId, int wagonTypeId, int wagonNumber,
+			double ticket_price) throws SQLException {
 		WagonDao dao = null;
 		WagonTypeDao wagonTypeDao = null;
 		WagonType wagonType = null;
@@ -355,7 +360,7 @@ public class DBService {
 		}
 	}
 
-	public Train findTrainById(int trainId){
+	public Train findTrainById(int trainId) {
 		LOG.trace("Searching for train");
 		TrainDao dao = null;
 		Train result = null;
@@ -379,7 +384,37 @@ public class DBService {
 		return result;
 	}
 
-	
-
+	public void editRoute(int routeId, int departureStationId,
+			Date departureTime, int arrivalStationId, Date arrivalTime) throws SqlException {
+		RouteDao dao = null;
+		StationDao stationDao = null;
+		Connection connection = null;
+		Route route = new Route();
+		try {
+			LOG.debug("Opening connection with DB.");
+			connection = factory.getConnection();
+			LOG.debug("Geting DAO");
+			dao = factory.getRouteDao(connection);
+			stationDao = factory.getStationDao(connection);
+			LOG.debug("Prepearing object");
+			route.setDepartureTime(departureTime);
+			route.setDepartureStation(stationDao.getByPK(departureStationId));
+			route.setArrivalTime(arrivalTime);
+			route.setArrivalStation(stationDao.getByPK(arrivalStationId));
+			route.setId(routeId);
+			LOG.debug("Updating");
+			dao.update(route);
+		} catch (SQLException e) {
+			LOG.error("Error occured: ", e);
+			throw new SqlException(e);
+		} finally {
+			try {
+				LOG.debug("Closing connection with DB.");
+				connection.close();
+			} catch (SQLException e) {
+				LOG.error("Error occured: ", e);
+			}
+		}
+	}
 
 }

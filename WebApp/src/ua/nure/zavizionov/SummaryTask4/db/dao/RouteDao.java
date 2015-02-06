@@ -36,8 +36,8 @@ public class RouteDao extends AbstractDao<Route>{
 
 	@Override
 	public String getUpdateQuery() {
-		// TODO Auto-generated method stub
-		return null;
+		return "UPDATE routes SET " + Fields.ROUTE_DEPARTURE_STATION_ID + " = ?, "+ Fields.ROUTE_DEPARTURE_TIME + " = ?, "
+				+ Fields.ROUTE_ARRIVAL_STATION_ID + " = ?, " + Fields.ROUTE_ARRIVAL_TIME + " = ? WHERE id = ?";
 	}
 
 	@Override
@@ -81,7 +81,7 @@ public class RouteDao extends AbstractDao<Route>{
 	@Override
 	protected void prepareStatementForInsert(PreparedStatement statement,
 			Route object) {
-		LOG.debug("Prepearing statemant");
+		LOG.debug("Prepearing statemant for insert.");
 		try {
 			statement.setInt(1, object.getDepartureStation().getId());
 			statement.setTime(2, new java.sql.Time(object.getDepartureTime().getTime()));
@@ -95,7 +95,17 @@ public class RouteDao extends AbstractDao<Route>{
 	@Override
 	protected void prepareStatementForUpdate(PreparedStatement statement,
 			Route object) {
-		// TODO Auto-generated method stub
+		LOG.trace("Prepearing statemant for update.");
+		try {
+			statement.setInt(1, object.getDepartureStation().getId());
+			statement.setTime(2, new java.sql.Time(object.getDepartureTime().getTime()));
+			statement.setInt(3, object.getArrivalStation().getId());
+			statement.setTime(4, new java.sql.Time(object.getArrivalTime().getTime()));
+			statement.setInt(5, object.getId());
+		} catch (SQLException e) {
+			LOG.error("Error occured.", e);
+		}
+		LOG.trace("Done.");
 		
 	}
 	

@@ -19,14 +19,14 @@ import junit.framework.TestCase;
 
 public class RouteDaoTests extends TestCase {
 	
-	static Connection con = null;
-	private static RouteDao dao = null;
-	static DaoFactory factory = DaoFactory.getInstance();
-	static Route testRoute = null;
-	static Station testStation1 = null;
-	static Station testStation2 = null;
+	 Connection con = null;
+	private  RouteDao dao = null;
+	 DaoFactory factory = DaoFactory.getInstance();
+	 Route testRoute = null;
+	 Station testStation1 = null;
+	 Station testStation2 = null;
 	
-	static{
+	{
 		System.out.println("do");
 		con = Init.getConnection();
 		dao = factory.getRouteDao(con);
@@ -109,4 +109,21 @@ public class RouteDaoTests extends TestCase {
 		}
 	}
 	
+	@Test
+	public void testEditRoute() throws SQLException {
+		Route route = dao.persist(testRoute);
+		testRoute.setId(route.getId());
+		testRoute.getArrivalStation().setName(route.getArrivalStation().getName());
+		testRoute.getDepartureStation().setName(route.getDepartureStation().getName());
+		try{
+			assertEquals(route, testRoute);
+			assertFalse(testRoute.getArrivalStation().equals(testStation1));
+			testRoute.setArrivalStation(testStation1);
+			dao.update(testRoute);
+			assertEquals(dao.getByPK(testRoute.getId()).getArrivalStation(), testStation1);;
+		}finally{
+			testRoute.setId(null);
+			dao.delete(route);
+		}
+	}
 }

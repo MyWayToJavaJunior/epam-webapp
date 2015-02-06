@@ -1,6 +1,7 @@
 package ua.nure.zavizionov.SummaryTask4.db.dao.test;
 
 import java.sql.Connection;
+import java.sql.SQLException;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -19,13 +20,12 @@ import junit.framework.TestCase;
 public class DBServiceTests extends TestCase {
 	
 
-	static Connection con = null;
-	static DaoFactory factory = DaoFactory.getInstance();
+	Connection con = null;
+	DaoFactory factory = DaoFactory.getInstance();
 	DBService service = DBService.getInstance();
 	
-	static{
+	{
 		con = Init.getConnection();
-		
 	}
 	
 	
@@ -108,7 +108,11 @@ public class DBServiceTests extends TestCase {
 	
 	@Test
 	public void testAddWagon() {
-		service.addWagon(3, 1, 4, 2.5);
+		try {
+			service.addWagon(3, 1, 4, 2.5);
+		} catch (SQLException e) {
+			fail();
+		}
 	}
 
 }
