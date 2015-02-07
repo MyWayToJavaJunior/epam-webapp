@@ -50,7 +50,7 @@
 				
 				<input type="hidden" name="command" value="addRouteComposition"/>
 				<input type="hidden" name="routeId" value="${route.id}"/>
-				Station:<input type="text" name="stationId" /><br>
+				Station:<my:stations name = "stationId"/><br>
 				Arrival time:<input type="time" name="arrivalTime" /><br>
 				Departure time:<input type="time" name="departureTime" /><br>
 				Stay time:<input type="text" name="stay" /><br>

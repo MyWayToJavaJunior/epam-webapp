@@ -14,9 +14,9 @@
 				
 				<input type="hidden" name="command" value="editRoute"/>
 				<input type="hidden" name="routeId" value="${param.routeId}"/>
-				Departure station:<input type="text" name="departureStationId" /><br>
+				Departure station:<my:stations name = "departureStationId"/><br>
 				Departure time:<input type="time" name="departureTime" /><br>
-				Arrival station:<input type="text" name="arrivalStationId" /><br>
+				Arrival station:<my:stations name = "arrivalStationId"/><br>
 				Arrival time:<input type="time" name="arrivalTime" /><br>
 				<input type="submit" value = "Edit"/><br>
 	</form>
