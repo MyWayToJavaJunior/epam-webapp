@@ -4,16 +4,14 @@
 
 <html>
 
-<c:set var="title" value="Routes" scope="page" />
+<c:set var="title" value="Route info" scope="page" />
 <%@ include file="/WEB-INF/jspf/head.jspf" %>
 
 <body>
 <%@ include file="/WEB-INF/jspf/header.jspf" %>
-	<table id="main-container">
 			
 			
-		<tr>
-		<td>
+
 <!-- 			<form id="listTrains" action="controller"> -->
 <!-- 				<input type="hidden" name="command" value="listTrains"/> -->
 <!-- 				<input type="date" name="startDate" /> -->
@@ -21,16 +19,17 @@
 <!-- 				<input type="submit" value = "Show"/> -->
 <!-- 			</form> -->
 			
-		</td>
-			<td class="content">			
+		
 			<%-- CONTENT --%>
 			
-			
+			<div id = "wrap">
 			Departure station: ${route.departureStation.name}<br>
 			Departure time: <fmt:formatDate value="${route.departureTime}" pattern="HH:mm:ss" /><br>
 			Arrival station: ${route.arrivalStation.name}<br>
 			Arrival time :<fmt:formatDate value="${route.arrivalTime}" pattern="HH:mm:ss" /><br>
+			<table class = "table table-bordered">
 			<c:forEach var="bean" items="${route.routeComposition}">
+			
 					<tr>
 						<td>${bean.station.name} </td>
 						<td><fmt:formatDate value="${bean.arrivalTime}" pattern="HH:mm:ss" /></td>
@@ -40,24 +39,26 @@
 							<td><a href="controller?command=deleteRouteComposition&routeCompositionId=${bean.id}&routeId=${route.id}">Delete</a></td>
 						</c:if>
 					</tr>
+					
 				</c:forEach>	
+				</table>
 			
 			<fmt:formatDate value="${bean.arrivalTime}" pattern="HH:mm:ss" />
 			<br>
 			<br>
 			<c:if test="${userRole.name == 'admin'}">
-					<form id="addRouteComposition" action="controller" method = "post">
-				
+					<form id="addRouteComposition" class = "form-signin" action="controller" method = "post">
+				<fieldset>
 				<input type="hidden" name="command" value="addRouteComposition"/>
 				<input type="hidden" name="routeId" value="${route.id}"/>
-				Station:<my:stations name = "stationId"/><br>
-				Arrival time:<input type="time" name="arrivalTime" /><br>
-				Departure time:<input type="time" name="departureTime" /><br>
-				Stay time:<input type="text" name="stay" /><br>
-				
+				<label>Station:</label><my:stations name = "stationId"/><br>
+				<label>Arrival time:</label><input type="time" name="arrivalTime" /><br>
+				<label>Departure time:</label><input type="time" name="departureTime" /><br>
+				<label>Stay time:</label><input type="text" name="stay" /><br>
 				<input type="submit" value = "Add"/><br>
+				</fieldset>
 	</form>
 			</c:if>
-			
+			</div>
 			
 			

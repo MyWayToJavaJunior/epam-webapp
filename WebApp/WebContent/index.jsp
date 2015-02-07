@@ -2,13 +2,15 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<%@ include file="/WEB-INF/jspf/head.jspf" %>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Train booking</title>
+<%@ include file="/WEB-INF/jspf/head.jspf" %>
 <%@ include file="/WEB-INF/jspf/header.jspf"%>
 </head>
 <body>
+<div id = "wrap">
+Wraped.
+</div>
+
 
 <%@ include file="/WEB-INF/jspf/footer.jspf"%>
 </body>

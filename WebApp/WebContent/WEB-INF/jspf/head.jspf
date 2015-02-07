@@ -17,7 +17,7 @@ If you define http-equiv attribute, set the content type and the charset the sam
 as you set them in a page directive.
 ===========================================================================--%> 
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<link href="css/bootstrap.min.css" rel="stylesheet">
-	 <link href="/wp-content/themes/clear-theme/styles/bootstrap-responsive.css" rel="stylesheet">
+	<link href="css/bootstrap.css" rel="stylesheet">
+	<link href="css/style.css" rel="stylesheet">
 
 </head>

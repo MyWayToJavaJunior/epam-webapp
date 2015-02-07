@@ -27,6 +27,7 @@ This way we define the ADMIN MENU.
 			<a href="controller?command=addTrain">Add train</a> &nbsp;
 			<a href="controller?command=addRoute">Add route</a> &nbsp;
 		</c:when>
+		
 
 		
 <%--=========================================================================== 
@@ -36,6 +37,9 @@ This way we define the USER MENU.
 			<a href="controller?command=listMenu">Menu</a> &nbsp;
 		</c:when>
 	</c:choose>
+	
+	<a href="controller?command=listTrains">List trains</a>
+	<a href="controller?command=listRoutes">List routes</a> &nbsp;
 	
 <%--=========================================================================== 
 This way we define the settings anchor.
@@ -79,8 +83,7 @@ Type link to logout
 </c:if>
 
 <div id="rightHeader">
-		<a href="controller?command=listTrains">List trains</a>
-		<a href="controller?command=listRoutes">List routes</a> &nbsp;
+		
 	</div>
 </div>
 	</div>
@@ -91,22 +94,5 @@ Type link to logout
 <script src="http://code.jquery.com/jquery-latest.js"></script>
     <script src="js/bootstrap.min.js"></script>
     
-    <style type="text/css">
-      body {
-        padding-top: 60px;
-        padding-bottom: 40px;
-      }
-      .sidebar-nav {
-        padding: 9px 0;
-      }
-
-      @media (max-width: 980px) {
-        /* Enable use of floated navbar text */
-        .navbar-text.pull-right {
-          float: none;
-          padding-left: 5px;
-          padding-right: 5px;
-        }
-      }
-    </style>
+    
 
