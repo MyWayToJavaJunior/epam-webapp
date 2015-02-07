@@ -6,14 +6,15 @@ Header (top area).
 <%@ include file="/WEB-INF/jspf/directive/taglib.jspf" %>
 
 <tr>
-<td id="header">
-
+<td id="header" class="navbar navbar-inverse navbar-fixed-top">
+ <div class="navbar-inner">
+        <div class="container-fluid">
 <c:if test="${not empty user}">
 <%--=========================================================================== 
 This is the user menu. 
 ===========================================================================--%> 
 
-<div id="leftHeader">
+<div class="navbar-text pull-left">
 
 	<c:choose>
 
@@ -46,7 +47,7 @@ This way we define the settings anchor.
 <%--=========================================================================== 
 This way we define the menu located at the right of header. 
 ===========================================================================--%> 
-<div id="rightHeader" >
+<div class="navbar-text pull-right" >
 
 <%--=========================================================================== 
 Type user name if the user object is presented in the current session.  
@@ -81,7 +82,31 @@ Type link to logout
 		<a href="controller?command=listTrains">List trains</a>
 		<a href="controller?command=listRoutes">List routes</a> &nbsp;
 	</div>
-
+</div>
+	</div>
 	</td>
+	
 </tr>
+
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    
+    <style type="text/css">
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
+      .sidebar-nav {
+        padding: 9px 0;
+      }
+
+      @media (max-width: 980px) {
+        /* Enable use of floated navbar text */
+        .navbar-text.pull-right {
+          float: none;
+          padding-left: 5px;
+          padding-right: 5px;
+        }
+      }
+    </style>
 

@@ -34,7 +34,7 @@ This is the CONTENT, containing the main part of the page.
 <%--=========================================================================== 
 Defines the web form.
 ===========================================================================--%> 
-				<form id="login_form" action="controller" method="post">
+				<form class="form-signin" id="login_form" action="controller" method="post">
 
 <%--=========================================================================== 
 Hidden field. In the query it will act as command=login.
@@ -45,14 +45,14 @@ after you submit current form.
 
 					<fieldset >
 						<legend>Login</legend>
-						<input name="login"/><br/>
+						<input name="login" class="input-block-level"/><br/>
 					</fieldset><br/>
 					<fieldset>
 						<legend>Password</legend>
-						<input type="password" name="password"/>
+						<input type="password" name="password" class="input-block-level"/>
 					</fieldset><br/>
 					
-					<input type="submit" value="Login">								
+					<input type="submit" value="Login" class="btn btn-large btn-primary">								
 				</form>
 				
 			<%-- CONTENT --%>
@@ -63,5 +63,39 @@ after you submit current form.
 		<%@ include file="/WEB-INF/jspf/footer.jspf"%>
 		
 	</table>
+	
+	<style type="text/css">
+      body {
+        padding-top: 40px;
+        padding-bottom: 40px;
+        background-color: #f5f5f5;
+      }
+
+      .form-signin {
+        max-width: 300px;
+        padding: 19px 29px 29px;
+        margin: 0 auto 20px;
+        background-color: #fff;
+        border: 1px solid #e5e5e5;
+        -webkit-border-radius: 5px;
+           -moz-border-radius: 5px;
+                border-radius: 5px;
+        -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+           -moz-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+                box-shadow: 0 1px 2px rgba(0,0,0,.05);
+      }
+      .form-signin .form-signin-heading,
+      .form-signin .checkbox {
+        margin-bottom: 10px;
+      }
+      .form-signin input[type="text"],
+      .form-signin input[type="password"] {
+        font-size: 16px;
+        height: auto;
+        margin-bottom: 15px;
+        padding: 7px 9px;
+      }
+
+    </style>
 </body>
 </html>
