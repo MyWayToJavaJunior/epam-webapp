@@ -6,7 +6,7 @@ Header (top area).
 <%@ include file="/WEB-INF/jspf/directive/taglib.jspf" %>
 
 
-<div class="navbar navbar-inverse navbar-fixed-top">
+<div class="navbar navbar-inverse">
  <div class="navbar-inner">
         <div class="container-fluid">
 <c:if test="${not empty user}">
@@ -76,6 +76,9 @@ Type link to logout
 </c:if>
 
 
+<c:if test = "${empty sessionScope.defaultLocale}">
+<c:set var = "defaultLocale" scope = "session" value = "ru"/>
+<</c:if>
 
 <div class="navbar-text pull-right" >
 <c:choose>
@@ -83,9 +86,11 @@ Type link to logout
       <a href="controller?command=setLocale&localeToSet=en">EN</a> &nbsp;
       </c:when>
 
-      <c:otherwise>
+      <c:when test="${sessionScope.defaultLocale == 'en'}">
       <a href="controller?command=setLocale&localeToSet=ru">RU</a> &nbsp;
-      </c:otherwise>
+      </c:when>
+     
+      
 </c:choose>
 </div>
 

@@ -8,31 +8,28 @@
 <%@ include file="/WEB-INF/jspf/head.jspf" %>
 
 <body>
-<%@ include file="/WEB-INF/jspf/header.jspf" %>
-	<table id="main-container">
-			<td class="content">			
+<div id = "wrap">
+<%@ include file="/WEB-INF/jspf/header.jspf" %>		
 			<%-- CONTENT --%>
 			
 			<c:out value="${message}"/>
 			
-			<form id="addTrain" action="controller" method = "post">
+			<form id="addTrain" action="controller" method = "post" class = "form-signin">
 			
 				<input type="hidden" name="command" value="addTrain"/>
-				<label><c:set var="title" scope="page" ><fmt:message key = "add_train_jsp.form.route" /></c:set></label>
+				<label><fmt:message key = "add_train_jsp.form.route" /></label>
 				<input type="text" name="routeId" /><br>
-				<label><c:set var="title" scope="page" ><fmt:message key = "add_train_jsp.form.depDate" /></c:set></label>
+				<label><fmt:message key = "add_train_jsp.form.depDate" /></label>
 				<input type="date" name="departureDate" /><br>
-				<label><c:set var="title" scope="page" ><fmt:message key = "add_train_jsp.form.arrDate" /></c:set></label>
+				<label><fmt:message key = "add_train_jsp.form.arrDate" /></label>
 				<input type="date" name="arrivalDate" /><br>
 				<input type="submit" value = "Add"/>
 				
 			</form>
 			
 			<%-- CONTENT --%>
-			</td>
-		</tr>
+		</div>
 		
 		<%@ include file="/WEB-INF/jspf/footer.jspf" %>
 		
-	</table>
 </body>

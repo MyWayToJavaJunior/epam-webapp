@@ -16,14 +16,14 @@
 	<div id="wrap">
 		<c:out value="${message}" />
 
-		<form id="addRoute" action="controller" method="post">
+		<form id="addRoute" action="controller" method="post" class = "form-signin">
 
 			<input type="hidden" name="command" value="addRoute" />
 			<label><fmt:message key="add_route_jsp.form.depStation" />
 			:</label>
 			<my:stations name="departureStationId" />
 			<br>
-			<label><fmt:message key="add_route_jsp.form.depTime" />
+			<label><fmt:message key="add_route_jsp.form..depTime" />
 			:</label><input type="time" name="departureTime" /><br>
 			<label><fmt:message key="add_route_jsp.form.arrStation" />
 			:</label>

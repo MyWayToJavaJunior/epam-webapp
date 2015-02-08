@@ -19,11 +19,11 @@
 			
 				<input type="hidden" name="command" value="editTrain"/>
 				<input type="hidden" name="trainId" value="${param.trainId}"/>
-				<label><c:set var="title" scope="page" ><fmt:message key = "edit_train_jsp.form.route" /></c:set></label>
+				<label><fmt:message key = "edit_train_jsp.form.route" /></label>
 				<input type="text" name="routeId" /><br>
-				<label><c:set var="title" scope="page" ><fmt:message key = "edit_train_jsp.form.depDate" /></c:set></label>
+				<label><fmt:message key = "edit_train_jsp.form.depDate" /></label>
 				<input type="date" name="departureDate" /><br>
-				<label><c:set var="title" scope="page" ><fmt:message key = "edit_train_jsp.form.arrDate" /></c:set></label>
+				<label><fmt:message key = "edit_train_jsp.form.arrDate" /></label>
 				<input type="date" name="arrivalDate" /><br>
 				<input type="submit" value = "Edit"/>
 				
