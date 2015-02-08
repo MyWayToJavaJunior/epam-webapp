@@ -40,6 +40,8 @@ public class CommandContainer {
 //		
 		commands.put("buyTicket", new BuyTicketCommand());
 		
+		commands.put("setLocale", new SetLocaleCommand());
+		
 		
 		
 		//TODO

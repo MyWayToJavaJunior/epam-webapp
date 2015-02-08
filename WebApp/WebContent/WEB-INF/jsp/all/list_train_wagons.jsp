@@ -4,17 +4,16 @@
 
 <html>
 
-<c:set var="title" value="Routes" scope="page" />
+<c:set var="title" value="Train info" />
 <%@ include file="/WEB-INF/jspf/head.jspf" %>
 
 <body>
 <%@ include file="/WEB-INF/jspf/header.jspf" %>
-	<table id="main-container">
+
 			
 		
 			
-		<tr>
-		<td>
+
 <!-- 			<form id="listTrains" action="controller"> -->
 <!-- 				<input type="hidden" name="command" value="listTrains"/> -->
 <!-- 				<input type="date" name="startDate" /> -->
@@ -22,12 +21,13 @@
 <!-- 				<input type="submit" value = "Show"/> -->
 <!-- 			</form> -->
 			
-		</td>
-			<td class="content">			
+
+			<div id = "wrap">
 			<%-- CONTENT --%>
 			<form action="controller" method = "post"> 
 			<input type = "hidden" name="command" value = "buyTicket" />
-			<input type = "text" name="fullName" />
+			<label>Full name</label><input type = "text" name="fullName" />
+			<table class = "table">
 			<c:forEach var="bean" items="${train.wagons}">
 					<tr>
 						<td>№${bean.number}</td>
@@ -42,17 +42,19 @@
 						</c:if>
 					</tr>
 				</c:forEach>	
+				</table>
 			<input type = "submit" value = "Buy"/>
 			</form>
 			
 			<c:if test="${userRole.name == 'admin' }">
 			
-			<form action="controller" method = "post"> 
+			<form action="controller" class = "form-signin" method = "post"> 
+			<legend>Add wagon</legend>
 			<input type = "hidden" name="command" value = "addWagon" />
 			<input type = "hidden" name="trainId" value = "${train.id}"/>
-			Type: <input type = "text" name="wagonTypeId" />
-			Number: <input type = "text" name="wagonNumber" />
-			Ticket price: <input type = "text" name="wagonTicketPrice" />
+			Type: <input type = "text" name="wagonTypeId" class="input-block-level" />
+			Number: <input type = "text" name="wagonNumber"  class="input-block-level"/>
+			Ticket price: <input type = "text" name="wagonTicketPrice" class="input-block-level" />
 			<input type = "submit" value = "Add"/>
 			</form>
 			
@@ -71,10 +73,8 @@
 			
 			
 			<%-- CONTENT --%>
-			</td>
-		</tr>
-		
+			</div>
+
 		<%@ include file="/WEB-INF/jspf/footer.jspf" %>
 		
-	</table>
 </body>

@@ -14,7 +14,7 @@
 	<form id="addStation" action="controller" method = "post">
 				
 				<input type="hidden" name="command" value="addStation"/>
-				<input type="text" name="stationName" />
+				<label>Station name</label><input type="text" name="stationName" />
 				<input type="submit" value = "Add"/>
 	</form>
 

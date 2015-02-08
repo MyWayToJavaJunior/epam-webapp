@@ -4,33 +4,30 @@
 
 <html>
 
-<c:set var="title" value="Routes" scope="page" />
+<c:set var="title" value="Registration" scope="page" />
 <%@ include file="/WEB-INF/jspf/head.jspf" %>
 
 <body>
-<%@ include file="/WEB-INF/jspf/header.jspf" %>
-	<table id="main-container">
-			<td class="content">			
+<%@ include file="/WEB-INF/jspf/header.jspf" %>		
 			<%-- CONTENT --%>
-			
+			<div id = "wrap">
 			<c:out value="${message}"/>
 			
-			<form id="addUser" action="controller" method = "post">
-			
+			<form id="addUser" action="controller" method = "post" class="form-signin">
+				
+				<legend>Type registration data</legend>
 				<input type="hidden" name="command" value="addUser"/>
-				<input type="text" name="login" />
-				<input type="password" name="password" />
-				<input type="text" name="fullName" />
-				<input type="text" name = "email"/>
+				<label>Login:</label><input type="text" name="login" />
+				<label>Password:</label><input type="password" name="password" />
+				<label>Full name</label><input type="text" name="fullName" />
+				<label>Email:</label><input type="text" name = "email"/>
 				<input type="submit" value = "Sumbit"/>
 				
 			</form>
 			
 			<%-- CONTENT --%>
-			</td>
-		</tr>
+		</div>
 		
 		<%@ include file="/WEB-INF/jspf/footer.jspf" %>
 		
-	</table>
-</body>
+

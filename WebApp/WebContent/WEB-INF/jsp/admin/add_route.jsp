@@ -5,7 +5,7 @@
 
 <html>
 
-<c:set var="title" value="Routes" scope="page" />
+<c:set var="title" value="Add route" scope="page" />
 <%@ include file="/WEB-INF/jspf/head.jspf" %>
 
 <body>

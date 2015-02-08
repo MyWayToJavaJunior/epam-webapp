@@ -61,10 +61,19 @@ Type user name if the user object is presented in the current session.
 <%--=========================================================================== 
 Type user role name if the user object is presented in the current session.  
 ===========================================================================--%> 
+
+<c:if test="${empty sessionScope.defaultLocale}">
+	<c:set var="defaultLocale" value = "ru" scope = "session"  ></c:set>		
+</c:if>
+
 	<c:if test="${not empty userRole}">
 		<c:out value="(${userRole.name})"/>
 	</c:if>
-
+	
+	<fmt:message key="header_jspf.anchor.all_orders" />
+	
+	<c:if test="${sessionScope.defaultLocale == 'ru'}"><a href="controller?command=setLocale&localeToSet=en">EN</a> &nbsp;</c:if>
+	<c:if test="${sessionScope.defaultLocale == 'en'}"><a href="controller?command=setLocale&localeToSet=ru">RU</a> &nbsp;</c:if>
 <%--=========================================================================== 
 Type link to logout  
 ===========================================================================--%> 
@@ -74,6 +83,10 @@ Type link to logout
 
 </div>
 </c:if>
+
+
+
+
 
 <c:if test="${empty user and title ne 'Login'}">
 	<div id="rightHeader">

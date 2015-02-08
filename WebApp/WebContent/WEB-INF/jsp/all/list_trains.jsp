@@ -9,21 +9,21 @@
 
 <body>
 	<%@ include file="/WEB-INF/jspf/header.jspf" %>
-	<table id="main-container">
+
 	
 			
 		
-		<form id="listTrains" action="controller">
+		<form id="listTrains" action="controller" class = "form-signin">
+				<legend>Choose train date</legend>
 				<input type="hidden" name="command" value="listTrains"/>
-				<input type="date" name="startDate" />
-				<input type="date" name = "endDate" />
+				<label>Start date:</label><input type="date" name="startDate" class="input-block-level" />
+				<label>End date:</label><input type="date" name = "endDate" class="input-block-level" />
 				<input type="submit" value = "Show"/>
 			</form>
-			
-		<tr>
-			<td class="content">			
+
+			<div id = "wrap">
 			<%-- CONTENT --%>
-			
+			<table class = "table">
 			<c:forEach var="bean" items="${trainList}">
 					<tr>
 						<td>${bean.route.departureStation.name} </td>
@@ -41,15 +41,14 @@
 					</tr>
 
 				</c:forEach>			
-			
+			</table>
 			
 			
 			
 			<%-- CONTENT --%>
-			</td>
-		</tr>
+		</div>
 		
 		<%@ include file="/WEB-INF/jspf/footer.jspf" %>
 		
-	</table>
+
 </body>
