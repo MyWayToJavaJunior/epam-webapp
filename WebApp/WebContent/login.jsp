@@ -2,8 +2,7 @@
 <%@ include file="/WEB-INF/jspf/directive/taglib.jspf" %>
 
 <html>
-
-<c:set var="title" value="Login" />
+<c:set var="title"><fmt:message key="login_jsp.title" /></c:set>
 <%@ include file="/WEB-INF/jspf/head.jspf" %>
 	
 <body>

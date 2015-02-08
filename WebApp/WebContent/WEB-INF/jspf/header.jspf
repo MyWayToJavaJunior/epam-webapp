@@ -5,8 +5,8 @@ Header (top area).
 <%@ include file="/WEB-INF/jspf/directive/page.jspf" %>
 <%@ include file="/WEB-INF/jspf/directive/taglib.jspf" %>
 
-<tr>
-<td id="header" class="navbar navbar-inverse navbar-fixed-top">
+
+<div class="navbar navbar-inverse navbar-fixed-top">
  <div class="navbar-inner">
         <div class="container-fluid">
 <c:if test="${not empty user}">
@@ -23,36 +23,44 @@ This way we define the ADMIN MENU.
 ===========================================================================--%>
 		
 		<c:when test="${userRole.name == 'admin' }">
-			<a href="controller?command=addStation">Add station</a> &nbsp;
-			<a href="controller?command=addTrain">Add train</a> &nbsp;
-			<a href="controller?command=addRoute">Add route</a> &nbsp;
+			<a href="controller?command=addStation"><fmt:message key="header_jspf.addStation" /></a> &nbsp;
+			<a href="controller?command=addTrain"><fmt:message key="header_jspf.addTrain" /></a> &nbsp;
+			<a href="controller?command=addRoute"><fmt:message key="header_jspf.addRoute" /></a> &nbsp;
 		</c:when>
 		
-
+</c:choose>
 		
 <%--=========================================================================== 
 This way we define the USER MENU.
 ===========================================================================--%> 
-		<c:when test="${userRole.name == 'user'}">
-			<a href="controller?command=listMenu">Menu</a> &nbsp;
-		</c:when>
-	</c:choose>
+
 	
-	<a href="controller?command=listTrains">List trains</a>
-	<a href="controller?command=listRoutes">List routes</a> &nbsp;
+	<a href="controller?command=listTrains"><fmt:message key="header_jspf.listTrains" /></a>
+	<a href="controller?command=listRoutes"><fmt:message key="header_jspf.listRoutes" /></a> &nbsp;
 	
 <%--=========================================================================== 
 This way we define the settings anchor.
 ===========================================================================--%> 
-	<a href="controller?command=viewSettings">Settings</a> &nbsp;
 
 </div>
 
 <%--=========================================================================== 
 This way we define the menu located at the right of header. 
 ===========================================================================--%> 
-<div class="navbar-text pull-right" >
 
+<c:if test="${empty sessionScope.defaultLocale}">
+	<c:set var="defaultLocale" value = "ru" scope = "session"  ></c:set>		
+</c:if>
+<div class="navbar-text pull-right" >
+<c:choose>
+      <c:when test="${sessionScope.defaultLocale == 'ru'}">
+      <a href="controller?command=setLocale&localeToSet=en">EN</a> &nbsp;
+      </c:when>
+
+      <c:otherwise>
+      <a href="controller?command=setLocale&localeToSet=ru">RU</a> &nbsp;
+      </c:otherwise>
+</c:choose>
 <%--=========================================================================== 
 Type user name if the user object is presented in the current session.  
 ===========================================================================--%> 
@@ -62,25 +70,19 @@ Type user name if the user object is presented in the current session.
 Type user role name if the user object is presented in the current session.  
 ===========================================================================--%> 
 
-<c:if test="${empty sessionScope.defaultLocale}">
-	<c:set var="defaultLocale" value = "ru" scope = "session"  ></c:set>		
-</c:if>
+
 
 	<c:if test="${not empty userRole}">
 		<c:out value="(${userRole.name})"/>
 	</c:if>
 	
-	<fmt:message key="header_jspf.anchor.all_orders" />
 	
-	<c:if test="${sessionScope.defaultLocale == 'ru'}"><a href="controller?command=setLocale&localeToSet=en">EN</a> &nbsp;</c:if>
-	<c:if test="${sessionScope.defaultLocale == 'en'}"><a href="controller?command=setLocale&localeToSet=ru">RU</a> &nbsp;</c:if>
 <%--=========================================================================== 
 Type link to logout  
 ===========================================================================--%> 
 	<a href="controller?command=logout">
-		Logout
+		<fmt:message key="header_jspf.logout" />
 	</a> 	
-
 </div>
 </c:if>
 
@@ -90,8 +92,8 @@ Type link to logout
 
 <c:if test="${empty user and title ne 'Login'}">
 	<div id="rightHeader">
-		<a href="login.jsp">Login</a>
-		<a href="controller?command=addUser">Register</a>
+		<a href="login.jsp"><fmt:message key="header_jspf.login" /></a>
+		<a href="controller?command=addUser"><fmt:message key="header_jspf.register" /></a>
 	</div>
 </c:if>
 
@@ -100,9 +102,9 @@ Type link to logout
 	</div>
 </div>
 	</div>
-	</td>
+	</div>
 	
-</tr>
+
 
 <script src="http://code.jquery.com/jquery-latest.js"></script>
     <script src="js/bootstrap.min.js"></script>

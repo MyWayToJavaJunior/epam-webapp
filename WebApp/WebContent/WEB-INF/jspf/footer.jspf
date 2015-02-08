@@ -3,6 +3,6 @@ Footer (bottom area).
 ===========================================================================--%> 
 
 <div id = "footer">
-	&copy;Railway Booking, 2014
+	&copy;<fmt:message key="footer_jspf.label" />
 		</div>
 
