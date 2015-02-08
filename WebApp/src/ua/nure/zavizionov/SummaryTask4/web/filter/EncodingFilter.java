@@ -1,6 +1,8 @@
 package ua.nure.zavizionov.SummaryTask4.web.filter;
 
+
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -30,7 +32,7 @@ public class EncodingFilter implements Filter {
 	}
 
 	public void doFilter(ServletRequest request, ServletResponse response,
-			FilterChain chain) throws IOException, ServletException {
+			FilterChain chain) throws  ServletException, IOException {
 		
 		LOG.debug("Filter starts");
 		

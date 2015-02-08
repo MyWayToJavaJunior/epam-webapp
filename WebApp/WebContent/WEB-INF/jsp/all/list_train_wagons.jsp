@@ -4,7 +4,7 @@
 
 <html>
 
-<c:set var="title" value="Train info" />
+<c:set var="title" scope="page" ><fmt:message key = "list_train_wagons_jsp.title" /></c:set>
 <%@ include file="/WEB-INF/jspf/head.jspf" %>
 
 <body>
@@ -28,6 +28,12 @@
 			<input type = "hidden" name="command" value = "buyTicket" />
 			<label>Full name</label><input type = "text" name="fullName" />
 			<table class = "table">
+			<tr>
+			<td><fmt:message key = "list_train_wagons_jsp.table.number"/></td>
+			<td><fmt:message key = "list_train_wagons_jsp.table.type"/></td>
+			<td><fmt:message key = "list_train_wagons_jsp.table.seats"/></td>
+			<td><fmt:message key = "list_train_wagons_jsp.table.price"/></td>
+			</tr>
 			<c:forEach var="bean" items="${train.wagons}">
 					<tr>
 						<td>№${bean.number}</td>

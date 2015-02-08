@@ -4,7 +4,7 @@
 
 <html>
 
-<c:set var="title" value="Routes" scope="page" />
+<c:set var="title" scope="page" ><fmt:message key = "list_routest_jsp.title" /></c:set>
 <%@ include file="/WEB-INF/jspf/head.jspf" %>
 
 <body>
@@ -27,10 +27,10 @@
 			<%-- CONTENT --%>
 			<table class = "table">
 			<tr>
-						<td>Departure station: </td>
-						<td>Departure time:</td>
-						<td>Arrival station:</td>
-						<td>Arrival time:</td>
+						<td><fmt:message key = "list_routest_jsp.table.depStation"/>: </td>
+						<td><fmt:message key = "list_routest_jsp.table.depTime"/>:</td>
+						<td><fmt:message key = "list_routest_jsp.table.arrStation"/>:</td>
+						<td><fmt:message key = "list_routest_jsp.table.arrTime"/>:</td>
 <%-- 						<td><a href="controller?command=listRouteComposition&routeId=${bean.id}">Info</a></td> --%>
 <%-- 						<c:if test="${userRole.name == 'admin'}"> --%>
 <%-- 						<td><a href="controller?command=editRoute&routeId=${bean.id}">Edit</a></td> --%>
@@ -44,10 +44,10 @@
 						<td><fmt:formatDate value="${bean.departureTime}" pattern="HH:mm:ss" /></td>
 						<td>${bean.arrivalStation.name}</td>
 						<td><fmt:formatDate value="${bean.arrivalTime}" pattern="HH:mm:ss" /></td>
-						<td><a href="controller?command=listRouteComposition&routeId=${bean.id}">Info</a></td>
+						<td><a href="controller?command=listRouteComposition&routeId=${bean.id}"><fmt:message key = "list_routest_jsp.table.info"/></a></td>
 						<c:if test="${userRole.name == 'admin'}">
-						<td><a href="controller?command=editRoute&routeId=${bean.id}">Edit</a></td>
-						<td><a href="controller?command=deleteRoute&routeId=${bean.id}">Delete</a></td>
+						<td><a href="controller?command=editRoute&routeId=${bean.id}"><fmt:message key = "list_routest_jsp.table.edit"/></a></td>
+						<td><a href="controller?command=deleteRoute&routeId=${bean.id}"><fmt:message key = "list_routest_jsp.table.delete"/></a></td>
 						</c:if>
 					</tr>
 

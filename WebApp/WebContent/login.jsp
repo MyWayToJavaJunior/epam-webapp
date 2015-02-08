@@ -34,20 +34,14 @@ This is the CONTENT, containing the main part of the page.
 Defines the web form.
 ===========================================================================--%> 
 				<form class="form-signin" id="login_form" action="controller" method="post">
-
-<%--=========================================================================== 
-Hidden field. In the query it will act as command=login.
-The purpose of this to define the command name, which have to be executed 
-after you submit current form. 
-===========================================================================--%> 
 					<input type="hidden" name="command" value="login"/>
-
+					<legend><fmt:message key="login_jsp.form.title" /></legend>
 					<fieldset >
-						<legend>Login</legend>
+						<legend><fmt:message key="login_jsp.form.login" /></legend>
 						<input name="login" class="input-block-level"/><br/>
 					</fieldset><br/>
 					<fieldset>
-						<legend>Password</legend>
+						<legend><fmt:message key="login_jsp.form.password" /></legend>
 						<input type="password" name="password" class="input-block-level"/>
 					</fieldset><br/>
 					

@@ -48,19 +48,8 @@ This way we define the settings anchor.
 This way we define the menu located at the right of header. 
 ===========================================================================--%> 
 
-<c:if test="${empty sessionScope.defaultLocale}">
-	<c:set var="defaultLocale" value = "ru" scope = "session"  ></c:set>		
-</c:if>
-<div class="navbar-text pull-right" >
-<c:choose>
-      <c:when test="${sessionScope.defaultLocale == 'ru'}">
-      <a href="controller?command=setLocale&localeToSet=en">EN</a> &nbsp;
-      </c:when>
 
-      <c:otherwise>
-      <a href="controller?command=setLocale&localeToSet=ru">RU</a> &nbsp;
-      </c:otherwise>
-</c:choose>
+<div class="navbar-text pull-right" >
 <%--=========================================================================== 
 Type user name if the user object is presented in the current session.  
 ===========================================================================--%> 
@@ -88,6 +77,17 @@ Type link to logout
 
 
 
+<div class="navbar-text pull-right" >
+<c:choose>
+      <c:when test="${sessionScope.defaultLocale == 'ru'}">
+      <a href="controller?command=setLocale&localeToSet=en">EN</a> &nbsp;
+      </c:when>
+
+      <c:otherwise>
+      <a href="controller?command=setLocale&localeToSet=ru">RU</a> &nbsp;
+      </c:otherwise>
+</c:choose>
+</div>
 
 
 <c:if test="${empty user and title ne 'Login'}">

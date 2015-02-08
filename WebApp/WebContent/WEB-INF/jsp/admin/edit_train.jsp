@@ -4,7 +4,7 @@
 
 <html>
 
-<c:set var="title" value="Routes" scope="page" />
+<c:set var="title" scope="page" ><fmt:message key = "edit_train_jsp.title" /></c:set>
 <%@ include file="/WEB-INF/jspf/head.jspf" %>
 
 <body>
@@ -19,9 +19,12 @@
 			
 				<input type="hidden" name="command" value="editTrain"/>
 				<input type="hidden" name="trainId" value="${param.trainId}"/>
-				Route:<input type="text" name="routeId" /><br>
-				Departure date:<input type="date" name="departureDate" /><br>
-				Arrival date:<input type="date" name="arrivalDate" /><br>
+				<label><c:set var="title" scope="page" ><fmt:message key = "edit_train_jsp.form.route" /></c:set></label>
+				<input type="text" name="routeId" /><br>
+				<label><c:set var="title" scope="page" ><fmt:message key = "edit_train_jsp.form.depDate" /></c:set></label>
+				<input type="date" name="departureDate" /><br>
+				<label><c:set var="title" scope="page" ><fmt:message key = "edit_train_jsp.form.arrDate" /></c:set></label>
+				<input type="date" name="arrivalDate" /><br>
 				<input type="submit" value = "Edit"/>
 				
 			</form>
